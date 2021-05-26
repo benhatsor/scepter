@@ -5,6 +5,11 @@
   </h3>
 </p>
 
+<p align="center">
+  <a target='_blank' href='https://scepter.berryscript.com'><img src='https://img.shields.io/badge/Try-it%20now-brightgreen' alt='Try it now'/></a>
+  <a target='_blank' href='https://app.netlify.com/sites/scepter/deploys'><img src='https://api.netlify.com/api/v1/badges/cf90a1a9-767e-440f-974a-6ac36e37da12/deploy-status' alt='Netlify Status'/></a>
+</p>
+
 ## See the contents of any site
 
 **Scepter** has a easy UI to help you understand how a site is built, fix problems, or make tweaks.
