@@ -1,7 +1,8 @@
 <html lang="en-us">
+  
   <head>
     <title>Scepter</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/scepter.css">
     <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
 
     <meta name="mobile-web-app-capable" content="yes">
@@ -19,18 +20,20 @@
     <meta property="og:title" content="Scepter">
     <meta property="og:description" content="Mobile web inspector. Scepter has a easy UI to help you understand how a site is built, fix problems, or make tweaks. Combining the power of both iframes and CORS requests, you can just type a URL to inspect it.">
     <meta property="og:url" content="https://scepter.berryscript.com">
-    <meta property="og:image" content="/thumb.png">
-    <meta property="og:type" content="website">
+    <meta property="og:image" content="/pic/thumb.png">
+    <meta property="og:type" content="application">
     <meta property="og:site_name" content="Scepter">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="referrer" content="origin-when-cross-origin">
     <meta name="keywords" content="web, inspector, chrome, browser, tool">
-    <link rel="shortcut icon" href="/images/icons/google-touch-icon.png">
+    <link rel="shortcut icon" href="/pic/icons/google-touch-icon.png">
     <meta name="next-head-count" content="24">
     <meta name="robots" content="all">
 
   </head>
-  <body ontouchstart="">  
+  
+  <body ontouchstart="">
+    
     <div class="overlay"></div>
     <div class="inspector">
       <div class="option class">
@@ -63,5 +66,9 @@
     </div>
 
     <iframe src="" class="html" frameborder="0" allow="camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer"></iframe>
+  
+    <script src="/scepter.js"></script>
+    
   </body>
+  
 </html>
