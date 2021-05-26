@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: auto;
+  color: #d4d5d7;
+  background: #090e11;
+  max-width: 481px;
+  height: 100%;
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
+  -webkit-font-feature-settings: "kern";
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+.overlay, .expanded--overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  
+  background: rgba(9,14,17,0.85);
+  opacity: 0;
+  pointer-events: none;
+  transition: none;
+}
+
+.expanded--overlay {
+  background: transparent;
+  z-index: 1002;
+}
+
+.inspector {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1001;
+    
+  opacity: 0;
+  pointer-events: none;
+  
+  margin-top: 20px;
+  margin-left: -13px;
+  
+  background: rgba(29,29,31,0.9);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  
+  width: 205px;
+  min-height: 0;
+  
+  transform: scale(0);
+  transform-origin: top left;
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2) transform, .3s opacity;
+  
+  box-shadow: 0 17px 50px 0 rgba(0,0,0,.19),0 12px 15px 0 rgba(0,0,0,.24);
+  border-radius: 8px;
+}
+
+.inspector.expanded {
+  top: 100vh !important;
+  transform: translateY(-100%) !important;
+  min-height: 50vh;
+  margin-top: 0;
+  
+  width: 100vw;
+  left: 0 !important;
+  margin-left: 0;
+  
+  border-radius: 0;
+  background: #2a2f32;
+  
+  pointer-events: none !important;
+  
+  transition: 0.3s ease, 0.18s 0.48s opacity !important;
+}
+
+.inspector.transitioning {
+  transition: 0.3s 0.18s ease, 0.18s opacity !important;
+}
+
+.inspector .option {
+  cursor: pointer;
+  color: #d4d5d7;
+  letter-spacing: 0.01rem;
+  
+  height: 53px;
+  width: 205px;
+  
+  padding: 14px 16px;
+  box-sizing: border-box;
+  
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgb(255 255 255 / 24%);
+  
+  opacity: 0;
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2);
+}
+
+.inspector .option:first-of-type {
+  border-top: 0;
+  transition-delay: .04s;
+}
+
+.inspector .option:nth-of-type(2) {
+  transition-delay: .08s;
+}
+
+.overlay.visible + .inspector .option {
+  opacity: 1;
+}
+
+.inspector.expanded .option {
+  opacity: 0 !important;
+  transition: 0.18s ease;
+}
+
+.inspector.transitioning .option {
+  transition: 0.18s 0.3s ease;
+}
+
+.inspector .option svg {
+  margin-right: 9px;
+  color: #828689;
+}
+
+.inspector .option a {
+  display: block;
+  position: relative;
+  
+  overflow-x: hidden;
+  white-space: nowrap;
+  width: calc(100% - 30px);
+  -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
+  mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
+}
+
+.inspector .option.fade a {
+  opacity: 0;
+}
+
+.overlay.visible, .overlay.visible + .inspector {
+  opacity: 1;
+  pointer-events: all;
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2);
+}
+
+.overlay.visible + .inspector {
+  transform: none;
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2), 0s left, 0s top;
+}
+
+.popover {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1003;
+  
+  opacity: 0;
+  pointer-events: none;
+  
+  width: 100vw;
+  height: 50vh;
+  overflow-y: overlay;
+  
+  padding: 20px;
+  box-sizing: border-box;
+  
+  background: #2a2f32;
+  box-shadow: 0 17px 50px 0 rgba(0,0,0,.19),0 12px 15px 0 rgba(0,0,0,.24);
+    
+  transition: 0.18s ease;
+}
+
+.popover.hidden {
+  opacity: 0 !important;
+  transition: 0.15s !important;
+  transition: none !important;
+}
+
+.popover.transitioning {
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2) !important;
+}
+
+.popover .header {
+  position: sticky;
+  top: -20px;
+  
+  height: calc(20px*2 + 24px);
+  margin: -20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  
+  background: rgba(42, 47, 50, 0.9);
+  border-bottom: 1px solid #f1f1f21c;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  
+  z-index: 1;
+}
+
+.popover .header .type {
+  font-size: 20px;
+  font-weight: 700;
+  
+  margin-bottom: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 50%;
+}
+
+.popover .header .close {
+  color: #828689;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.popover .item {
+  background: #1e2429;
+  
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px 16px;
+  box-sizing: border-box;
+  
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.popover .item .desc {
+  color: #b1b3b5;
+  max-width: 50%;
+  overflow: hidden;
+}
+
+.popover .item .text {
+  color: rgba(241,241,242,0.92);
+  font-weight: 600;
+  max-width: 50%;
+  overflow: hidden;
+}
+
+.popover .title {
+  color: #b1b3b5;
+  padding: 10px 16px;
+}
+
+.popover .title:first-of-type {
+  padding-top: 0;
+}
+
+.popover .item + .title {
+  padding-top: 10px;
+}
+
+.popover .actions {
+  cursor: pointer;
+  background: #323739;
+  width: 100%;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.popover .actions:last-of-type {
+  margin-bottom: 0;
+}
+
+.popover .action {
+  padding: 15px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.popover .action:first-of-type {
+  border-top: 0;
+}
+
+.popover .action .desc {
+  overflow: hidden;
+  white-space: nowrap;
+  overflow-x: hidden;
+  width: calc(100% - 42px);
+  -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
+  mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
+}
+
+.inspector.expanded + .expanded--overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.inspector.expanded ~ .popover {
+  opacity: 1;
+  pointer-events: all;
+  transition-delay: 0.3s;
+}
+
+.html * {
+  transition: .3s ease;
+}
+
+.html *:active {
+  transform: scale(0.94);
+}
+
+.html .seElected *:active {
+  transform: none;
+}
+
+.html *.seElected {
+  position: relative;
+  transform: scale(1.04);
+  
+  border-radius: 1% !important;
+  box-shadow: 0 0 0 10px rgb(104 187 228 / 12%);
+  background: rgba(104,187,228,0.12);
+  
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2), 0s z-index;
+  z-index: 1000;
+}
+
+
+.html {
+  width: 100%;
+  height: 100vh;
+}
