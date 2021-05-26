@@ -1,4 +1,4 @@
-<h1 align="center"><img src="icon.svg" height="30" width="30">Scepter</h1>
+<h1 align="center"><img src="scepter.svg" height="30" width="30">Scepter</h1>
 <p align="center">
   <h3 align="center">  
     Mobile web inspector
