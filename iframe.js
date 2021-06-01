@@ -106,24 +106,21 @@ function fireEvent(element, event) {
   return !element.dispatchEvent(evt);
 }
 
+var links = document.getElementsByTagName("link");
+var st = [];
+for (var x = 0; x < links.length; x++)
+  if (links[x].getAttribute("rel") == "stylesheet") {
+    st.push(links[x]);
+    links[x].wasAtt = links[x].getAttribute("href");
+    links[x].setAttribute("href", "");
+  }
 setTimeout(function() {
-
-  var links = document.getElementsByTagName("link");
-  var st = [];
-  for (var x = 0; x < links.length; x++)
-    if (links[x].getAttribute("rel") == "stylesheet") {
-      st.push(links[x]);
-      links[x].wasAtt = links[x].getAttribute("href");
-      links[x].setAttribute("href", "");
-    }
+  for (var x = 0; x < st.length; x++)
+    st[x].setAttribute("href", st[x].wasAtt);
   setTimeout(function() {
-    for (var x = 0; x < st.length; x++)
-      st[x].setAttribute("href", st[x].wasAtt);
-    setTimeout(function() {
-      fireEvent(window, "load");
-    }, 1000);
+    fireEvent(window, "load");
   }, 1000);
-}, 5000); // test reload after five seconds
+}, 1000);
 `;
 
 renderFrame('https://berryscript.com');
