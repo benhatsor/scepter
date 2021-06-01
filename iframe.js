@@ -52,7 +52,7 @@ async function renderFrame(url) {
     
     let newHref = new URL(origHref, url); 
     
-    a.href = 'javascript: window.parent.renderFrame("'+ newHref +'")';
+    a.href = 'javascript: window.parent.history.pushState({}, "", "'+ newHref +'");window.parent.renderFrame("'+ newHref +'")';
     
   })
   
