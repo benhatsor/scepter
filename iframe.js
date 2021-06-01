@@ -33,22 +33,16 @@ async function renderFrame(url) {
   var new_html = "<div class='htmL'>" + org_html + "</div>";
   
   // add scepter to iframe
-  tempDoc.body.innerHTML = scepterHTML + new_html;
+  tempDoc.body.innerHTML = reloadScript + scepterHTML + new_html;
   
   
   
-  // create iframe and inspect it
-  var iframe = document.createElement('iframe');
+  // reload iframe  
+  tempFrame.src = '';
+  tempFrame.frameborder = 0;
+  tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
-  iframe.src = '';
-  iframe.frameborder = 0;
-  iframe.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
-  
-  document.body.appendChild(iframe);
-  
-  iframe.contentDocument.documentElement.innerHTML = tempDoc.documentElement.innerHTML;
-  
-  //document.body.removeChild(tempFrame);
+  tempFrame.contentWindow.reloadPage();
   
 };
 
@@ -105,5 +99,36 @@ var scepterHTML = `
     </div>
     <link rel="stylesheet" href="https://scepter.berryscript.com/scepter.css">
     <script src="https://scepter.berryscript.com/scepter.js"></script>`;
+
+var reloadScript = `
+<script>
+function reloadPage() {
+  function fireEvent(element, event) {
+    var evt = document.createEvent("HTMLEvents");
+    evt.initEvent(event, true, true); // event type,bubbling,cancelable
+    return !element.dispatchEvent(evt);
+  }
+
+  setTimeout(function() {
+
+    var links = document.getElementsByTagName("link");
+    var st = [];
+    for (var x = 0; x < links.length; x++)
+      if (links[x].getAttribute("rel") == "stylesheet") {
+        st.push(links[x]);
+        links[x].wasAtt = links[x].getAttribute("href");
+        links[x].setAttribute("href", "");
+      }
+    setTimeout(function() {
+      for (var x = 0; x < st.length; x++)
+        st[x].setAttribute("href", st[x].wasAtt);
+      setTimeout(function() {
+        fireEvent(window, "load");
+      }, 1000);
+    }, 1000);
+  }, 5000); // test reload after five seconds
+}
+</script>
+`;
 
 renderFrame('https://berryscript.com');
