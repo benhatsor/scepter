@@ -2,7 +2,9 @@
 // render iframe
 async function renderFrame(url) {
   
-  document.body.removeChild(document.querySelector('iframe'));
+  if (document.querySelector('iframe')) {
+    document.querySelector('iframe').remove();
+  }
   
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
