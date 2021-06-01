@@ -16,7 +16,7 @@ async function renderFrame(url) {
   tempFrame.location.href = url;
   
   var tempDoc = tempFrame.contentDocument;
-  tempDoc.documentElement.innerHTML = resp;
+  //tempDoc.documentElement.innerHTML = resp;
   
   
   // add base url to iframe to prevent breaking relative URLs
