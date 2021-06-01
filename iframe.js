@@ -7,6 +7,8 @@ async function renderFrame() {
   
   iframe.contentDocument.querySelector('html').innerHTML = resp;
   
+  scepter.init(iframe);
+  
 });
 
 renderFrame();
