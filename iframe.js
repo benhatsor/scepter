@@ -48,7 +48,7 @@ async function renderFrame(url) {
     if (script.src) {
     
       // create a HTTP Request with CORS headers
-      var code = await axios.get(script.src);
+      var code = await axios.get(script.src, true);
       
     } else {
       
