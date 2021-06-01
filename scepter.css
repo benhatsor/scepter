@@ -10,6 +10,11 @@ html {
   font-size: 16px;
   color: #d4d5d7;
   
+  line-height: normal;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: normal;
+  
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
