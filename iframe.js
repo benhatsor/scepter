@@ -50,7 +50,7 @@ async function renderFrame(url) {
     
     newHref = url + newHref;
     
-    a.href = 'https://scepter.berryscript.com/?url=' + newHref;
+    a.href = 'javascript: window.parent.renderFrame("'+ newHref +'")';
     
   })
   
