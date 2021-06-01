@@ -1,12 +1,21 @@
 const iframe = document.querySelector('.html');
 
 // Update iframe
-async function renderFrame() {
+async function renderFrame(url) {
   
-  const resp = await axios.get('https://berryscript.com', true);
+  // create a HTTP Request with CORS headers
+  const resp = await axios.get(url, true);
   
+  // inject html into iframe
   iframe.contentDocument.querySelector('html').innerHTML = resp;
   
+  // add base url to iframe to prevent breaking relative URLs
+  const base = iframe.contentDocument.createElement('base');
+  base.href = url;
+  
+  iframe.contentDocument.querySelector('head').appendChild(base);
+  
+  // inspect the iframe
   scepter.init(iframe);
   
 };
@@ -31,4 +40,4 @@ var axios = {
   }
 };
 
-renderFrame();
+renderFrame('https://berryscript.com');
