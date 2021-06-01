@@ -103,7 +103,7 @@ var scepterHTML = `
         </div>
       </div>
     </div>
-    <link rel="stylesheet" href="/scepter.css">
+    <link rel="stylesheet" href="https://scepter.berryscript.com/scepter.css">
     <script src="https://scepter.berryscript.com/scepter.js"></script>`;
 
 renderFrame('https://berryscript.com');
