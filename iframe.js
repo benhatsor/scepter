@@ -16,7 +16,7 @@ async function renderFrame(url) {
   const base = frameDoc.createElement('base');
   base.href = url;
   
-  frameHead.insertBefore(base, frameHead.firstChild);
+  frameHead.appendChild(base);
   
   // inspect the iframe
   scepter.init(iframe);
