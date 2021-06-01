@@ -44,15 +44,20 @@ async function renderFrame(url) {
   // Run all <script> tags
   tempDoc.querySelectorAll('script').forEach(async (script) => {
     
+    // if script is external
     if (script.src) {
     
       // create a HTTP Request with CORS headers
       var code = await axios.get(script.src);
-
-      // I really did try to find an alternative... but...
-      tempFrame.contentWindow.eval(code);
+      
+    } else {
+      
+      var code = script.innerHTML;
       
     }
+    
+    // I really did try to find an alternative... but...
+    tempFrame.contentWindow.eval(code);
     
   })
   
