@@ -45,6 +45,9 @@ async function renderFrame(url) {
   
   
   // add iframe to HTML
+  iframe.frameborder = 0;
+  iframe.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
+  
   document.body.appendChild(iframe);
   
 };
