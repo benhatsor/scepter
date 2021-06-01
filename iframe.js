@@ -41,10 +41,16 @@ async function renderFrame(url) {
   tempFrame.frameBorder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
-  // disable all <a> tags
+  // redirect all <a> tags
   tempDoc.querySelectorAll('a').forEach((a) => {
     
-    a.href = 'javascript: void(0)';
+    var origHref = a.href;
+    
+    var newHref = origHref.replaceAll(url, '');
+    
+    newHref = url + newHref;
+    
+    a.href = 'https://scepter.berryscript.com/?url=' + newHref;
     
   })
   
