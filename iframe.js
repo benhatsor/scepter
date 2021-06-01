@@ -155,4 +155,4 @@ setTimeout(function() {
 }, 0);
 `;
 
-renderFrame('https://google.com');
+renderFrame('https://stackoverflow.com');
