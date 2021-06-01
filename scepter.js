@@ -1,6 +1,6 @@
 const scepter = {
   
-  'init': (elementsWrapper) => {
+  'inspect': (elementsWrapper) => {
   
     const elements = elementsWrapper.querySelectorAll('*'),
 
