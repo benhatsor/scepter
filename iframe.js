@@ -9,7 +9,7 @@ async function renderFrame() {
   
   scepter.init(iframe);
   
-});
+};
 
 renderFrame();
 
