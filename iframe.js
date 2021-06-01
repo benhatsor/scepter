@@ -6,8 +6,7 @@ async function renderFrame(url) {
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
   
-  const frameDoc = iframe.contentDocument,
-        frameHead = frameDoc.querySelector('head');
+  const frameDoc = iframe.contentDocument;
   
   // inject html into iframe
   frameDoc.querySelector('html').innerHTML = resp;
@@ -16,7 +15,8 @@ async function renderFrame(url) {
   const base = frameDoc.createElement('base');
   base.href = url;
   
-  frameHead.appendChild(base);
+  const frameHead = frameDoc.querySelector('head');
+  frameHead.insertBefore(base, frameHead.firstChild);
   
   // inspect the iframe
   scepter.init(iframe);
