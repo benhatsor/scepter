@@ -46,9 +46,7 @@ async function renderFrame(url) {
     
     var origHref = a.href;
     
-    var newHref = origHref.replaceAll(url, '');
-    
-    newHref = url + '/' + newHref;
+    let newHref = new URL(origHref, url); 
     
     a.href = 'javascript: window.parent.renderFrame("'+ newHref +'")';
     
