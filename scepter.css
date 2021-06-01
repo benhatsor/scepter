@@ -1,13 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-body {
-  margin: auto;
-  color: #d4d5d7;
-  background: #090e11;
-  max-width: 481px;
-  height: 100%;
-  
+.scepterElem {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
+  color: #d4d5d7;
+  
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
@@ -315,19 +311,19 @@ body {
   transition-delay: 0.3s;
 }
 
-.html * {
+.htmL * {
   transition: .3s ease;
 }
 
-.html *:active {
+.htmL *:active {
   transform: scale(0.94);
 }
 
-.html .seElected *:active {
+.htmL .seElected *:active {
   transform: none;
 }
 
-.html *.seElected {
+.htmL *.seElected {
   position: relative;
   transform: scale(1.04);
   
@@ -340,7 +336,7 @@ body {
 }
 
 
-.html {
+.htmL {
   width: 100%;
   height: 100vh;
 }
