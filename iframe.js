@@ -33,7 +33,7 @@ async function renderFrame(url) {
   var new_html = "<div class='htmL'>" + org_html + "</div>";
   
   // add scepter to iframe
-  tempDoc.body.innerHTML = scepterHTML + new_html;
+  tempDoc.body.innerHTML = scepterHTML + new_html + '<link rel="stylesheet" href="https://scepter.berryscript.com/scepter.css">';
   
   
   
@@ -122,7 +122,6 @@ var scepterHTML = `
         </div>
       </div>
     </div>
-    <link rel="stylesheet" href="https://scepter.berryscript.com/scepter.css">
     <script src="https://scepter.berryscript.com/scepter.js"></script>`;
 
 var reloadScript = `
