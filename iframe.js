@@ -41,6 +41,8 @@ async function renderFrame(url) {
   tempFrame.frameBorder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
+  tempFrame.contentWindow.eval(reloadScript);
+  
   // Run all <script> tags
   tempDoc.querySelectorAll('script').forEach(async (script) => {
     
@@ -59,15 +61,9 @@ async function renderFrame(url) {
     }
     
     // I really did try to find an alternative... but...
-    try {
-      tempFrame.contentWindow.eval(code);
-    } catch(e) {
-      console.log(e);
-    }
+    tempFrame.contentWindow.eval(code);
     
   })
-  
-  tempFrame.contentWindow.eval(reloadScript);
   
 };
 
