@@ -320,7 +320,7 @@ html {
 }
 
 .htmL * {
-  transition: .3s ease;
+  transition: .3s ease transform;
 }
 
 .htmL *:active {
