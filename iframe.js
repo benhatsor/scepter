@@ -143,8 +143,8 @@ setTimeout(function() {
     st[x].setAttribute("href", st[x].wasAtt);
   setTimeout(function() {
     fireEvent(window, "load");
-  }, 1000);
-}, 1000);
+  }, 0);
+}, 0);
 `;
 
 renderFrame('https://berryscript.com');
