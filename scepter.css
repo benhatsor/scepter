@@ -134,6 +134,7 @@ html {
 }
 
 .inspector .option a {
+  text-decoration: none;
   color: #d4d5d7;
   display: block;
   position: relative;
