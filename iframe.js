@@ -44,7 +44,7 @@ async function renderFrame(url) {
   // disable all <a> tags
   tempDoc.querySelectorAll('a').forEach((a) => {
     
-    a.href = '';
+    a.href = 'javascript: void(0)';
     
   })
   
