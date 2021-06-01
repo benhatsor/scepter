@@ -18,6 +18,8 @@
 
 Combining the power of both **iframes** and **CORS requests**, you can just type a URL to inspect it.
 
+Eg. https://scepter.berryscript.com/?url=https://berryscript.com
+
 ## Mobile first
 
 There's no reason to have to open the computer just to inspect. Tap and swipe to roam the site.
