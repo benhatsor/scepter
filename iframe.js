@@ -50,7 +50,7 @@ async function renderFrame(url) {
     
     var newHref = new URL(a.href, url); 
     
-    a.href = 'javascript: window.parent.history.pushState({}, "", "'+ newHref +'");window.parent.renderFrame("'+ newHref +'")';
+    a.href = 'javascript: window.parent.history.pushState({}, "", "https://scepter.berryscript.com/?url='+ newHref +'");window.parent.renderFrame("'+ newHref +'")';
     
   })
   
