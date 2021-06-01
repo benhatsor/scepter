@@ -3,7 +3,7 @@ const iframe = document.querySelector('.html');
 // Update iframe
 async function renderFrame() {
   
-  const resp = await axios.get('https://berryscript.com');
+  const resp = await axios.get('https://berryscript.com', true);
   
   iframe.contentDocument.querySelector('html').innerHTML = resp;
   
@@ -11,10 +11,8 @@ async function renderFrame() {
   
 };
 
-renderFrame();
-
 var axios = {
-  'get': (url, options) => {
+  'get': (url, cors) => {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
@@ -24,7 +22,7 @@ var axios = {
           }
         };
 
-        cors = options ? 'https://berrycors.herokuapp.com/' : '';
+        cors = cors ? 'https://berrycors.herokuapp.com/' : '';
 
         xmlhttp.open('GET', (cors + url), true);
         xmlhttp.send();
@@ -32,3 +30,5 @@ var axios = {
     });
   }
 };
+
+renderFrame();
