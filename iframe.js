@@ -7,7 +7,7 @@ async function renderFrame(url) {
   
   
   
-  if (frames[0]) {
+  if (window.frames[0]) {
     document.body.removeChild(window.frames[0]);
   }
   
