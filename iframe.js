@@ -48,9 +48,7 @@ async function renderFrame(url) {
   // redirect all <a> tags
   tempDoc.querySelectorAll('a').forEach((a) => {
     
-    var origHref = a.href;
-    
-    let newHref = new URL(origHref, url); 
+    var newHref = new URL(a.href, url); 
     
     a.href = 'javascript: window.parent.history.pushState({}, "", "'+ newHref +'");window.parent.renderFrame("'+ newHref +'")';
     
@@ -64,8 +62,11 @@ async function renderFrame(url) {
     // if script is external
     if (script.src) {
     
+      // get src with base URL
+      var absSrc = new URL(script.src, url);
+      
       // create a HTTP Request with CORS headers
-      code = await axios.get(script.src, true);
+      code = await axios.get(absSrc, true);
       
     } else {
       
