@@ -8,7 +8,7 @@ async function renderFrame(url) {
   
   
   if (frames[0]) {
-    document.body.removeChild(frames[0]);
+    document.body.removeChild(window.frames[0]);
   }
   
   // inject html into temporary iframe
