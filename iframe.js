@@ -155,4 +155,4 @@ setTimeout(function() {
 }, 0);
 `;
 
-renderFrame('https://stackoverflow.com');
+renderFrame('https://apple.com');
