@@ -7,12 +7,13 @@ async function renderFrame(url) {
   
   
   
-  // inject html into iframe
-  // and manipulate HTML
+  // inject html into temporary iframe
+  // for HTML manipulation
   
-  var iframe = document.createElement('iframe'),
-      tempDoc = iframe.contentDocument;
+  var tempFrame = document.createElement('iframe');
+  document.body.appendChild(tempFrame);
   
+  var tempDoc = tempFrame.contentDocument;
   tempDoc.documentElement.innerHTML = resp;
   
   
@@ -44,11 +45,18 @@ async function renderFrame(url) {
   
   
   
-  // add iframe to HTML
+  // create iframe and inspect it
+  var iframe = document.createElement('iframe');
+  
+  iframe.src = '';
   iframe.frameborder = 0;
   iframe.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
   document.body.appendChild(iframe);
+  
+  iframe.contentDocument.documentElement.innerHTML = tempDoc.documentElement.innerHTML;
+  
+  //document.body.removeChild(tempFrame);
   
 };
 
