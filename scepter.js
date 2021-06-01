@@ -1,4 +1,4 @@
-const elementsWrapper = document.querySelector('.htmL'),
+const elementsWrapper = document.querySelector('.hTml'),
       elements = elementsWrapper.querySelectorAll('*'),
       
       overlay = document.querySelector('.overlay'),
