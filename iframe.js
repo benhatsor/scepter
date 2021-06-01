@@ -41,9 +41,31 @@ async function renderFrame(url) {
   tempFrame.frameBorder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
+  // Run all <script> tags
+  tempDoc.querySelectorAll('script').forEach(script => {
+    
+    // create a HTTP Request with CORS headers
+    var code = await axios.get(script.src);
+    
+    // Try running their code. If there's an error, display it in the console
+    setInnerHTML(script, code);
+    
+  })
+  
   tempFrame.contentWindow.eval(reloadScript);
   
 };
+
+var setInnerHTML = function(elm, html) {
+  elm.innerHTML = html;
+  Array.from(elm.querySelectorAll("script")).forEach(oldScript => {
+    const newScript = document.createElement("script");
+    Array.from(oldScript.attributes)
+      .forEach(attr => newScript.setAttribute(attr.name, attr.value));
+    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+    oldScript.parentNode.replaceChild(newScript, oldScript);
+  });
+}
 
 var axios = {
   'get': (url, cors) => {
@@ -108,19 +130,17 @@ function fireEvent(element, event) {
 
 var links = document.getElementsByTagName("link");
 var st = [];
-for (var x = 0; x < links.length; x++)
+for (var x = 0; x < links.length; x++) {
   if (links[x].getAttribute("rel") == "stylesheet") {
     st.push(links[x]);
     links[x].wasAtt = links[x].getAttribute("href");
     links[x].setAttribute("href", "");
   }
-setTimeout(function() {
   for (var x = 0; x < st.length; x++)
     st[x].setAttribute("href", st[x].wasAtt);
-  setTimeout(function() {
     fireEvent(window, "load");
-  }, 1000);
-}, 1000);
+  }
+}
 `;
 
 renderFrame('https://berryscript.com');
