@@ -38,11 +38,10 @@ async function renderFrame(url) {
   
   
   // reload iframe  
-  tempFrame.src = '';
   tempFrame.frameborder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
-  //tempFrame.contentWindow.reloadPage();
+  tempFrame.contentWindow.reloadPage();
   
 };
 
