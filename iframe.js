@@ -13,7 +13,7 @@ async function renderFrame(url) {
   var tempFrame = document.createElement('iframe');
   document.body.appendChild(tempFrame);
   
-  tempFrame.location.href = url;
+  tempFrame.contentDocument.location.href = url;
   
   var tempDoc = tempFrame.contentDocument;
   //tempDoc.documentElement.innerHTML = resp;
