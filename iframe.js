@@ -46,7 +46,7 @@ async function renderFrame(url) {
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
   // redirect all <a> tags
-  tempDoc.querySelectorAll('a').forEach((a) => {
+  tempDoc.querySelectorAll('.htmL a').forEach((a) => {
     
     var newHref = new URL(a.href, url); 
     
