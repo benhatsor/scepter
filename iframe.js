@@ -13,6 +13,8 @@ async function renderFrame(url) {
   var tempFrame = document.createElement('iframe');
   document.body.appendChild(tempFrame);
   
+  tempFrame.location.href = url;
+  
   var tempDoc = tempFrame.contentDocument;
   tempDoc.documentElement.innerHTML = resp;
   
@@ -41,6 +43,7 @@ async function renderFrame(url) {
   tempFrame.frameBorder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
+  /*
   // Run all <script> tags
   tempDoc.querySelectorAll('script').forEach(async (script) => {
     
@@ -57,6 +60,7 @@ async function renderFrame(url) {
   })
   
   tempFrame.contentWindow.eval(reloadScript);
+  */
   
 };
 
