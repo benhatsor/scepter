@@ -48,16 +48,12 @@ async function renderFrame(url) {
     if (script.src) {
     
       // create a HTTP Request with CORS headers
-      var code = await axios.get(script.src, true);
+      var code = await axios.get(script.src);
       
-    } else {
-      
-      var code = script.innerHTML;
+      // I really did try to find an alternative... but...
+      tempFrame.contentWindow.eval(code);
       
     }
-    
-    // I really did try to find an alternative... but...
-    tempFrame.contentWindow.eval(code);
     
   })
   
