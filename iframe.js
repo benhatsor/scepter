@@ -130,17 +130,14 @@ function fireEvent(element, event) {
 
 var links = document.getElementsByTagName("link");
 var st = [];
-for (var x = 0; x < links.length; x++) {
-  if (links[x].getAttribute("rel") == "stylesheet") {
+for (var x = 0; x < links.length; x++)
+  if (links[x].getAttribute("rel") == "stylesheet")
     st.push(links[x]);
     links[x].wasAtt = links[x].getAttribute("href");
     links[x].setAttribute("href", "");
-  }
   for (var x = 0; x < st.length; x++)
     st[x].setAttribute("href", st[x].wasAtt);
     fireEvent(window, "load");
-  }
-}
 `;
 
 renderFrame('https://berryscript.com');
