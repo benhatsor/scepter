@@ -38,7 +38,7 @@ async function renderFrame(url) {
   
   
   // reload iframe  
-  tempFrame.frameborder = 0;
+  tempFrame.frameBorder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
   tempFrame.contentWindow.eval(reloadScript);
