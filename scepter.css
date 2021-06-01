@@ -32,7 +32,7 @@ html {
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 9999;
+  z-index: 99999;
   
   background: rgba(9,14,17,0.85);
   opacity: 0;
@@ -42,14 +42,14 @@ html {
 
 .expanded--overlay {
   background: transparent;
-  z-index: 1002;
+  z-index: 991002;
 }
 
 .inspector {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 91001;
+  z-index: 991001;
     
   opacity: 0;
   pointer-events: none;
@@ -172,7 +172,7 @@ html {
   position: fixed;
   left: 0;
   bottom: 0;
-  z-index: 91003;
+  z-index: 991003;
   
   opacity: 0;
   pointer-events: none;
@@ -345,7 +345,7 @@ html {
   background: rgba(104,187,228,0.12);
   
   transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2), 0s z-index;
-  z-index: 91000 !important;
+  z-index: 991000 !important;
 }
 
 
