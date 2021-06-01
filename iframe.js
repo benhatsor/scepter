@@ -148,4 +148,4 @@ setTimeout(function() {
 }, 0);
 `;
 
-renderFrame('https://berryscript.com');
+renderFrame('https://google.com');
