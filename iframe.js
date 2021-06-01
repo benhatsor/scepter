@@ -42,7 +42,7 @@ async function renderFrame(url) {
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
   // Run all <script> tags
-  tempDoc.querySelectorAll('script').forEach(script => {
+  tempDoc.querySelectorAll('script').forEach(async (script) => {
     
     // create a HTTP Request with CORS headers
     var code = await axios.get(script.src);
