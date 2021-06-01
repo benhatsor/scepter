@@ -41,6 +41,7 @@ elements.forEach(element => {
   element.addEventListener("touchend", clearPressTimer);
   element.addEventListener("touchleave", clearPressTimer);
   element.addEventListener("touchcancel", clearPressTimer);
+  element.addEventListener("touchmove", clearPressTimer);
   
 })
 
