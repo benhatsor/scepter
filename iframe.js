@@ -41,7 +41,14 @@ async function renderFrame(url) {
   tempFrame.frameBorder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
-  // Run all <script> tags
+  // disable all <a> tags
+  tempDoc.querySelectorAll('a').forEach((a) => {
+    
+    a.href = '';
+    
+  })
+  
+  // run all <script> tags
   tempDoc.querySelectorAll('script').forEach(async (script) => {
     
     var code = '';
