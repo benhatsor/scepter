@@ -6,14 +6,17 @@ async function renderFrame(url) {
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
   
+  const frameDoc = iframe.contentDocument,
+        frameHead = frameDoc.querySelector('head');
+  
   // inject html into iframe
-  iframe.contentDocument.querySelector('html').innerHTML = resp;
+  frameDoc.querySelector('html').innerHTML = resp;
   
   // add base url to iframe to prevent breaking relative URLs
-  const base = iframe.contentDocument.createElement('base');
+  const base = frameDoc.createElement('base');
   base.href = url;
   
-  iframe.contentDocument.querySelector('head').appendChild(base);
+  frameHead.insertBefore(base, frameHead.firstChild);
   
   // inspect the iframe
   scepter.init(iframe);
