@@ -27,21 +27,13 @@ async function renderFrame(url) {
   
   // wrap the body in a div, to prevent selecting inspector elements
   
-  var parent = tempDoc.body.parentNode;
-  var wrapper = tempDoc.createElement('div');
+  var org_html = tempDoc.body.innerHTML;
   
   // note: "htmL" is not a typo. added on purpose to prevent targeting "html" classes appearing naturally in websites.
-  wrapper.classList = 'htmL';
-  
-  // set the wrapper as child (instead of the body)
-  parent.replaceChild(wrapper, tempDoc.body);
-  // set body as child of wrapper
-  wrapper.appendChild(tempDoc.body);
-  
+  var new_html = "<div class='htmL'>" + org_html + "</div>";
   
   // add scepter to iframe
-  
-  tempDoc.body.innerHTML = scepterHTML + tempDoc.body.innerHTML;
+  tempDoc.body.innerHTML = scepterHTML + new_html;
   
   
   
