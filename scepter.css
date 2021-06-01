@@ -200,7 +200,7 @@ html {
   transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2) !important;
 }
 
-.popover .heaDer {
+.popover .headDer {
   position: sticky;
   top: -20px;
   
@@ -218,7 +218,7 @@ html {
   z-index: 1;
 }
 
-.popover .heaDer .type {
+.popover .headDer .type {
   font-size: 20px;
   font-weight: 700;
   
@@ -229,7 +229,7 @@ html {
   max-width: 50%;
 }
 
-.popover .heaDer .close {
+.popover .headDer .close {
   color: #828689;
   position: absolute;
   right: 0;
