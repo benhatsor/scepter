@@ -85,6 +85,7 @@ async function renderFrame(url) {
   
 };
 
+// my attempt at running a script without eval()
 var setInnerHTML = function(elm, html) {
   elm.innerHTML = html;
   Array.from(elm.querySelectorAll("script")).forEach(oldScript => {
