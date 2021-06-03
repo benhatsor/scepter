@@ -95,6 +95,13 @@ async function renderFrame(url) {
   tempDoc.head.appendChild(base);
   
   
+  // add scepter shadow boundary CSS to iframe
+  let style = document.createElement('style');
+  
+  style.textContent = scepterOutlyingCSS;
+  tempDoc.head.appendChild(style);
+  
+  
   // redirect all links
   tempDoc.querySelectorAll('a').forEach((a) => {
     
@@ -202,6 +209,32 @@ var scepterHTML = `
       </div>
     </div>
     `;
+
+var scepterOutlyingCSS = `
+body *:not(scepter) {
+  transition: .3s ease;
+}
+
+body *:not(scepter):active {
+  transform: scale(0.94);
+}
+
+body .seElected *:active {
+  transform: none;
+}
+
+body .seElected {
+  position: relative;
+  transform: scale(1.04);
+  
+  border-radius: 1% !important;
+  box-shadow: 0 0 0 10px rgb(104 187 228 / 12%);
+  background: rgba(104,187,228,0.12);
+  
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2), 0s z-index;
+  z-index: 999999999 !important;
+}
+`;
 
 var url = new URL(window.location.href),
     requestedURL = url.searchParams.get('url');
