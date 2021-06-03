@@ -1,14 +1,16 @@
-const elementsWrapper = document.querySelector('.htmL'),
+const elementsWrapper = document.querySelector('.html'),
       elements = elementsWrapper.querySelectorAll('*'),
       
-      overlay = document.querySelector('.overlay'),
-      expandedOverlay = document.querySelector('.expanded--overlay'),
+      shadow = document.body.shadowRoot,
       
-      inspector = document.querySelector('.inspector'),
+      overlay = shadow.querySelector('.overlay'),
+      expandedOverlay = shadow.querySelector('.expanded--overlay'),
+      
+      inspector = shadow.querySelector('.inspector'),
       classOption = inspector.querySelector('.option.class'),
       codeOption = inspector.querySelector('.option.code'),
       
-      popover = document.querySelector('.popover'),
+      popover = shadow.querySelector('.popover'),
       popoverType = popover.querySelector('.type'),
       popoverClose = popover.querySelector('.close'),
       popoverContent = popover.querySelector('.content');
@@ -90,7 +92,7 @@ function selectElement(element) {
     
     classOption.children[1].innerText = classString.replace('.seElected', '');
 
-    }
+  }
   
 }
 
