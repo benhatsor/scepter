@@ -211,11 +211,11 @@ var scepterHTML = `
     `;
 
 var scepterOutlyingCSS = `
-body *:not(scepter) {
+body *:not(scepter-element) {
   transition: .3s ease;
 }
 
-body *:not(scepter):active {
+body *:not(scepter-element):active {
   transform: scale(0.94);
 }
 
