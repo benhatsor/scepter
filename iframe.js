@@ -1,9 +1,72 @@
 
+// create a class for the scepter element
+class scepterElement extends HTMLElement {
+  
+  constructor() {
+    
+    // always call super first in constructor
+    super();
+
+    // create a shadow root
+    let shadow = this.attachShadow({mode: 'open'});
+    
+    // add scepter HTML to shadow dom
+    shadow.innerHTML = scepterHTML;
+    
+    // apply external styles to the shadow dom
+    const linkElem = document.createElement('link');
+    linkElem.setAttribute('rel', 'stylesheet');
+    linkElem.setAttribute('href', 'https://scepter.berryscript.com/scepter.css');
+
+    // attach the created element to the shadow dom
+    shadow.appendChild(linkElem);
+    
+    // reload page
+    function fireEvent(element, event) {
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent(event, true, true); // event type,bubbling,cancelable
+      return !element.dispatchEvent(evt);
+    }
+    var links = document.getElementsByTagName("link");
+    var st = [];
+    for (var x = 0; x < links.length; x++)
+      if (links[x].getAttribute("rel") == "stylesheet") {
+        st.push(links[x]);
+        links[x].wasAtt = links[x].getAttribute("href");
+        links[x].setAttribute("href", "");
+      }
+    setTimeout(function() {
+      for (var x = 0; x < st.length; x++)
+        st[x].setAttribute("href", st[x].wasAtt);
+      setTimeout(function() {
+        fireEvent(window, "load");
+      }, 0);
+    }, 0);
+    
+    // init scepter
+    scepter.init(shadow);
+    
+  }
+  
+}
+
+// define the scepter element
+customElements.define('scepter', scepterElement);
+
+
+
 // render iframe
 async function renderFrame(url) {
   
+  // if an iframe already exists
   if (document.querySelector('iframe')) {
+    
+    // remove old iframe
     document.querySelector('iframe').remove();
+    
+    // push new url to history
+    window.history.pushState({}, '', 'https://scepter.berryscript.com/?url='+ url);
+    
   }
   
   // create a HTTP Request with CORS headers
@@ -15,6 +78,9 @@ async function renderFrame(url) {
   // for HTML manipulation
   
   var tempFrame = document.createElement('iframe');
+  tempFrame.frameBorder = 0;
+  tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
+  
   document.body.appendChild(tempFrame);
   
   var tempDoc = tempFrame.contentDocument;
@@ -29,37 +95,18 @@ async function renderFrame(url) {
   tempDoc.head.appendChild(base);
   
   
-  // wrap the body in a div, to prevent selecting inspector elements
-  
-  var org_html = tempDoc.body.innerHTML;
-  
-  // note: "htmL" is not a typo. added on purpose to prevent targeting "html" classes appearing naturally in websites.
-  var new_html = "<div class='htmL'>" + org_html + "</div>";
-  
-  tempDoc.body.innerHTML = new_html;
-  
-  // create a shadow root
-  var shadow = tempDoc.body.attachShadow({mode: 'open'});
-  
-  // add scepter to iframe
-  shadow.innerHTML = scepterHTML;
-  
-  
-  
-  // reload iframe  
-  tempFrame.frameBorder = 0;
-  tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
-  
-  // redirect all <a> tags
-  tempDoc.querySelectorAll('.htmL a').forEach((a) => {
+  // redirect all links
+  tempDoc.querySelectorAll('a').forEach((a) => {
     
+    // get href with base URL
     var newHref = new URL(a.href, url); 
     
-    a.href = 'javascript: window.parent.history.pushState({}, "", "https://scepter.berryscript.com/?url='+ newHref +'");window.parent.renderFrame("'+ newHref +'")';
+    a.href = 'javascript: window.parent.renderFrame("'+ newHref +'")';
     
   })
   
-  // run all <script> tags
+  
+  // run all scripts
   tempDoc.querySelectorAll('script').forEach(async (script) => {
     
     var code = '';
@@ -84,11 +131,12 @@ async function renderFrame(url) {
     
   })
   
-  tempFrame.contentWindow.eval(reloadScript);
   
-  tempFrame.contentWindow.eval(scepterScript);
+  // add scepter to iframe
+  var scepterElem = tempDoc.createElement('scepter');
+  tempDoc.body.appendChild(base);
   
-};
+}
 
 // my attempt at running a script without eval()
 var setInnerHTML = function(elm, html) {
@@ -120,7 +168,7 @@ var axios = {
       } catch(e) { reject(e) }
     });
   }
-};
+}
 
 var scepterHTML = `
     <div class="overlay"></div>
@@ -153,32 +201,7 @@ var scepterHTML = `
         </div>
       </div>
     </div>
-    <link rel="stylesheet" href="https://scepter.berryscript.com/scepter.css">`;
-
-var reloadScript = `
-function fireEvent(element, event) {
-  var evt = document.createEvent("HTMLEvents");
-  evt.initEvent(event, true, true); // event type,bubbling,cancelable
-  return !element.dispatchEvent(evt);
-}
-var links = document.getElementsByTagName("link");
-var st = [];
-for (var x = 0; x < links.length; x++)
-  if (links[x].getAttribute("rel") == "stylesheet") {
-    st.push(links[x]);
-    links[x].wasAtt = links[x].getAttribute("href");
-    links[x].setAttribute("href", "");
-  }
-setTimeout(function() {
-  for (var x = 0; x < st.length; x++)
-    st[x].setAttribute("href", st[x].wasAtt);
-  setTimeout(function() {
-    fireEvent(window, "load");
-  }, 0);
-}, 0);
-`;
-
-var scepterScript = `const elementsWrapper=document.querySelector(".htmL"),elements=elementsWrapper.querySelectorAll("*"),overlay=document.querySelector(".overlay"),expandedOverlay=document.querySelector(".expanded--overlay"),inspector=document.querySelector(".inspector"),classOption=inspector.querySelector(".option.class"),codeOption=inspector.querySelector(".option.code"),popover=document.querySelector(".popover"),popoverType=popover.querySelector(".type"),popoverClose=popover.querySelector(".close"),popoverContent=popover.querySelector(".content");elements.forEach(t=>{let s;function e(e){return s=window.setTimeout(()=>{selectElement(t)},350),!1}function o(){return clearTimeout(s),!1}t.addEventListener("mousedown",e),t.addEventListener("touchstart",e),t.addEventListener("mouseup",o),t.addEventListener("mouseout",o),t.addEventListener("touchend",o),t.addEventListener("touchleave",o),t.addEventListener("touchcancel",o),t.addEventListener("touchmove",o)});let selectQueue=[];function selectElement(i){if(!i.classList.contains("seElected")){selectQueue.unshift(i);let e=elementsWrapper.querySelectorAll(".seElected");e.forEach(e=>{e.classList.remove("seElected")}),selectQueue[0].classList.add("seElected"),overlay.classList.add("visible");var l=getPosRelToViewport(selectQueue[0]),i=selectQueue[0].clientHeight,i=l.top+i,l=l.left;inspector.style.top=i+"px",inspector.style.left=l+"px";let t=selectQueue[0].nodeName.toLowerCase(),s=Array.from(selectQueue[0].classList),o=selectQueue[0].id,n=t;0<s.length&&(n+="."+s.join(".")),o&&(n+="#"+o.split(" ").join("#")),classOption.children[1].innerText=n.replace(".seElected","")}}let clickOverride=overlay.addEventListener("click",()=>{let e=elementsWrapper.querySelectorAll(".seElected");e.forEach(e=>{e.classList.remove("seElected")}),overlay.classList.remove("visible"),selectQueue=[]});function repositionMenu(){var e,t;selectQueue[0]&&(t=getPosRelToViewport(selectQueue[0]),e=selectQueue[0].clientHeight,e=t.top+e,t=t.left,(e>window.innerHeight||e<0)&&console.log('Outside window'),inspector.style.top=e+"px",inspector.style.left=t+"px")}function getPosRelToViewport(e){var t=e.getBoundingClientRect();e.ownerDocument.defaultView;return{top:t.top,left:t.left}}function renderPopover(n){popoverType.innerText="<"+n.nodeName.toLowerCase()+">",popoverContent.innerHTML="";let e=Array.from(selectQueue[0].classList),t=selectQueue[0].id,s="";0<e.length&&(s+=" ."+e.join(" .")),t&&(s+=" #"+t.split(" ").join(" #")),s=s.replace(" .seElected",""),s&&" .seElected"!=s&&(popoverContent.innerHTML+='<div class="item"><div class="desc">Classes and IDs</div><div class="text">'+s+"</div></div>");let o=Array.from(selectQueue[0].children);if(0<o.length){let i='<div class="title">Children</div><div class="actions">';o.forEach(e=>{let t=e.nodeName.toLowerCase(),s=Array.from(e.classList),o=e.id,n=t;0<s.length&&(n+="."+s.join(".")),o&&(n+="#"+o.split(" ").join("#")),i+='<div class="action"><div class="desc">'+n+'</div><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="icon"><path d="M0 0h24v24H0z" fill="none"></path><path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6l-4 4h3v6h2v-6h3l-4-4z" fill="currentColor"></path></svg></div>'}),popoverContent.innerHTML+=i+"</div>"}let i=selectQueue[0].parentElement;if(i&&i!=elementsWrapper){n='<div class="title">Parent</div><div class="actions">';let e=i.nodeName.toLowerCase(),t=Array.from(i.classList),s=i.id,o=e;0<t.length&&(o+="."+t.join(".")),s&&(o+="#"+s.split(" ").join("#")),n+='<div class="action parent"><div class="desc">'+o+'</div><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="icon"><path d="M0 0h24v24H0z" fill="none"></path><path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h4v-2H5V8h14v10h-4v2h4c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm-7 6l-4 4h3v6h2v-6h3l-4-4z" fill="currentColor"></path></svg></div>',popoverContent.innerHTML+=n+"</div>"}let l=popoverContent.querySelectorAll(".action");l.forEach((t,s)=>{t.addEventListener("click",()=>{popover.classList.add("hidden");let e=elementsWrapper.querySelectorAll(".seElected");e.forEach(e=>{e.classList.remove("seElected")}),selectQueue=[],window.setTimeout(()=>{var e=t.classList.contains("parent")?i:o[s];selectElement(e),renderPopover(e),popover.classList.add("transitioning"),popover.classList.remove("hidden"),window.setTimeout(()=>{popover.classList.remove("transitioning")},250)},300)})})}window.addEventListener("resize",repositionMenu,!0),window.addEventListener("scroll",repositionMenu,!0),elements.forEach(e=>{e.addEventListener("contextmenu",e=>e.preventDefault())}),classOption.addEventListener("click",()=>{renderPopover(selectQueue[0]),inspector.classList.add("expanded")}),expandedOverlay.addEventListener("click",()=>{inspector.classList.add("transitioning"),inspector.classList.remove("expanded"),window.setTimeout(()=>{inspector.classList.remove("transitioning")},480)}),popoverClose.addEventListener("click",()=>{inspector.classList.add("transitioning"),inspector.classList.remove("expanded"),window.setTimeout(()=>{inspector.classList.remove("transitioning")},480)});`;
+    `;
 
 var url = new URL(window.location.href),
     requestedURL = url.searchParams.get('url');
