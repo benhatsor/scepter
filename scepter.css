@@ -321,27 +321,3 @@
   pointer-events: all;
   transition-delay: 0.3s;
 }
-
-.html > * {
-  transition: .3s ease;
-}
-
-.html > *:active {
-  transform: scale(0.94);
-}
-
-.html > .seElected > *:active {
-  transform: none;
-}
-
-.html > .seElected {
-  position: relative;
-  transform: scale(1.04);
-  
-  border-radius: 1% !important;
-  box-shadow: 0 0 0 10px rgb(104 187 228 / 12%);
-  background: rgba(104,187,228,0.12);
-  
-  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2), 0s z-index;
-  z-index: 999999999 !important;
-}
