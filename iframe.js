@@ -10,6 +10,8 @@ class scepterElement extends HTMLElement {
     // create a shadow root
     let shadow = this.attachShadow({mode: 'open'});
     
+    console.log('a');
+    
     // add scepter HTML to shadow dom
     shadow.innerHTML = scepterHTML;
     
