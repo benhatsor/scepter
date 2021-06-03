@@ -19,7 +19,7 @@ body {
 }
 
 .loading {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -29,6 +29,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s ease;
+}
+
+.loading.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .loading .image-wrapper {
