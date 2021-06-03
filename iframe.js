@@ -1,6 +1,6 @@
 
 // create a class for the scepter element
-class scepterElement extends HTMLElement {
+class ScepterElement extends HTMLElement {
   
   constructor() {
     
@@ -53,7 +53,7 @@ class scepterElement extends HTMLElement {
 }
 
 // define the scepter element
-customElements.define('scepter-element', scepterElement);
+customElements.define('scepter-element', ScepterElement);
 
 
 
