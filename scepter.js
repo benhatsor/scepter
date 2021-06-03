@@ -2,7 +2,7 @@ var scepter = {
   
   init: (shadow) => {
     
-    const elementsWrapper = document.querySelector('.html'),
+    const elementsWrapper = document.body,
           elements = elementsWrapper.querySelectorAll('*'),
 
           overlay = shadow.querySelector('.overlay'),
