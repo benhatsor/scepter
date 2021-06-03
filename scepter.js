@@ -1,7 +1,7 @@
 const elementsWrapper = document.querySelector('.html'),
       elements = elementsWrapper.querySelectorAll('*'),
       
-      shadow = document.body.shadowRoot,
+      shadow = document.querySelector('scepter').shadowRoot,
       
       overlay = shadow.querySelector('.overlay'),
       expandedOverlay = shadow.querySelector('.expanded--overlay'),
