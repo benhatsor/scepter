@@ -24,4 +24,4 @@ Eg. https://scepter.berryscript.com/?url=https://berryscript.com
 
 There's no reason to have to open the computer just to inspect. Tap and swipe to roam the site.
 
-### 👨‍💻 [@barhatsor](https://github.com/barhatsor)
+### 👨‍💻 <img src="/pic/icon.svg" height="24" width="24"> [@barhatsor](https://github.com/barhatsor)
