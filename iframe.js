@@ -51,7 +51,7 @@ class scepterElement extends HTMLElement {
 }
 
 // define the scepter element
-customElements.define('scepter', scepterElement);
+customElements.define('scepter-element', scepterElement);
 
 
 
@@ -140,8 +140,8 @@ async function renderFrame(url) {
   
   
   // add scepter to iframe
-  var scepterElem = tempDoc.createElement('scepter');
-  tempDoc.body.appendChild(base);
+  var scepterElem = tempDoc.createElement('scepter-element');
+  tempDoc.body.appendChild(scepterElem);
   
 }
 
