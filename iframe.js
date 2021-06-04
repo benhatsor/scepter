@@ -140,7 +140,7 @@ async function renderFrame(url) {
   
   // define the scepter element
   let customElementRegistry = tempFrame.contentWindow.customElements;
-  customElements.define('scepter-element', window.parent.ScepterElement);
+  customElements.define('scepter-element', ScepterElement);
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
