@@ -11,7 +11,7 @@ class ScepterElement extends HTMLElement {
     let shadow = this.attachShadow({mode: 'open'});
     
     // add scepter HTML to shadow dom
-    shadow.innerHTML = scepterHTML;
+    shadow.innerHTML = window.parent.scepterHTML;
     
     // apply external styles to the shadow dom
     const linkElem = document.createElement('link');
@@ -44,7 +44,7 @@ class ScepterElement extends HTMLElement {
     }, 0);
     
     // init scepter
-    scepter.init(shadow);
+    window.parent.scepter.init(shadow);
     
   }
   
@@ -140,9 +140,7 @@ async function renderFrame(url) {
   
   // define the scepter element
   let customElementRegistry = tempFrame.contentWindow.customElements;
-  customElements.define('scepter-element', ScepterElement);
-  
-  console.log(ScepterElement);
+  customElements.define('scepter-element', window.parent.ScepterElement);
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
