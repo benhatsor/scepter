@@ -1,6 +1,6 @@
 
 // create a class for the scepter element
-class ScepterElement extends HTMLElement {
+/*class ScepterElement extends HTMLElement {
   
   constructor() {
     
@@ -48,7 +48,7 @@ class ScepterElement extends HTMLElement {
     
   }
   
-}
+}*/
 
 
 
@@ -139,10 +139,56 @@ async function renderFrame(url) {
   // add scepter to iframe
   
   // define the scepter element
-  window.customElements.define('scepter-element', ScepterElement);
-  
   let customElementRegistry = tempFrame.contentWindow.customElements;
-  customElementRegistry.define('scepter-element', ScepterElement);
+  customElementRegistry.define('scepter-element', class extends HTMLElement {
+  
+  constructor() {
+    
+    // always call super first in constructor
+    super();
+
+    // create a shadow root
+    let shadow = this.attachShadow({mode: 'open'});
+    
+    // add scepter HTML to shadow dom
+    shadow.innerHTML = window.parent.scepterHTML;
+    
+    // apply external styles to the shadow dom
+    const linkElem = document.createElement('link');
+    linkElem.setAttribute('rel', 'stylesheet');
+    linkElem.setAttribute('href', 'https://scepter.berryscript.com/scepter.css');
+
+    // attach the created element to the shadow dom
+    shadow.appendChild(linkElem);
+    
+    // reload page
+    function fireEvent(element, event) {
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent(event, true, true); // event type,bubbling,cancelable
+      return !element.dispatchEvent(evt);
+    }
+    var links = document.getElementsByTagName("link");
+    var st = [];
+    for (var x = 0; x < links.length; x++)
+      if (links[x].getAttribute("rel") == "stylesheet") {
+        st.push(links[x]);
+        links[x].wasAtt = links[x].getAttribute("href");
+        links[x].setAttribute("href", "");
+      }
+    setTimeout(function() {
+      for (var x = 0; x < st.length; x++)
+        st[x].setAttribute("href", st[x].wasAtt);
+      setTimeout(function() {
+        fireEvent(window, "load");
+      }, 0);
+    }, 0);
+    
+    // init scepter
+    window.parent.scepter.init(shadow);
+    
+  }
+  
+});
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
