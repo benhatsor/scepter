@@ -139,7 +139,9 @@ async function renderFrame(url) {
   // add scepter to iframe
   
   // define the scepter element
-  let customElementRegistry = tempFrame.contentWindow.customElements;
+  //let customElementRegistry = tempFrame.contentWindow.customElements;
+  let customElementRegistry = window.customElements;
+  
   customElementRegistry.define('scepter-element', ScepterElement);
   
   // add the scepter element to dom
