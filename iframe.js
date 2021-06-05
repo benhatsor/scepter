@@ -221,12 +221,12 @@ body *:not(scepter-element) {
   transition: .3s ease transform;
 }
 
-body *:not(scepter-element).acCtive {
+body *:not(scepter-element):active {
   transform: scale(0.94);
   transition: .3s ease transform !important;
 }
 
-body .seElected *.acCtive {
+body .seElected *:active {
   transform: none;
 }
 
