@@ -173,7 +173,7 @@ class ScepterElement extends HTMLElement {
     }, 0);
     
     // init scepter
-    window.parent.scepter.init(shadow);
+    window.parent.scepter.init(document.body, shadow);
     
   }
   
