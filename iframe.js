@@ -84,11 +84,11 @@ async function renderFrame(url) {
   
   
   // add scepter to iframe
-  tempFrame.contentWindow.eval(scepterClass);
+  /*tempFrame.contentWindow.eval(scepterClass);
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
-  tempDoc.body.appendChild(scepterElem);
+  tempDoc.body.appendChild(scepterElem);*/
   
 }
 
@@ -147,7 +147,7 @@ class ScepterElement extends HTMLElement {
     // attach the created element to the shadow dom
     shadow.appendChild(linkElem);
     
-    /*// reload page
+    // reload page
     function fireEvent(element, event) {
       var evt = document.createEvent("HTMLEvents");
       evt.initEvent(event, true, true); // event type,bubbling,cancelable
@@ -167,7 +167,7 @@ class ScepterElement extends HTMLElement {
       setTimeout(function() {
         fireEvent(window, "load");
       }, 0);
-    }, 0);*/
+    }, 0);
     
     // init scepter
     window.parent.scepter.init(shadow);
