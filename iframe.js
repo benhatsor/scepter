@@ -50,15 +50,21 @@ async function renderFrame(url) {
   tempDoc.head.appendChild(style);
   
   
-  // get og image with base URL
+  // show site image in loading screen
   var loadingImage = document.querySelector('.loading-image');
+  var ogImage = tempDoc.querySelector('meta[property="og:image"]');
   
-  var ogImage = tempDoc.querySelector('meta[property="og:image"]').content;
-  var ogImageUrl = new URL(ogImage, url);
-  
-  // show og image in loading screen
-  loadingImage.src = ogImageUrl;
-  loadingImage.onload = () => { loadingImage.classList.add('loaded') };
+  // if og image exists
+  if (ogImage) {
+    
+    // get og image with base URL
+    var ogImageUrl = new URL(ogImage.content, url);
+
+    // show og image in loading screen
+    loadingImage.src = ogImageUrl;
+    loadingImage.onload = () => { loadingImage.classList.add('loaded') };
+    
+  }
   
   
   // redirect all links
