@@ -238,6 +238,9 @@ body .seElected {
   box-shadow: 0 0 0 10px rgb(104 187 228 / 12%);
   background: rgba(104,187,228,0.12);
   
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  
   transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2), 0s z-index;
   z-index: 999999999 !important;
 }
