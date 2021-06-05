@@ -69,7 +69,6 @@ var scepter = {
         });
 
         selectQueue[0].classList.add('seElected');
-        selectQueue[0].scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 
         // override every click everywhere but selected element
         overlay.classList.add('visible');
@@ -298,6 +297,9 @@ var scepter = {
             // select action element
             selectElement(actionElement);
 
+            // scroll to action element
+            actionElement.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            
             // render popover content
             renderPopover(actionElement);
 
