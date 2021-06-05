@@ -279,21 +279,7 @@ body .seElected {
 }
 `;
 
-var url = new URL(window.location.href),
-    requestedURL = url.searchParams.get('url');
-
-if (requestedURL) {
-  renderFrame(requestedURL);
-} else {
-  renderFrame('https://berryscript.com');
-}
-
-// rerender iframe when pressed "back" button in browser
-window.addEventListener('popstate', pushUrl);
-
 function pushUrl() {
-  history.pushState({}, '', window.location.href);
-  
   var url = new URL(window.location.href),
     requestedURL = url.searchParams.get('url');
 
@@ -303,3 +289,9 @@ function pushUrl() {
     renderFrame('https://berryscript.com');
   }
 }
+
+// rerender iframe when pressed "back" button in browser
+window.addEventListener('popstate', pushUrl);
+
+// render iframe
+pushUrl();
