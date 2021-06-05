@@ -2,7 +2,8 @@ var scepter = {
   
   init: (elementsWrapper, shadow) => {
     
-    const elements = elementsWrapper.querySelectorAll('*:not(scepter-element)'),
+    const win = elementsWrapper.ownerDocument.defaultView,
+          elements = elementsWrapper.querySelectorAll('*:not(scepter-element)'),
 
           overlay = shadow.querySelector('.overlay'),
           expandedOverlay = shadow.querySelector('.expanded--overlay'),
@@ -24,7 +25,7 @@ var scepter = {
       function setPressTimer(e) {
 
         // on press of element
-        pressTimer = window.setTimeout(() => { selectElement(element) }, 350);
+        pressTimer = win.setTimeout(() => { selectElement(element) }, 350);
         return false;
 
       };
@@ -116,8 +117,8 @@ var scepter = {
     })
 
     // reposition menu on window resize
-    elementsWrapper.ownerDocument.defaultView.addEventListener('resize', repositionMenu, true);
-    elementsWrapper.ownerDocument.defaultView.addEventListener('scroll', repositionMenu, true);
+    win.addEventListener('resize', repositionMenu, true);
+    win.addEventListener('scroll', repositionMenu, true);
 
     function repositionMenu() {
 
@@ -143,14 +144,11 @@ var scepter = {
     }
 
     // disable context menu
-    elements.forEach(element => {
-      element.addEventListener('contextmenu', event => event.preventDefault());
-    })
+    win.addEventListener('contextmenu', event => event.preventDefault());
 
     function getPosRelToViewport(elem) {
 
       var rect = elem.getBoundingClientRect();
-      var win = elem.ownerDocument.defaultView;
 
       return {
         top: rect.top,
@@ -293,7 +291,7 @@ var scepter = {
           selectQueue = [];
 
           // when animation ended
-          window.setTimeout(() => {
+          win.setTimeout(() => {
 
             let actionElement = action.classList.contains('parent') ? parent : children[index];
 
@@ -310,7 +308,7 @@ var scepter = {
             popover.classList.remove('hidden');
 
             // reset transition when animation ended
-            window.setTimeout(() => {
+            win.setTimeout(() => {
               popover.classList.remove('transitioning');
             }, 250);
 
@@ -332,7 +330,7 @@ var scepter = {
       inspector.classList.remove('expanded');
 
       // reset transition when animation ended
-      window.setTimeout(() => {
+      win.setTimeout(() => {
         inspector.classList.remove('transitioning');
       }, 300 + 180);
 
@@ -348,7 +346,7 @@ var scepter = {
       inspector.classList.remove('expanded');
 
       // reset transition when animation ended
-      window.setTimeout(() => {
+      win.setTimeout(() => {
         inspector.classList.remove('transitioning');
       }, 300 + 180);
 
