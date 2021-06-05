@@ -164,6 +164,7 @@ class ScepterElement extends HTMLElement {
     }
     var links = document.getElementsByTagName("link");
     var st = [];
+    var percent = 0;
     for (var x = 0; x < links.length; x++)
       if (links[x].getAttribute("rel") == "stylesheet") {
         st.push(links[x]);
@@ -173,9 +174,7 @@ class ScepterElement extends HTMLElement {
     setTimeout(function() {
       for (var x = 0; x < st.length; x++)
         st[x].setAttribute("href", st[x].wasAtt);
-      setTimeout(function() {
-        fireEvent(window, "load");
-      }, 0);
+        st[x].onload = function() { percent += 100/st.length; if (percent == 100) fireEvent(window, "load"); }
     }, 0);
     
     // init scepter
