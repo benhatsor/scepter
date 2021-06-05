@@ -2,6 +2,8 @@ var scepter = {
   
   init: (shadow) => {
     
+    console.log(shadow);
+    
     const elementsWrapper = document.body,
           elements = elementsWrapper.querySelectorAll('*:not(scepter-element)'),
 
