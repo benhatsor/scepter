@@ -68,7 +68,7 @@ async function renderFrame(url) {
   
   
   // redirect all links
-  tempDoc.querySelectorAll('a').forEach((a) => {
+  tempDoc.querySelectorAll('a[href]').forEach((a) => {
     
     // get href with base URL
     var newHref = new URL(a.href, url); 
@@ -269,20 +269,10 @@ var scepterHTML = `
 
 var scepterOutlyingCSS = `
 body *:not(scepter-element) {
-  transition: .3s ease transform;
   -webkit-tap-highlight-color: transparent;
 }
-body *:not(scepter-element).acCtive {
-  transform: scale(0.94);
-  transition: .3s ease transform !important;
-}
-body .seElected *.acCtive {
-  transform: none;
-}
 body .seElected {
-  transform: scale(1.04);
-  
-  border-radius: 1% !important;
+  border-radius: 1px !important;
   box-shadow: 0 0 0 10px rgb(104 187 228 / 12%);
   background-color: rgba(104,187,228,0.12);
   
