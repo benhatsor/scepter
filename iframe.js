@@ -217,19 +217,6 @@ var scepterHTML = `
     `;
 
 var scepterOutlyingCSS = `
-body *:not(scepter-element) {
-  transition: .3s ease transform;
-}
-
-body *:not(scepter-element).acCtive {
-  transform: scale(0.94);
-  transition: .3s ease transform !important;
-}
-
-body .seElected *.acCtive {
-  transform: none;
-}
-
 body .seElected {
   position: relative;
   transform: scale(1.04);
