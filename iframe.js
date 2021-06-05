@@ -234,7 +234,7 @@ body .seElected {
   
   border-radius: 1% !important;
   box-shadow: 0 0 0 10px rgb(104 187 228 / 12%);
-  background: rgba(104,187,228,0.12);
+  background-color: rgba(104,187,228,0.12);
   
   user-select: none !important;
   -webkit-user-select: none !important;
