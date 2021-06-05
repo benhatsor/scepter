@@ -77,10 +77,8 @@ async function renderFrame(url) {
       
     }
     
-    console.log(code);
-    
     // I really did try to find an alternative... but...
-    tempFrame.contentWindow.eval(code);
+    if (!code.includes('top!==self')) tempFrame.contentWindow.eval(code);
     
   })
   
