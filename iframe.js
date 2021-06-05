@@ -11,10 +11,11 @@ async function renderFrame(url) {
     // push new url to history
     window.history.pushState({}, '', 'https://scepter.berryscript.com/?url='+ url);
     
-    // show loading screen
-    document.querySelector('.loading').classList.remove('hidden');
-    
   }
+  
+  // show loading screen
+  document.querySelector('.loading').classList.remove('hidden');
+  document.querySelector('.loading-image').classList.remove('loaded');
   
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
@@ -47,6 +48,17 @@ async function renderFrame(url) {
   
   style.textContent = scepterOutlyingCSS;
   tempDoc.head.appendChild(style);
+  
+  
+  // get og image with base URL
+  var loadingImage = document.querySelector('.loading-image');
+  
+  var ogImage = tempDoc.querySelector('meta[property="og:image"]').content;
+  var ogImageUrl = new URL(ogImage, url);
+  
+  // show og image in loading screen
+  loadingImage.src = ogImageUrl;
+  loadingImage.onload = () => { loadingImage.classList.add('loaded') };
   
   
   // redirect all links
