@@ -38,6 +38,9 @@ async function renderFrame(url) {
   base.href = url;
   tempDoc.head.appendChild(base);
   
+  // change origin to url
+  tempFrame.contentWindow.origin = url;
+  
   
   // add scepter shadow boundary CSS to iframe
   let style = document.createElement('style');
@@ -84,11 +87,11 @@ async function renderFrame(url) {
   
   
   // add scepter to iframe
-  /*tempFrame.contentWindow.eval(scepterClass);
+  tempFrame.contentWindow.eval(scepterClass);
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
-  tempDoc.body.appendChild(scepterElem);*/
+  tempDoc.body.appendChild(scepterElem);
   
 }
 
