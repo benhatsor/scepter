@@ -312,11 +312,11 @@
 .inspector.expanded + .expanded--overlay {
   opacity: 1;
   pointer-events: all;
-  transition-delay: 0.18s;
+  transition-delay: 0s;
 }
 
 .inspector.expanded ~ .popover {
   opacity: 1;
   pointer-events: all;
-  transition-delay: 0s;
+  transition-delay: 0.3s;
 }
