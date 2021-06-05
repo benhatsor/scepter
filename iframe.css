@@ -61,12 +61,12 @@ body {
   height: 100%;
   opacity: 0;
   transform: scale(1.15);
-  transition: .45s ease;
 }
 
 .loading-image.loaded {
   opacity: 1;
   transform: scale(1);
+  transition: .2s ease;
 }
 
 .loading .hero {
