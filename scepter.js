@@ -74,13 +74,7 @@ var scepter = {
         overlay.classList.add('visible');
 
         // move menu to element
-        var rect = getPosRelToViewport(selectQueue[0]),
-            height = selectQueue[0].clientHeight,
-            elTop = rect.top + height,
-            elLeft = rect.left;
-
-        inspector.style.top = elTop + 'px';
-        inspector.style.left = elLeft + 'px';
+        repositionMenu();
 
 
         let type = selectQueue[0].nodeName.toLowerCase(),
@@ -124,17 +118,25 @@ var scepter = {
       // if an element is selected
       if (selectQueue[0]) {
 
-        // move menu to element
+        // get position of element
         var rect = getPosRelToViewport(selectQueue[0]),
             height = selectQueue[0].clientHeight,
             elTop = rect.top + height,
             elLeft = rect.left;
 
+        // menu boundry
+        var maxTop = (win.innerHeight - (73 + 10)),
+            minTop = (-20 - 10),
+            maxLeft = (win.innerWidth - (192 + 10)),
+            minLeft = (13 + 10);
+        
         // check if menu is outside window
-        if (elTop > window.innerHeight || elTop < 0) {
-          console.log('Outside window');
-        }
+        if (maxTop < elTop) elTop = maxTop;
+        if (minTop < elTop) elTop = minTop;
+        if (maxLeft < elLeft) elLeft = maxLeft;
+        if (minLeft > elLeft) elLeft = minLeft;
 
+        // move menu to element
         inspector.style.top = elTop + 'px';
         inspector.style.left = elLeft + 'px';
 
