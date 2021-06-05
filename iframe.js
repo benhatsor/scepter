@@ -95,7 +95,9 @@ async function renderFrame(url) {
   
   
   // hide loading screen
-  document.querySelector('.loading').classList.add('hidden');
+  tempFrame.contentWindow.onload = () => {
+    document.querySelector('.loading').classList.add('hidden');
+  };
   
 }
 
