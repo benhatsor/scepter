@@ -126,7 +126,7 @@ var scepter = {
 
         // menu boundry
         var maxTop = (win.innerHeight - (73 + 10)),
-            minTop = (-20 - 10),
+            minTop = (-10),
             maxLeft = (win.innerWidth - (192 + 10)),
             minLeft = (13 + 10);
         
