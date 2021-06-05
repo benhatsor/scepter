@@ -72,9 +72,9 @@
 }
 
 .inspector.expanded {
-  top: 100vh !important;
+  top: 100% !important;
   transform: translateY(-100%) !important;
-  min-height: 50vh;
+  min-height: 50%;
   margin-top: 0;
   
   width: 100vw;
@@ -174,7 +174,7 @@
   pointer-events: none;
   
   width: 100vw;
-  height: 50vh;
+  height: 50%;
   overflow-y: overlay;
   
   padding: 20px;
