@@ -201,7 +201,7 @@ class ScepterElement extends HTMLElement {
       if (Math.round(width + percent) == 100) {
       
         parentWindow.document.querySelector('.loading').classList.add('hidden');
-        loader.style.width = 0;
+        loader.style.width = '0%';
         
       }
     }
