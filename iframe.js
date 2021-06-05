@@ -93,6 +93,10 @@ async function renderFrame(url) {
   var scepterElem = tempDoc.createElement('scepter-element');
   tempDoc.body.appendChild(scepterElem);
   
+  
+  // hide loading screen
+  document.querySelector('.loading').classList.add('hidden');
+  
 }
 
 // my attempt at running a script without eval()
