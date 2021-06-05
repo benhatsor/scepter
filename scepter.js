@@ -171,6 +171,10 @@ var scepter = {
 
     function renderPopover(element) {
 
+      // scroll to element
+      element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+      
+      
       // show element title
       popoverType.innerText = '<' + element.nodeName.toLowerCase() + '>';
 
@@ -300,7 +304,7 @@ var scepter = {
             selectElement(actionElement);
 
             // scroll to action element
-            actionElement.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            //actionElement.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
             
             // render popover content
             renderPopover(actionElement);
