@@ -23,7 +23,7 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: #090e11;
   z-index: 1;
   display: flex;
