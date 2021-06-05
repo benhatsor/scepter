@@ -279,7 +279,7 @@ body .seElected {
   user-select: none !important;
   -webkit-user-select: none !important;
   
-  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2);
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2) !important;
 }
 `;
 
