@@ -116,8 +116,8 @@ var scepter = {
     })
 
     // reposition menu on window resize
-    elementsWrapper.addEventListener('resize', repositionMenu, true);
-    elementsWrapper.addEventListener('scroll', repositionMenu, true);
+    elementsWrapper.ownerDocument.defaultView.addEventListener('resize', repositionMenu, true);
+    elementsWrapper.ownerDocument.defaultView.addEventListener('scroll', repositionMenu, true);
 
     function repositionMenu() {
 
