@@ -32,6 +32,7 @@ var scepter = {
 
       function clearPressTimer() {
 
+        console.log('cleared');
         clearTimeout(pressTimer);
         return false;
 
