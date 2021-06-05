@@ -219,6 +219,7 @@ var scepterHTML = `
 var scepterOutlyingCSS = `
 body *:not(scepter-element) {
   transition: .3s ease transform;
+  -webkit-tap-highlight-color: transparent;
 }
 body *:not(scepter-element).acCtive {
   transform: scale(0.94);
