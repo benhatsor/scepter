@@ -292,6 +292,8 @@ if (requestedURL) {
 window.addEventListener('popstate', pushUrl);
 
 function pushUrl() {
+  history.pushState({}, '', window.location.href);
+  
   var url = new URL(window.location.href),
     requestedURL = url.searchParams.get('url');
 
