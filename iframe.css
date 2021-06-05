@@ -100,7 +100,7 @@ body {
 .loading .progress {
   height: 3px;
   background: rgb(241 241 242 / 75%);
-  width: 0;
+  width: 0%;
 }
 
 iframe {
