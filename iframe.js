@@ -147,7 +147,7 @@ class ScepterElement extends HTMLElement {
     // attach the created element to the shadow dom
     shadow.appendChild(linkElem);
     
-    // reload page
+    /*// reload page
     function fireEvent(element, event) {
       var evt = document.createEvent("HTMLEvents");
       evt.initEvent(event, true, true); // event type,bubbling,cancelable
@@ -167,7 +167,7 @@ class ScepterElement extends HTMLElement {
       setTimeout(function() {
         fireEvent(window, "load");
       }, 0);
-    }, 0);
+    }, 0);*/
     
     // init scepter
     window.parent.scepter.init(shadow);
