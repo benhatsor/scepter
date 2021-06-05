@@ -38,9 +38,6 @@ async function renderFrame(url) {
   base.href = url;
   tempDoc.head.appendChild(base);
   
-  // change location to url
-  tempFrame.contentWindow.location.pathname = url + '/integrations/embedded';
-  
   
   // add scepter shadow boundary CSS to iframe
   let style = document.createElement('style');
