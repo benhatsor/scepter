@@ -280,7 +280,6 @@ body .seElected *.acCtive {
   transform: none;
 }
 body .seElected {
-  position: relative;
   transform: scale(1.04);
   
   border-radius: 1% !important;
@@ -290,8 +289,7 @@ body .seElected {
   user-select: none !important;
   -webkit-user-select: none !important;
   
-  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2), 0s z-index;
-  z-index: 999999999 !important;
+  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2);
 }
 `;
 
