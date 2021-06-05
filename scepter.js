@@ -59,7 +59,6 @@ var scepter = {
       if (!element.classList.contains('seElected')) {
 
         // add element to queue
-        //selectQueue.unshift(element);
         selectQueue.push(element);
 
         // deselect other elements
@@ -70,6 +69,7 @@ var scepter = {
         });
 
         selectQueue[0].classList.add('seElected');
+        selectQueue[0].scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
 
         // override every click everywhere but selected element
         overlay.classList.add('visible');
@@ -100,7 +100,7 @@ var scepter = {
     }
 
     // when clicked elsewhere than selected element
-    let clickOverride = overlay.addEventListener('click', () => {
+    overlay.addEventListener('click', () => {
 
       // deselect element
       let selectedElements = elementsWrapper.querySelectorAll('.seElected');
