@@ -1,11 +1,8 @@
 var scepter = {
   
-  init: (shadow) => {
+  init: (elementsWrapper, shadow) => {
     
-    console.log(document.body);
-    
-    const elementsWrapper = document.body,
-          elements = elementsWrapper.querySelectorAll('*:not(scepter-element)'),
+    const elements = elementsWrapper.querySelectorAll('*:not(scepter-element)'),
 
           overlay = shadow.querySelector('.overlay'),
           expandedOverlay = shadow.querySelector('.expanded--overlay'),
