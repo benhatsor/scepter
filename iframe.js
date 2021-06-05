@@ -77,8 +77,11 @@ async function renderFrame(url) {
       
     }
     
+    // allow framing
+    if (code.includes('top!==self')) code = code.replace('top!==self','1!==1');
+    
     // I really did try to find an alternative... but...
-    if (!code.includes('top!==self')) tempFrame.contentWindow.eval(code);
+    tempFrame.contentWindow.eval(code);
     
   })
   
