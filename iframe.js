@@ -194,7 +194,7 @@ class ScepterElement extends HTMLElement {
       var percent = 100 / st.length,
           width = Number(loader.style.width.replace('%',''));
 
-      console.log(100 / st.length, loader.style.width);
+      console.log(st.length, loader.style.width);
 
       loader.style.width = width + percent + '%';
 
