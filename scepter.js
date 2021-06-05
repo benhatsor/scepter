@@ -132,7 +132,7 @@ var scepter = {
         
         // check if menu is outside window
         if (maxTop < elTop) elTop = maxTop;
-        if (minTop < elTop) elTop = minTop;
+        if (minTop > elTop) elTop = minTop;
         if (maxLeft < elLeft) elLeft = maxLeft;
         if (minLeft > elLeft) elLeft = minLeft;
 
