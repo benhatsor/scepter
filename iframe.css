@@ -29,12 +29,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: .2s ease;
 }
 
 .loading.hidden {
   opacity: 0;
   pointer-events: none;
+  transition: .2s ease;
 }
 
 .loading .image-wrapper {
@@ -101,7 +101,6 @@ body {
   height: 3px;
   background: rgb(241 241 242 / 75%);
   width: 0;
-  transition: 0.45s ease;
 }
 
 iframe {
