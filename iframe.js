@@ -136,11 +136,14 @@ class ScepterElement extends HTMLElement {
     // always call super first in constructor
     super();
 
+    // get parent window
+    let parentWindow = window.parent;
+
     // create a shadow root
     let shadow = this.attachShadow({mode: 'open'});
     
     // add scepter HTML to shadow dom
-    shadow.innerHTML = window.parent.scepterHTML;
+    shadow.innerHTML = parentWindow.scepterHTML;
     
     // apply external styles to the shadow dom
     const linkElem = document.createElement('link');
@@ -183,7 +186,7 @@ class ScepterElement extends HTMLElement {
       
     }, 0);
     
-    var loader = document.parent.querySelector('.loading .progress');
+    var loader = parentWindow.document.querySelector('.loading .progress');
     function incrementLoader() {
       var percent = 100 / st.length,
           width = Number(loader.style.width.replace('%',''));
@@ -192,7 +195,7 @@ class ScepterElement extends HTMLElement {
 
       if (Math.round(width + percent) == 100) {
       
-        document.parent.querySelector('.loading').classList.add('hidden');
+        parentWindow.document.querySelector('.loading').classList.add('hidden');
         loader.style.width = 0;
         
       }
@@ -200,7 +203,7 @@ class ScepterElement extends HTMLElement {
     
     
     // init scepter
-    window.parent.scepter.init(document.body, shadow);
+    parentWindow.scepter.init(document.body, shadow);
     
   }
   
