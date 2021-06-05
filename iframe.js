@@ -11,6 +11,9 @@ async function renderFrame(url) {
     // push new url to history
     window.history.pushState({}, '', 'https://scepter.berryscript.com/?url='+ url);
     
+    // show loading screen
+    document.querySelector('.loading').classList.remove('hidden');
+    
   }
   
   // create a HTTP Request with CORS headers
