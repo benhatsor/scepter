@@ -58,7 +58,8 @@ var scepter = {
       if (!element.classList.contains('seElected')) {
 
         // add element to queue
-        selectQueue.unshift(element);
+        //selectQueue.unshift(element);
+        selectQueue.push(element);
 
         // deselect other elements
         let selectedElements = elementsWrapper.querySelectorAll('.seElected');
