@@ -93,12 +93,6 @@ async function renderFrame(url) {
   var scepterElem = tempDoc.createElement('scepter-element');
   tempDoc.body.appendChild(scepterElem);
   
-  
-  // hide loading screen
-  tempFrame.contentWindow.onload = () => {
-    document.querySelector('.loading').classList.add('hidden');
-  };
-  
 }
 
 // my attempt at running a script without eval()
@@ -156,26 +150,54 @@ class ScepterElement extends HTMLElement {
     // attach the created element to the shadow dom
     shadow.appendChild(linkElem);
     
+    
     // reload page
+    
     function fireEvent(element, event) {
       var evt = document.createEvent("HTMLEvents");
       evt.initEvent(event, true, true); // event type,bubbling,cancelable
       return !element.dispatchEvent(evt);
     }
+    
     var links = document.getElementsByTagName("link");
     var st = [];
-    var percent = 0;
-    for (var x = 0; x < links.length; x++)
+    
+    for (var x = 0; x < links.length; x++) {
       if (links[x].getAttribute("rel") == "stylesheet") {
         st.push(links[x]);
         links[x].wasAtt = links[x].getAttribute("href");
         links[x].setAttribute("href", "");
       }
+    }
+    
     setTimeout(function() {
-      for (var x = 0; x < st.length; x++)
+    
+      for (var x = 0; x < st.length; x++) {
         st[x].setAttribute("href", st[x].wasAtt);
-        st[x].onload = function() { percent += 100/st.length; if (percent == 100) fireEvent(window, "load"); }
+        st[x].onload = incrementLoader();
+      }
+      
+      setTimeout(function() {
+        fireEvent(window, "load");
+      }, 0);
+      
     }, 0);
+    
+    var loader = document.parent.querySelector('.loading .progress');
+    function incrementLoader() {
+      var percent = 100 / st.length,
+          width = Number(loader.style.width.replace('%',''));
+
+      loader.style.width = width + percent + '%';
+
+      if (Math.round(width + percent) == 100) {
+      
+        document.parent.querySelector('.loading').classList.add('hidden');
+        loader.style.width = 0;
+        
+      }
+    }
+    
     
     // init scepter
     window.parent.scepter.init(document.body, shadow);
