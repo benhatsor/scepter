@@ -321,6 +321,7 @@
 }
 
 .popover .action .desc {
+  font-weight: 600;
   overflow: hidden;
   white-space: nowrap;
   overflow-x: hidden;
