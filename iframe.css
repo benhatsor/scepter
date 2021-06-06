@@ -50,7 +50,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(9,14,17,0.85);
+  background: rgba(9,14,17,0.9);
   backdrop-filter: saturate(180%) blur(20px);
   z-index: 1;
 }
@@ -97,12 +97,22 @@ body {
   width: 100%;
   height: 3px;
   background: rgb(241 241 242 / 18%);
+  display: none;
 }
 
 .loading .progress {
   height: 3px;
   background: rgb(241 241 242 / 75%);
   width: 0%;
+}
+
+.loading .subtitle {
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  color: #f1f1f273;
 }
 
 iframe {
