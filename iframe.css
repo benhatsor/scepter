@@ -71,6 +71,7 @@ body {
 
 .loading .hero {
   display: flex;
+  padding-right: 1px;
   color: #f1f1f2e0;
 }
 
