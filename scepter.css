@@ -220,7 +220,7 @@
   
   white-space: nowrap;
   overflow: hidden;
-  width: calc(100% - 42px);
+  width: calc(100% - 44px);
   -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
   mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
 }
