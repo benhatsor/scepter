@@ -99,7 +99,9 @@ async function renderFrame(url) {
     }
     
     // allow framing
-    if (code.includes('top!==self')) code = code.replace('top!==self','self!==self');
+    //if (code.includes('top!==self')) code = code.replace('top!==self','self!==self');
+    if (code.includes('window.top')) code = code.replace('window.top','window');
+    if (code.includes('window.parent')) code = code.replace('window.parent','window');
     
     // I really did try to find an alternative... but...
     tempFrame.contentWindow.eval(code);
