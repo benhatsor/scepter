@@ -6,7 +6,7 @@ async function renderFrame(url) {
   if (document.querySelector('iframe')) {
     
     // remove old iframe
-    document.querySelector('iframe').remove();
+    document.querySelectorAll('iframe').forEach(iframe => { iframe.remove() });
     
   }
   
