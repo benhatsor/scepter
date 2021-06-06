@@ -1,4 +1,4 @@
-<h1 align="center"><img src="/pic/scepter-pic.svg" height="34" width="34">Scepter</h1>
+<h1 align="center"><img src="/pic/scepter-logo.svg" height="60" alt="Scepter"></h1>
 <p align="center">
   <h3 align="center">  
     Mobile web inspector
@@ -12,7 +12,7 @@
 
 ## See the contents of any site
 
-**Scepter** has a easy UI to help you understand how a site is built, fix problems, or make tweaks.
+**Scepter** helps you easily understand how a site is built, fix problems, or make tweaks.
 
 ## Just type a URL
 
@@ -23,5 +23,9 @@ Eg. [scepter.berryscript.com/?url=[URL to inspect]](https://scepter.berryscript.
 ## Mobile first
 
 There's no reason to have to open the computer just to inspect. Tap and swipe to roam the site.
+
+<p align="center">
+  <img width="600" src="/pic/two-screenshot.png">
+</p>
 
 ### 👨‍💻 <img src="/pic/icon.svg" height="24" width="24"> [@barhatsor](https://github.com/barhatsor)
