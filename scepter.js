@@ -175,6 +175,10 @@ var scepter = {
       //element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
 
 
+      // show element title
+      popoverType.innerText = classOption.children[1].innerText;
+
+
       // reset popover content
       popoverContent.innerHTML = '';
       
@@ -195,9 +199,7 @@ var scepter = {
 
       classString = classString.replace(' .seElected', '');
       
-      // show element title
-      popoverType.innerText = '<' + element.nodeName.toLowerCase() + '>' + classString;
-
+      
       // if element has classes
       if (classString && classString != ' .seElected') {
 
