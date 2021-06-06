@@ -69,6 +69,10 @@ body {
   transition: .2s ease;
 }
 
+.loading .logo {
+  color: #f1f1f2e0;
+}
+
 .loading .hero {
   display: flex;
   padding-right: 1px;
