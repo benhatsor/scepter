@@ -221,8 +221,9 @@
   margin-bottom: 1px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 50%;
+  width: calc(100% - 42px);
+  -webkit-mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
+  mask-image: linear-gradient(90deg, white calc(100% - 30px), transparent);
 }
 
 .popover .header .close {
