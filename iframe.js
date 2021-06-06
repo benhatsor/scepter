@@ -8,10 +8,10 @@ async function renderFrame(url) {
     // remove old iframe
     document.querySelector('iframe').remove();
     
-    // push new url to history
-    window.history.pushState({}, '', 'https://scepter.berryscript.com/?url='+ url);
-    
   }
+  
+  // push new url to history
+  window.history.pushState({}, '', 'https://scepter.berryscript.com/?url='+ url);
   
   // show loading screen
   document.querySelector('.loading').classList.remove('hidden');
