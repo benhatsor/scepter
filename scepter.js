@@ -199,7 +199,6 @@ var scepter = {
 
       classString = classString.replace(' .seElected', '');
       
-      
       // if element has classes
       if (classString && classString != ' .seElected') {
 
