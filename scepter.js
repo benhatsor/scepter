@@ -177,6 +177,10 @@ var scepter = {
 
       // reset popover content
       popoverContent.innerHTML = '';
+      
+      
+      // scroll to top of popover
+      popoverContent.scrollTo(0, 0);
 
 
 
