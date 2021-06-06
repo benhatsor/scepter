@@ -173,10 +173,6 @@ var scepter = {
 
       // scroll to element
       //element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-      
-      
-      // show element title
-      popoverType.innerText = '<' + element.nodeName.toLowerCase() + '>';
 
 
       // reset popover content
@@ -185,8 +181,8 @@ var scepter = {
 
 
       // show classes and IDs of element
-      let classes = Array.from(selectQueue[0].classList),
-          ids = selectQueue[0].id;
+      let classes = Array.from(element.classList),
+          ids = element.id;
 
       let classString = '';
 
@@ -194,6 +190,9 @@ var scepter = {
       if (ids) classString += ' #' + ids.split(' ').join(' #');
 
       classString = classString.replace(' .seElected', '');
+      
+      // show element title
+      popoverType.innerText = '<' + element.nodeName.toLowerCase() + '>' + classString;
 
       // if element has classes
       if (classString && classString != ' .seElected') {
@@ -209,7 +208,7 @@ var scepter = {
 
 
       // show children of element
-      let children = Array.from(selectQueue[0].children);
+      let children = Array.from(element.children);
 
       // if element has children
       if (children.length > 0) {
@@ -243,7 +242,7 @@ var scepter = {
 
 
       // show parent of element
-      let parent = selectQueue[0].parentElement;
+      let parent = element.parentElement;
 
       // if element has a parent
       if (parent && parent != elementsWrapper) {
