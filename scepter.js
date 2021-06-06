@@ -220,7 +220,9 @@ var scepter = {
 
         // render HTML
 
-        let renderedHTML = '<div class="title">Children</div><div class="actions">';
+        let renderedHTML = '<div class="title">' + (children.length == 1 ? 'Child' : 'Children') + '</div>';
+        renderedHTML += '<div class="actions">';
+        
         children.forEach(child => {
 
           // show classes and IDs of element
