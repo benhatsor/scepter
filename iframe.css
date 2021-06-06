@@ -70,6 +70,7 @@ body {
 }
 
 .loading .hero {
+  display: flex;
   color: #f1f1f2e0;
 }
 
