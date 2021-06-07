@@ -28,4 +28,4 @@ There's no reason to have to open the computer just to inspect. Tap and swipe to
   <img src="https://media.giphy.com/media/woc5Fv841xPvYR11vq/giphy-downsized-large.gif" alt="Scepter Tutorial">
 </p>
 
-### 👨‍💻 <img src="/pic/icon.svg" height="24" width="24"> [@barhatsor](https://github.com/barhatsor)
+### 👨‍💻 🪄 [@barhatsor](https://github.com/barhatsor)
