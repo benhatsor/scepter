@@ -57,7 +57,3 @@ Some stuff I want to add:
 ## Change log
 
 [Releases](https://github.com/barhatsor/scepter/releases)
-
----
-
-### 👨‍💻 🪄 [@barhatsor](https://github.com/barhatsor)
