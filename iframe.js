@@ -20,10 +20,11 @@ async function renderFrame(url) {
   
   // create a HTTP Request with CORS headers
   try {
-    var resp = await axios.get(url, true);
+    const resp = await axios.get(url, true);
   } catch(e) {
     // if there's been an error, show it
     document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + e;
+    break;
   }
   
   
