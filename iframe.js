@@ -1,9 +1,4 @@
 
-// if there's been an error, show it
-window.addEventListener('error', function(error) {
-  document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + error.message;
-})
-
 // render iframe
 async function renderFrame(url) {
   
@@ -306,6 +301,12 @@ function pushUrl() {
 
 // rerender iframe when pressed "back" button in browser
 window.addEventListener('popstate', pushUrl);
+
+// if there's been an error, show it
+window.addEventListener('error', function(error) {
+  console.log("A");
+  document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + error.message;
+})
 
 // render iframe
 pushUrl();
