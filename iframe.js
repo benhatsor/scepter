@@ -19,7 +19,12 @@ async function renderFrame(url) {
   document.querySelector('.loading .subtitle').innerText = 'Loading...';
   
   // create a HTTP Request with CORS headers
-  const resp = await axios.get(url, true);
+  try {
+    const resp = await axios.get(url, true);
+  } catch(e) {
+    // if there's been an error, show it
+    document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + error.message;
+  }
   
   
   
@@ -137,19 +142,20 @@ var axios = {
   'get': (url, cors) => {
     return new Promise((resolve, reject) => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function () {
+      xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           resolve(this.responseText);
         }
+      };
+      
+      xmlhttp.onerror = function(e) {
+        reject(e);
       };
 
       cors = cors ? 'https://berrycors.herokuapp.com/' : '';
 
       xmlhttp.open('GET', (cors + url), true);
-      
-      try {
-        xmlhttp.send();
-      } catch(e) { reject(e) }
+      xmlhttp.send();
     });
   }
 }
@@ -302,12 +308,6 @@ function pushUrl() {
 
 // rerender iframe when pressed "back" button in browser
 window.addEventListener('popstate', pushUrl);
-
-// if there's been an error, show it
-window.addEventListener('error', function(error) {
-  console.log("A");
-  document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + error.message;
-})
 
 // render iframe
 pushUrl();
