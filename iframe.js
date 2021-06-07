@@ -24,6 +24,7 @@ async function renderFrame(url) {
   } catch(e) {
     // if there's been an error, show it
     document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + e;
+    break;
   }
   
   
