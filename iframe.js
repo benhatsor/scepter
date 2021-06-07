@@ -19,13 +19,7 @@ async function renderFrame(url) {
   document.querySelector('.loading .subtitle').innerText = 'Loading...';
   
   // create a HTTP Request with CORS headers
-  try {
-    const resp = await axios.get(url, true);
-  } catch(e) {
-    // if there's been an error, show it
-    document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + e;
-    break;
-  }
+  const resp = await axios.get(url, true);
   
   
   
