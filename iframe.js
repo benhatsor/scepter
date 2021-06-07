@@ -16,15 +16,9 @@ async function renderFrame(url) {
   // show loading screen
   document.querySelector('.loading').classList.remove('hidden');
   document.querySelector('.loading-image').classList.remove('loaded');
-  document.querySelector('.loading .subtitle').innerText = 'Loading...';
   
   // create a HTTP Request with CORS headers
-  try {
-    var resp = await axios.get(url, true);
-  } catch(e) {
-    // if there's been an error, show it
-    document.querySelector('.loading .subtitle').innerText = 'Oh no!' + e;
-  }
+  const resp = await axios.get(url, true);
   
   
   
@@ -143,11 +137,9 @@ var axios = {
     return new Promise((resolve, reject) => {
       try {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             resolve(this.responseText);
-          } else {
-            reject(this.responseText);
           }
         };
 
