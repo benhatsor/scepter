@@ -16,6 +16,14 @@ async function renderFrame(url) {
   // show loading screen
   document.querySelector('.loading').classList.remove('hidden');
   document.querySelector('.loading-image').classList.remove('loaded');
+  document.querySelector('.loading .subtitle').innerText = 'Loading...';
+  
+  // set a loading timeout
+  window.setTimeout(() => {
+    
+    document.querySelector('.loading .subtitle').innerText = 'Oh no! Timed out.';
+    
+  }, 30000);
   
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
