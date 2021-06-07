@@ -44,6 +44,20 @@ Pages won't load in these cases:
 - Relative URL CSS `background-image`
 - CSS files with cross-origin don't fetch
 
+## Contributing
+
+### Help me improve it 🌱
+
+Some stuff I want to add:
+
+- Inline console
+- Edit mode: Add local CSS to element via inline editor
+- Show more element properties in Scepter menu
+
+## Change log
+
+[Releases](https://github.com/barhatsor/scepter/releases)
+
 ---
 
 ### 👨‍💻 🪄 [@barhatsor](https://github.com/barhatsor)
