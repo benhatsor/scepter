@@ -145,11 +145,9 @@ var axios = {
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           resolve(this.responseText);
+        } else {
+          reject(this.status);
         }
-      };
-      
-      xmlhttp.onerror = function(e) {
-        reject(e);
       };
 
       cors = cors ? 'https://berrycors.herokuapp.com/' : '';
