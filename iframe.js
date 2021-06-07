@@ -23,7 +23,7 @@ async function renderFrame(url) {
     var resp = await axios.get(url, true);
   } catch(e) {
     // if there's been an error, show it
-    document.querySelector('.loading .subtitle').innerText = 'Oh no!';
+    document.querySelector('.loading .subtitle').innerText = 'Oh no!' + e;
   }
   
   
