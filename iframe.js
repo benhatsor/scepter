@@ -21,7 +21,7 @@ async function renderFrame(url) {
   // set a loading timeout
   window.setTimeout(() => {
     
-    document.querySelector('.loading .subtitle').innerText = 'Oh no! Timed out.';
+    document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
     
   }, 30000);
   
