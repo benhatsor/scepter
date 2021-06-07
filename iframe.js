@@ -135,19 +135,19 @@ var setInnerHTML = function(elm, html) {
 var axios = {
   'get': (url, cors) => {
     return new Promise((resolve, reject) => {
-      try {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            resolve(this.responseText);
-          }
-        };
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          resolve(this.responseText);
+        } else {
+          reject(this.status);
+        }
+      };
 
-        cors = cors ? 'https://berrycors.herokuapp.com/' : '';
+      cors = cors ? 'https://berrycors.herokuapp.com/' : '';
 
-        xmlhttp.open('GET', (cors + url), true);
-        xmlhttp.send();
-      } catch(e) { reject(e) }
+      xmlhttp.open('GET', (cors + url), true);
+      xmlhttp.send();
     });
   }
 }
