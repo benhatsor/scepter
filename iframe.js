@@ -23,10 +23,7 @@ async function renderFrame(url) {
     const resp = await axios.get(url, true);
   } catch(e) {
     // if there's been an error, show it
-    
-    // Cloudflare protection denies access to Scepter
-    // because it dosen't run the page's Javascript fast enough
-    document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + ((e == '0 ()') ? '(CloudFlare error)' : e);
+    document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + ((e == '0 ()') ? '403 (Forbidden)' : e);
   }
   
   
@@ -149,7 +146,6 @@ var axios = {
         if (this.readyState == 4 && this.status == 200) {
           resolve(this.responseText);
         } else {
-          console.log(this.status);
           reject(this.status + ' (' + this.statusText + ')');
         }
       };
