@@ -302,5 +302,10 @@ function pushUrl() {
 // rerender iframe when pressed "back" button in browser
 window.addEventListener('popstate', pushUrl);
 
+// if there's been an error, show it
+window.onerror = function(e) {
+  document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + e;
+}
+
 // render iframe
 pushUrl();
