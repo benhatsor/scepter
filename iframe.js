@@ -18,12 +18,8 @@ async function renderFrame(url) {
   document.querySelector('.loading-image').classList.remove('loaded');
   document.querySelector('.loading .subtitle').innerText = 'Loading...';
   
-  try {
-    // create a HTTP Request with CORS headers
-    const resp = await axios.get(url, true);
-  } catch(e) {
-    console.log(e);
-  }
+  // create a HTTP Request with CORS headers
+  const resp = await axios.get(url, true);
   
   
   
@@ -140,17 +136,18 @@ var setInnerHTML = function(elm, html) {
 var axios = {
   'get': (url, cors) => {
     return new Promise((resolve, reject) => {
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          resolve(this.responseText);
+        }
+      };
+
+      cors = cors ? 'https://berrycors.herokuapp.com/' : '';
+
+      xmlhttp.open('GET', (cors + url), true);
+      
       try {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            resolve(this.responseText);
-          }
-        };
-
-        cors = cors ? 'https://berrycors.herokuapp.com/' : '';
-
-        xmlhttp.open('GET', (cors + url), true);
         xmlhttp.send();
       } catch(e) { reject(e) }
     });
