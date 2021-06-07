@@ -18,8 +18,12 @@ async function renderFrame(url) {
   document.querySelector('.loading-image').classList.remove('loaded');
   document.querySelector('.loading .subtitle').innerText = 'Loading...';
   
-  // create a HTTP Request with CORS headers
-  const resp = await axios.get(url, true);
+  try {
+    // create a HTTP Request with CORS headers
+    const resp = await axios.get(url, true);
+  } catch(e) {
+    console.log(e);
+  }
   
   
   
