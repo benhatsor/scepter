@@ -147,7 +147,7 @@ var axios = {
           resolve(this.responseText);
         } else {
           console.log(this);
-          reject(this.response);
+          reject(this.status + ' (' + this.statusText + ')');
         }
       };
 
