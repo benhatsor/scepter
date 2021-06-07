@@ -303,9 +303,9 @@ function pushUrl() {
 window.addEventListener('popstate', pushUrl);
 
 // if there's been an error, show it
-window.onerror = function(e) {
-  document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + e;
-}
+window.addEventListener('error', function(error) {
+  document.querySelector('.loading .subtitle').innerText = 'Oh no! ' + error.message;
+})
 
 // render iframe
 pushUrl();
