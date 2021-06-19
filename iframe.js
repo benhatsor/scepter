@@ -202,6 +202,7 @@ class ScepterElement extends HTMLElement {
       for (var x = 0; x < st.length; x++) {
         st[x].setAttribute("href", st[x].wasAtt);
         st[x].onload = incrementLoader();
+        st[x].onerror = incrementLoader();
       }
       
       setTimeout(function() {
