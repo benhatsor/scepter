@@ -172,7 +172,7 @@ var scepter = {
     function renderPopover(element) {
 
       // scroll to element
-      window.scrollTo({
+      win.scrollTo({
         top: (element.offsetTop - 10),
         left: (element.offsetLeft - 10),
         behavior: 'smooth'
