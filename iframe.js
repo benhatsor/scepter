@@ -112,8 +112,11 @@ async function renderFrame(url) {
     if (code.includes('top!==self')) code = code.replace('top!==self','self!==self');
     if (code.includes('window.top')) code = code.replace('window.top','window');
     if (code.includes('window.parent')) code = code.replace('window.parent','window');
+    /**/
+    if (code.includes('window.document.domain')) code = code.replace('window.document.domain','window.location.origin');
     
-    // I really did try to find an alternative... but...
+    // discussion about replacing eval():
+    // https://github.com/barhatsor/scepter/issues/2
     tempFrame.contentWindow.eval(code);
     
   })
@@ -126,18 +129,6 @@ async function renderFrame(url) {
   var scepterElem = tempDoc.createElement('scepter-element');
   tempDoc.body.appendChild(scepterElem);
   
-}
-
-// my attempt at running a script without eval()
-var setInnerHTML = function(elm, html) {
-  elm.innerHTML = html;
-  Array.from(elm.querySelectorAll("script")).forEach(oldScript => {
-    const newScript = tempDoc.createElement("script");
-    Array.from(oldScript.attributes)
-      .forEach(attr => newScript.setAttribute(attr.name, attr.value));
-    newScript.appendChild(tempDoc.createTextNode(oldScript.innerHTML));
-    oldScript.parentNode.replaceChild(newScript, oldScript);
-  });
 }
 
 var axios = {
