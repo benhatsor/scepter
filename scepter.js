@@ -173,8 +173,8 @@ var scepter = {
 
       // scroll to element
       win.scrollTo({
-        top: (element.offsetTop - 10),
-        left: (element.offsetLeft - 10),
+        top: (element.offsetTop - 20),
+        left: (element.offsetLeft - 20),
         behavior: 'smooth'
       });
 
