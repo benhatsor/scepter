@@ -108,12 +108,21 @@ async function renderFrame(url) {
       
     }
     
+    
+    // filter scripts
+    
     // allow framing
     if (code.includes('top!==self')) code = code.replace('top!==self','self!==self');
     if (code.includes('window.top')) code = code.replace('window.top','window');
     if (code.includes('window.parent')) code = code.replace('window.parent','window');
-    /**/
+    
+    // prevent changing domain
     if (code.includes('window.document.domain')) code = code.replace('window.document.domain','window.location.origin');
+    
+    // redirect on changing location of window
+    /* if (code.includes('window.location.href=')) code = code.replace('window.location.href=','window.parent.renderFrame(');
+    if (code.includes('window.location.href =')) code = code.replace('window.location.href =','window.parent.renderFrame('); */
+    
     
     // discussion about replacing eval():
     // https://github.com/barhatsor/scepter/issues/2
