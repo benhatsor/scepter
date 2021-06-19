@@ -272,7 +272,7 @@ var scepterHTML = `
     `;
 
 var scepterOutlyingCSS = `
-body *:not(scepter-element) {
+body, html {
   -webkit-tap-highlight-color: transparent;
 }
 body .seElected {
