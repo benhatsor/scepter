@@ -42,8 +42,8 @@ Here's how to use it:
 Pages won't load in these cases:
 
 - 403 (Forbidden) on some sites
-- Relative URL CSS `background-image`
-- CSS files with cross-origin don't fetch ([#1 will fix in next release](https://github.com/barhatsor/scepter/issues/1))
+- Relative URL CSS `background-image` ([#3](https://github.com/barhatsor/scepter/issues/3))
+- CSS files with cross-origin don't fetch ([#1](https://github.com/barhatsor/scepter/issues/1))
 
 ## Contributing
 
