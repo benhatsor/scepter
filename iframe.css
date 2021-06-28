@@ -112,13 +112,59 @@ body {
   width: 0%;
 }
 
+.loading .loader {
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  animation: rotate 2s linear infinite;
+}
+
+.loading .loader circle {
+  stroke: #1a73e8;
+  stroke-dasharray: 1, 150;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: stroke 1.5s ease-in-out infinite;
+}
+
+.loading.snap .loader {
+  /* What did it take? */
+  display: none;
+  /* Everything. */
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes stroke {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
 .loading .subtitle {
   margin-top: 20px;
-  display: block;
   width: 100%;
   text-align: center;
   font-size: 20px;
   color: #f1f1f273;
+  display: none;
+}
+
+.loading.snap .subtitle {
+  display: block;
 }
 
 iframe {
