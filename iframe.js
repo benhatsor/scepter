@@ -14,13 +14,15 @@ async function renderFrame(url) {
   window.history.pushState({}, '', 'https://scepter.berryscript.com/?url='+ url);
   
   // show loading screen
-  document.querySelector('.loading').classList.remove('hidden');
+  document.querySelector('.loading').classList = 'loading';
   document.querySelector('.loading-image').classList.remove('loaded');
-  document.querySelector('.loading .subtitle').innerText = 'Loading...';
   
   // set a loading timeout
   window.setTimeout(() => {
     
+    /* What did it take? */
+    document.querySelector('.loading').classList.add('snap');
+    /* Everything. */
     document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
     
   }, 30000);
