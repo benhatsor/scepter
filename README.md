@@ -52,6 +52,7 @@ Pages won't load in these cases:
 Some stuff I want to add:
 
 - Inline console
+- Show element's stylesheet properties in Scepter menu
 - Edit mode: Add local CSS to element via inline editor
 - Show more element properties in Scepter menu
 
