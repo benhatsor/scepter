@@ -54,7 +54,6 @@ Some stuff I want to add:
 - Inline console
 - Show element's stylesheet properties in Scepter menu
 - Edit mode: Add local CSS to element via inline editor
-- Show more element properties in Scepter menu
 
 Make a pull request if you feel like adding something from the list, or something else entirely :)  
 Please create a GitHub issue if there is something wrong or needs to be improved.
