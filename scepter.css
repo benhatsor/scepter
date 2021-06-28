@@ -19,6 +19,7 @@
   font-feature-settings: "kern";
   -webkit-font-feature-settings: "kern";
   user-select: none;
+  touch-action: manipulation;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
