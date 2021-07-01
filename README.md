@@ -19,7 +19,7 @@
 
 Combining the power of both **iframes** and **CORS requests**, you can just type a URL to inspect it.
 
-Eg. [scepter.berryscript.com/?url=[URL to inspect]](https://scepter.berryscript.com/?url=https://berryscript.com)
+Eg. [scepter.berryscript.com/?url=**https://time.com**](https://scepter.berryscript.com/?url=https://time.com)
 
 ### Mobile first
 
