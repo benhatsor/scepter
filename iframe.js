@@ -152,7 +152,7 @@ var axios = {
         }
       };
 
-      cors = cors ? 'https://berrycors.herokuapp.com/' : '';
+      cors = cors ? 'https://sceptercors.herokuapp.com/' : '';
 
       xmlhttp.open('GET', (cors + url), true);
 
