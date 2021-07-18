@@ -64,4 +64,4 @@ Please create a GitHub issue if there is something wrong or needs to be improved
 
 ## License
 
-[MIT](https://github.com/barhatsor/scepter/blob/main/LICENSE)
+MIT
