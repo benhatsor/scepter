@@ -55,8 +55,7 @@ Some ideas to riff on:
 - [ ] Show element styles
 - [ ] Add local CSS to element using inline editor
 
-Make a pull request to the `dev` branch.
-
+Make a pull request to the `dev` branch.  
 Please create a GitHub issue if there is something wrong or needs to be improved.
 
 ## Changelog
