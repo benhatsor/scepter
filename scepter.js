@@ -338,13 +338,13 @@ var scepter = {
     
     // hook logs and errors to console
     
-    win.console.logs = [];
+    console.logs = [];
     
-    win.console.stdlog = win.console.log.bind(win.console);
-    win.console.log = () => {
+    console.stdlog = console.log.bind(console);
+    console.log = () => {
       
-      win.console.logs.push({ content: Array.from(win.arguments).join(' '), type: 'log' });
-      win.console.stdlog.apply(win.console, win.arguments);
+      console.logs.push({ content: Array.from(arguments).join(' '), type: 'log' });
+      console.stdlog.apply(console, arguments);
       
       // if console is open
       if (popoverContent.querySelector('.log')) {
