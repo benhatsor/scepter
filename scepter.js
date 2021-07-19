@@ -176,11 +176,7 @@ var scepter = {
     function renderPopover(element) {
 
       // scroll to element
-      win.scrollTo({
-        top: (element.offsetTop - 10),
-        left: (element.offsetLeft - 10),
-        behavior: 'smooth'
-      });
+      element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
 
 
       // show element title
