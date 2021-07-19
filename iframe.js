@@ -210,10 +210,9 @@ class ScepterElement extends HTMLElement {
         
         // set link href with base URL
         var url = parentWindow.location.href.split('?url=')[1];
-        links[x].wasAtt = new URL(links[x].getAttribute('href'), url);
-        
         st.push(links[x]);
         
+        links[x].wasAtt = new URL(links[x].getAttribute('href'), url);
         links[x].setAttribute('href', '');
         
       } else {
@@ -232,7 +231,7 @@ class ScepterElement extends HTMLElement {
         st[x].setAttribute('href', st[x].wasAtt);
         
         // if could not fetch the resource normally, try a CORS fetch
-        st[x].onerror = () => {
+        st[x].onerror = function() {
         
           st[x].setAttribute('crossorigin', '');
           st[x].setAttribute('href', '');
