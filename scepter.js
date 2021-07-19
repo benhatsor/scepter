@@ -358,9 +358,11 @@ var scepter = {
       
     };
 
-    win.onerror = function(error, url, line) {
+    window.onerror = function(message, source) {
       
-      win.console.logs.push({ content: (error + '\nURL:' + url + '. L:' + line), type: 'error' });
+      console.log('Found error!');
+      
+      win.console.logs.push({ content: (message + '\nURL:' + source), type: 'error' });
       
       // if console is open
       if (popoverContent.querySelector('.log')) {
