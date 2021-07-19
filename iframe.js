@@ -185,6 +185,9 @@ class ScepterElement extends HTMLElement {
     const linkElem = document.createElement('link');
     linkElem.setAttribute('rel', 'stylesheet');
     linkElem.setAttribute('href', '`+ window.location.origin +`/scepter.css');
+    
+    // hide loader when styles are loaded
+    linkElem.onload = () => { parentWindow.document.querySelector('.loading').classList.add('hidden') };
 
     // attach the created element to the shadow dom
     shadow.appendChild(linkElem);
@@ -212,7 +215,9 @@ class ScepterElement extends HTMLElement {
     setTimeout(function() {
     
       for (var x = 0; x < st.length; x++) {
+        st[x].setAttribute("crossorigin", "");
         st[x].setAttribute("href", st[x].wasAtt);
+        
         st[x].onload = incrementLoader();
         st[x].onerror = incrementLoader();
       }
@@ -222,21 +227,6 @@ class ScepterElement extends HTMLElement {
       }, 0);
       
     }, 0);
-    
-    var loader = parentWindow.document.querySelector('.loading .progress');
-    function incrementLoader() {
-      var percent = 100 / st.length,
-          width = Number(loader.style.width.replace('%',''));
-
-      loader.style.width = width + percent + '%';
-
-      if (Math.round(width + percent) == 100) {
-      
-        parentWindow.document.querySelector('.loading').classList.add('hidden');
-        loader.style.width = '0%';
-        
-      }
-    }
     
     
     // init scepter
