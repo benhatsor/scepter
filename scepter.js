@@ -125,9 +125,13 @@ var scepter = {
             elLeft = rect.left;
 
         // menu boundry
-        var maxTop = (win.innerHeight - (73 + 10)),
+        var scepterHeight = (inspector.clientHeight + 20),
+            scepterWidth = inspector.clientWidth,
+            
+            maxTop = (win.innerHeight - (scepterHeight + 10)),
             minTop = (-10),
-            maxLeft = (win.innerWidth - (195 + 10)),
+            
+            maxLeft = (win.innerWidth - scepterWidth),
             minLeft = (20);
         
         // check if menu is outside window
