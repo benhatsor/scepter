@@ -10,6 +10,7 @@ var scepter = {
 
           inspector = shadow.querySelector('.inspector'),
           classOption = inspector.querySelector('.option.class'),
+          consoleOption = inspector.querySelector('.option.console'),
           codeOption = inspector.querySelector('.option.code'),
 
           popover = shadow.querySelector('.popover'),
@@ -334,6 +335,82 @@ var scepter = {
       })
 
     }
+    
+    // hook logs and errors to console
+    
+    win.console.logs = [];
+    
+    win.console.stdlog = win.console.log.bind(win.console);
+    win.console.log = () => {
+      
+      win.console.logs.push({ content: Array.from(arguments).join(' '), type: 'log' });
+      win.console.stdlog.apply(win.console, arguments);
+      
+      // if console is open
+      if (popoverContent.querySelector('.log')) {
+        
+        // render console
+        renderConsole();
+        
+      }
+      
+    };
+
+    win.onerror = (error, url, line) => {
+      
+      win.console.logs.push({ content: (error + '\nURL:' + url + '. L:' + line), type: 'error' });
+      
+      // if console is open
+      if (popoverContent.querySelector('.log')) {
+        
+        // render console
+        renderConsole();
+        
+      }
+      
+    };
+    
+    function renderConsole() {
+      
+      // show title
+      popoverType.innerText = 'Console';
+      
+      
+      // scroll to bottom of popover
+      popoverContent.scrollTo(0, popoverContent.scrollHeight);
+      
+      
+      // render logs
+      let renderedHTML = '';
+      
+      win.console.logs.forEach(log => {
+        
+        if (log.type == 'error') {
+          
+          renderedHTML += '<div class="log error">' + log.content + '</div>';
+          
+        } else {
+          
+          renderedHTML += '<div class="log">' + log.content + '</div>';
+          
+        }
+        
+      })
+      
+      popoverContent.innerHTML = renderedHTML;
+      
+    }
+    
+    // on click of 'console' option in inspector
+    consoleOption.addEventListener('click', () => {
+
+      // render console
+      renderConsole();
+
+      // expand overlay
+      inspector.classList.add('expanded');
+
+    });
 
     // when popover is open and clicked elsewhere than popover
     expandedOverlay.addEventListener('click', () => {
