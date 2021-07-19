@@ -227,7 +227,8 @@ class ScepterElement extends HTMLElement {
     setTimeout(() => {
     
       for (var x = 0; x < st.length; x++) {
-      
+        
+        console.log(st[x]);
         st[x].setAttribute('href', st[x].wasAtt);
         
         // if could not fetch the resource normally, try a CORS fetch
