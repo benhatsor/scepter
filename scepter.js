@@ -377,11 +377,6 @@ var scepter = {
       // show title
       popoverType.innerText = 'Console';
       
-      
-      // scroll to bottom of popover
-      popoverContent.scrollTo(0, popoverContent.scrollHeight);
-      
-      
       // render logs
       let renderedHTML = '';
       
@@ -400,6 +395,9 @@ var scepter = {
       })
       
       popoverContent.innerHTML = renderedHTML;
+      
+      // scroll to bottom of popover
+      popoverContent.scrollTo(0, popoverContent.scrollHeight);
       
     }
     
