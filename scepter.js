@@ -189,7 +189,7 @@ var scepter = {
       
       
       // scroll to top of popover
-      popoverContent.scrollTo(0, 0);
+      popover.scrollTo(0, 0);
 
 
 
@@ -397,7 +397,7 @@ var scepter = {
       popoverContent.innerHTML = renderedHTML;
       
       // scroll to bottom of popover
-      popoverContent.scrollTo(0, popoverContent.scrollHeight);
+      popover.scrollTo(0, popover.scrollHeight);
       
     }
     
