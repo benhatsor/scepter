@@ -43,7 +43,6 @@ Pages won't load in these cases:
 
 - 403 (Forbidden) on some sites
 - Relative URL CSS `background-image` ([#3](https://github.com/barhatsor/scepter/issues/3))
-- CSS files with cross-origin don't fetch ([#1](https://github.com/barhatsor/scepter/issues/1))
 
 ## Contributing
 
@@ -51,7 +50,7 @@ Thanks! Add yourself to `CONTRIBUTORS.md` when you're done 😊
 
 Some ideas to riff on:
 
-- [ ] Inline console
+- [x] Inline console
 - [ ] Show element styles
 - [ ] Add local CSS to element using inline editor
 
