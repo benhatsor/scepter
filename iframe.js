@@ -206,17 +206,15 @@ class ScepterElement extends HTMLElement {
     
     for (var x = 0; x < links.length; x++) {
     
-      if (links[x].getAttribute("rel") == "stylesheet") {
-      
-        links[x].wasAtt = links[x].getAttribute("href");
+      if (links[x].getAttribute('rel') == 'stylesheet') {
+        
+        // set link href with base URL
+        var url = parentWindow.location.href.split('?url=')[1];
+        links[x].wasAtt = new URL(links[x].getAttribute('href'), url);
+        
         st.push(links[x]);
         
-        links[x].setAttribute("href", "");
-        
-      } else {
-        
-        // fetch fonts with CORS
-        links[x].setAttribute('crossorigin', '');
+        links[x].setAttribute('href', '');
         
       }
       
