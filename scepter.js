@@ -358,7 +358,7 @@ var scepter = {
       
     };
 
-    win.onerror = (error, url, line) => {
+    win.onerror = function(error, url, line) {
       
       win.console.logs.push({ content: (error + '\nURL:' + url + '. L:' + line), type: 'error' });
       
