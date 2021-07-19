@@ -338,13 +338,13 @@ var scepter = {
     
     // hook logs and errors to console
     
-    console.logs = [];
+    win.console.logs = [];
     
-    console.stdlog = console.log.bind(console);
-    console.log = () => {
+    win.console.stdlog = win.console.log.bind(win.console);
+    win.console.log = (arguments) => {
       
-      console.logs.push({ content: Array.from(arguments).join(' '), type: 'log' });
-      console.stdlog.apply(console, arguments);
+      win.console.logs.push({ content: Array.from(arguments).join(' '), type: 'log' });
+      win.console.stdlog.apply(win.console, arguments);
       
       // if console is open
       if (popoverContent.querySelector('.log')) {
@@ -358,7 +358,7 @@ var scepter = {
 
     win.onerror = (error, url, line) => {
       
-      console.logs.push({ content: (error + '\nURL:' + url + '. L:' + line), type: 'error' });
+      win.console.logs.push({ content: (error + '\nURL:' + url + '. L:' + line), type: 'error' });
       
       // if console is open
       if (popoverContent.querySelector('.log')) {
@@ -383,7 +383,7 @@ var scepter = {
       // render logs
       let renderedHTML = '';
       
-      console.logs.forEach(log => {
+      win.console.logs.forEach(log => {
         
         if (log.type == 'error') {
           
