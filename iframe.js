@@ -11,7 +11,7 @@ async function renderFrame(url) {
   }
   
   // push new url to history
-  window.history.pushState({}, '', 'https://scepter.berryscript.com/?url='+ url);
+  window.history.pushState({}, '', (window.location.origin + '/?url=' + url));
   
   // show loading screen
   document.querySelector('.loading').classList = 'loading';
@@ -184,7 +184,7 @@ class ScepterElement extends HTMLElement {
     // apply external styles to the shadow dom
     const linkElem = document.createElement('link');
     linkElem.setAttribute('rel', 'stylesheet');
-    linkElem.setAttribute('href', 'https://scepter.berryscript.com/scepter.css');
+    linkElem.setAttribute('href', '`+ window.location.origin +`/scepter.css');
 
     // attach the created element to the shadow dom
     shadow.appendChild(linkElem);
