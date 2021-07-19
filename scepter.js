@@ -360,8 +360,6 @@ var scepter = {
 
     win.onerror = function(message, source, line) {
       
-      console.log('Found error!');
-      
       win.console.logs.push({ content: (message + '\nURL: ' + source + '. L: ' + line), type: 'error' });
       
       // if console is open
