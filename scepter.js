@@ -358,7 +358,7 @@ var scepter = {
 
     win.onerror = (error, url, line) => {
       
-      win.console.logs.push({ content: (error + '\nURL:' + url + '. L:' + line), type: 'error' });
+      console.logs.push({ content: (error + '\nURL:' + url + '. L:' + line), type: 'error' });
       
       // if console is open
       if (popoverContent.querySelector('.log')) {
@@ -383,7 +383,7 @@ var scepter = {
       // render logs
       let renderedHTML = '';
       
-      win.console.logs.forEach(log => {
+      console.logs.forEach(log => {
         
         if (log.type == 'error') {
           
