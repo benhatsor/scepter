@@ -344,7 +344,7 @@ var scepter = {
     win.console.log = (message) => {
       
       win.console.logs.push({ content: message, type: 'log' });
-      win.console.stdlog.apply(win.console, message);
+      win.console.stdlog(message);
       
       // if console is open
       if (popoverContent.querySelector('.log')) {
