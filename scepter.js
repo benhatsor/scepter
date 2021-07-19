@@ -10,6 +10,7 @@ var scepter = {
 
           inspector = shadow.querySelector('.inspector'),
           classOption = inspector.querySelector('.option.class'),
+          consoleOption = inspector.querySelector('.option.console'),
           codeOption = inspector.querySelector('.option.code'),
 
           popover = shadow.querySelector('.popover'),
@@ -125,9 +126,13 @@ var scepter = {
             elLeft = rect.left;
 
         // menu boundry
-        var maxTop = (win.innerHeight - (73 + 10)),
+        var scepterHeight = (inspector.clientHeight + 20),
+            scepterWidth = inspector.clientWidth,
+            
+            maxTop = (win.innerHeight - (scepterHeight + 10)),
             minTop = (-10),
-            maxLeft = (win.innerWidth - (195 + 10)),
+            
+            maxLeft = (win.innerWidth - scepterWidth),
             minLeft = (20);
         
         // check if menu is outside window
@@ -172,11 +177,7 @@ var scepter = {
     function renderPopover(element) {
 
       // scroll to element
-      win.scrollTo({
-        top: (element.offsetTop - 10),
-        left: (element.offsetLeft - 10),
-        behavior: 'smooth'
-      });
+      element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
 
 
       // show element title
@@ -188,7 +189,7 @@ var scepter = {
       
       
       // scroll to top of popover
-      popoverContent.scrollTo(0, 0);
+      popover.scrollTo(0, 0);
 
 
 
@@ -334,6 +335,84 @@ var scepter = {
       })
 
     }
+    
+    // hook logs and errors to console
+    
+    win.console.logs = [];
+    
+    win.console.stdlog = win.console.log.bind(win.console);
+    win.console.log = function() {
+      
+      var argsArr = Array.from(arguments);
+      
+      win.console.logs.push({ content: argsArr.join(' '), type: 'log' });
+      win.console.stdlog.apply(win.console, argsArr);
+      
+      // if console is open
+      if (popoverContent.querySelector('.log')) {
+        
+        // render console
+        renderConsole();
+        
+      }
+      
+    };
+
+    win.onerror = function(message, source, line) {
+      
+      console.log('Found error!');
+      
+      win.console.logs.push({ content: (message + '\nURL: ' + source + '. L: ' + line), type: 'error' });
+      
+      // if console is open
+      if (popoverContent.querySelector('.log')) {
+        
+        // render console
+        renderConsole();
+        
+      }
+      
+    };
+    
+    function renderConsole() {
+      
+      // show title
+      popoverType.innerText = 'Console';
+      
+      // render logs
+      let renderedHTML = '';
+      
+      win.console.logs.forEach(log => {
+        
+        if (log.type == 'error') {
+          
+          renderedHTML += '<div class="log error">' + log.content + '</div>';
+          
+        } else {
+          
+          renderedHTML += '<div class="log">' + log.content + '</div>';
+          
+        }
+        
+      })
+      
+      popoverContent.innerHTML = renderedHTML;
+      
+      // scroll to bottom of popover
+      popover.scrollTo(0, popover.scrollHeight);
+      
+    }
+    
+    // on click of 'console' option in inspector
+    consoleOption.addEventListener('click', () => {
+
+      // render console
+      renderConsole();
+
+      // expand overlay
+      inspector.classList.add('expanded');
+
+    });
 
     // when popover is open and clicked elsewhere than popover
     expandedOverlay.addEventListener('click', () => {
