@@ -341,7 +341,7 @@ var scepter = {
     win.console.logs = [];
     
     win.console.stdlog = win.console.log.bind(win.console);
-    win.console.log = () => {
+    win.console.log = function() {
       
       var argsArr = Array.from(arguments);
       
