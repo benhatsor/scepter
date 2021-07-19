@@ -345,7 +345,7 @@ var scepter = {
       
       var argsArr = Array.from(arguments);
       
-      win.console.logs.push({ content: argsArr, type: 'log' });
+      win.console.logs.push({ content: argsArr.join(' '), type: 'log' });
       win.console.stdlog.apply(win.console, argsArr);
       
       // if console is open
