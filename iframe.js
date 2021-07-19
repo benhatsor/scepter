@@ -208,11 +208,8 @@ class ScepterElement extends HTMLElement {
     
       if (links[x].getAttribute('rel') == 'stylesheet') {
         
-        // set link href with base URL
-        var url = parentWindow.location.href.split('?url=')[1];
         st.push(links[x]);
-        
-        links[x].wasAtt = new URL(links[x].getAttribute('href'), url);
+        links[x].wasAtt = links[x].getAttribute('href');
         links[x].setAttribute('href', '');
         
       } else {
@@ -228,7 +225,6 @@ class ScepterElement extends HTMLElement {
     
       for (var x = 0; x < st.length; x++) {
         
-        console.log(st[x]);
         st[x].setAttribute('href', st[x].wasAtt);
         
         // if could not fetch the resource normally, try a CORS fetch
