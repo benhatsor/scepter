@@ -205,24 +205,39 @@ class ScepterElement extends HTMLElement {
     var st = [];
     
     for (var x = 0; x < links.length; x++) {
+    
       if (links[x].getAttribute("rel") == "stylesheet") {
-        st.push(links[x]);
+      
         links[x].wasAtt = links[x].getAttribute("href");
-        links[x].setAttribute("href", "");
-      }
-    }
-    
-    setTimeout(function() {
-    
-      for (var x = 0; x < st.length; x++) {
-        st[x].setAttribute("crossorigin", "");
-        st[x].setAttribute("href", st[x].wasAtt);
+        st.push(links[x]);
         
-        st[x].onload = incrementLoader();
-        st[x].onerror = incrementLoader();
+        links[x].setAttribute("href", "");
+        
       }
       
-      setTimeout(function() {
+    }
+    
+    setTimeout(() => {
+    
+      for (var x = 0; x < st.length; x++) {
+      
+        st[x].setAttribute('href', st[x].wasAtt);
+        
+        // if could not fetch the resource normally, try a CORS fetch
+        st[x].onerror = () => {
+        
+          st[x].setAttribute('crossorigin', '');
+          st[x].setAttribute('href', '');
+          
+          setTimeout(() => {
+            st[x].setAttribute('href', st[x].wasAtt);
+          }, 0);
+          
+        };
+        
+      }
+      
+      setTimeout(() => {
         fireEvent(window, "load");
       }, 0);
       
