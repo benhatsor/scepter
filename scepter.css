@@ -340,8 +340,14 @@
   margin-bottom: 12px;
   background: #131c21;
   color: #f1f1f2f2;
+  user-select: text;
+  -webkit-user-select: text;
   border-top-left-radius: 0;
-  box-shadow: 0 1px 0.5px rgb(0 0 0 / 13%);
+  box-shadow: 0 1px .5px rgba(0,0,0,.13);
+}
+
+.popover .log.error {
+  box-shadow: inset 0 -3px 0 0 rgb(239 105 122 / 100%), 0 1px 0.5px rgb(0 0 0 / 13%);
 }
 
 .popover .log::after {
