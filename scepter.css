@@ -390,12 +390,12 @@
   .inspector.expanded {
     width: 568px;
     border-radius: 8px;
-    left: 50vw !important;
+    left: 50% !important;
     transform: translateX(-50%) translateY(-100%) !important;
   }
   
   .popover {
-    left: 50vw;
+    left: 50%;
     width: 568px;
     border-radius: 8px;
     transform: translateX(-50%);
