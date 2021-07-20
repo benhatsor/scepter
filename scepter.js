@@ -94,7 +94,7 @@ var scepter = {
     }
 
     // when clicked elsewhere than selected element
-    overlay.addEventListener('click', () => {
+    overlay.addEventListener('touchstart', () => {
 
       // deselect element
       let selectedElements = elementsWrapper.querySelectorAll('.seElected');
