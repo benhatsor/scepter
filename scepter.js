@@ -27,6 +27,8 @@ var scepter = {
 
         // on press of element
         pressTimer = win.setTimeout(() => { selectElement(element) }, 350);
+        
+        e.preventDefault();
         return false;
 
       };
@@ -45,8 +47,6 @@ var scepter = {
       element.addEventListener("mouseout", clearPressTimer);
       element.addEventListener("touchend", clearPressTimer);
       element.addEventListener("touchleave", clearPressTimer);
-      element.addEventListener("touchcancel", clearPressTimer);
-      element.addEventListener("touchmove", clearPressTimer);
 
     })
 
