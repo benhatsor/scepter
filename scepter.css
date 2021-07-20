@@ -266,37 +266,16 @@
 
 .popover .title {
   padding: 10px 16px;
-  position: relative;
   border-radius: 10px 10px 0 0;
+  
   background: #20272b;
   color: #e1e1e3;
+  
   padding-bottom: 20px;
   margin-bottom: -10px;
   width: max-content;
-}
-
-.popover .title::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  left: 0;
-  height: 100%;
-  background: inherit;
-  width: calc(100% + 10px);
-  z-index: -1;
-  border-radius: inherit;
-}
-
-.popover .title::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 100%;
-  height: 100%;
-  background: #2a2f32;
-  width: calc(100% + 10px);
-  z-index: -1;
-  border-radius: 10px;
+  
+  box-shadow: inset 0 1px 0.5px rgb(0 0 0 / 13%);
 }
 
 .popover .actions {
