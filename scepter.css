@@ -215,6 +215,7 @@
 .popover .header .type {
   font-size: 20px;
   font-weight: 700;
+  color: rgba(241,241,242,0.92);
   
   white-space: nowrap;
   overflow: hidden;
