@@ -325,5 +325,13 @@ function pushUrl() {
 // rerender iframe when pressed "back" button in browser
 window.addEventListener('popstate', pushUrl);
 
+// listen for errors
+window.addEventListener('error', (message) => {
+  
+  document.querySelector('.loading').classList = 'snap';
+  document.querySelector('.loading .subtitle').innerText = message;
+  
+})
+
 // render iframe
 pushUrl();
