@@ -99,6 +99,12 @@ async function renderFrame(url) {
         window.parent.renderFrame(newHref);
       };
       
+    } else {
+      
+      a.onclick = (e) => {
+        e.preventDefault();
+      };
+      
     }
     
   })
