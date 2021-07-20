@@ -72,7 +72,7 @@ var scepter = {
         selectQueue[0].classList.add('seElected');
 
         // override every click everywhere but selected element
-        overlay.classList.add('visible');
+        //overlay.classList.add('visible');
 
         // move menu to element
         repositionMenu();
@@ -93,26 +93,24 @@ var scepter = {
 
     }
 
-    // when clicked elsewhere than selected element
-    overlay.addEventListener('touchstart', (e) => {
-
-      // deselect element
-      let selectedElements = elementsWrapper.querySelectorAll('.seElected');
-
-      selectedElements.forEach(elem => {
-        elem.classList.remove('seElected');
-      });
-
-      overlay.classList.remove('visible');
-
-      // remove element from queue
-      selectQueue = [];
+    // when clicked elsewhere than the scepter menu
+    elementsWrapper.addEventListener('touchstart', (e) => {
       
-      // init new touch event
-      var newE = win.document.createEvent('TouchEvent');
-      newE.touches = [{ pageX: e.touches[0].pageX, pageY: e.touches[0].pageY }];
+      if (e.target != shadow) {
       
-      console.log(newE);
+        // deselect element
+        let selectedElements = elementsWrapper.querySelectorAll('.seElected');
+
+        selectedElements.forEach(elem => {
+          elem.classList.remove('seElected');
+        });
+
+        //overlay.classList.remove('visible');
+
+        // remove element from queue
+        selectQueue = [];
+        
+      }
       
     })
 
