@@ -226,11 +226,6 @@ class ScepterElement extends HTMLElement {
         links[x].wasAtt = links[x].getAttribute('href');
         links[x].setAttribute('href', '');
         
-      } else {
-      
-        // fetch fonts with CORS
-        links[x].setAttribute('crossorigin', '');
-        
       }
       
     }
