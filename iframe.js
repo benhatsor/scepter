@@ -313,7 +313,7 @@ body, html {
 }
 body .seElected {
   border-radius: 1px !important;
-  box-shadow: inset 0 0 0 500em rgb(104 187 228 / 12%), 0 0 0 10px rgb(104 187 228 / 12%);  
+  box-shadow: inset 0 0 0 500em rgb(104 187 228 / 12%), 0 0 0 10px rgb(104 187 228 / 12%) !important;  
   transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2) !important;
   transition-property: box-shadow, border-radius !important;
 }
