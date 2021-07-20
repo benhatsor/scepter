@@ -85,7 +85,7 @@ async function renderFrame(url) {
     // get href with base URL
     var newHref = new URL(a.href, url); 
     
-    a.ontouchstart = () => { window.parent.renderFrame(newHref) };
+    a.onclick = () => { window.parent.renderFrame(newHref) };
     
   })
   
