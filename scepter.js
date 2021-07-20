@@ -26,9 +26,7 @@ var scepter = {
       function setPressTimer(e) {
 
         // on press of element
-        pressTimer = win.setTimeout(() => { selectElement(element) }, 350);
-        
-        e.preventDefault();
+        pressTimer = win.setTimeout(() => { e.preventDefault(); selectElement(element) }, 350);
         return false;
 
       };
