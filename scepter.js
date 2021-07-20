@@ -95,9 +95,7 @@ var scepter = {
 
     // when clicked elsewhere than the scepter menu
     elementsWrapper.addEventListener('touchstart', (e) => {
-      
-      console.log(e);
-      
+            
       if (e.target != shadow.host) {
       
         // deselect element
