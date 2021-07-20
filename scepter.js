@@ -414,10 +414,13 @@ var scepter = {
 
     // when popover is open and clicked elsewhere than popover
     expandedOverlay.addEventListener('click', () => {
-
+      
+      // move menu to selected element
+      repositionMenu();
+      
       // transition back correctly
       inspector.classList.add('transitioning');
-
+      
       // close popover
       inspector.classList.remove('expanded');
 
@@ -430,7 +433,10 @@ var scepter = {
 
     // when popover is open and clicked on close button 
     popoverClose.addEventListener('click', () => {
-
+      
+      // move menu to selected element
+      repositionMenu();
+      
       // transition back correctly
       inspector.classList.add('transitioning');
 
