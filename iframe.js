@@ -300,6 +300,9 @@ var scepterHTML = `
     `;
 
 var scepterOutlyingCSS = `
+html {
+  padding-top: 48px;
+}
 body, html {
   user-select: none;
   -webkit-user-select: none;
