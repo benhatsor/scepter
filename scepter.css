@@ -356,6 +356,20 @@
   border-top-left-radius: 2px;
 }
 
+.popover .intro .subhead {
+  text-align: center;
+  font-size: 36px;
+  padding: 15px 16px;
+  color: #e1e1e3;
+}
+
+.popover .intro .message {
+  text-align: center;
+  color: #b1b3b5;
+  padding: 0px 16px;
+  margin-top: -6px;
+}
+
 .inspector.expanded + .expanded--overlay {
   opacity: 1;
   pointer-events: all;
