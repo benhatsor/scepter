@@ -82,7 +82,7 @@ var scepter = {
             classes = Array.from(selectQueue[0].classList),
             ids = selectQueue[0].id;
 
-        let classString = '<' + type + '>';
+        let classString = '&lt;' + type + '&gt;';
 
         if (classes.length > 0) classString += '.' + classes.join('.');
         if (ids) classString += '#' + ids.split(' ').join('#');
@@ -235,7 +235,7 @@ var scepter = {
               classes = Array.from(child.classList),
               ids = child.id;
 
-          let classString = '<' + type + '>';
+          let classString = '&lt;' + type + '&gt;';
 
           if (classes.length > 0) classString += '.' + classes.join('.');
           if (ids) classString += '#' + ids.split(' ').join('#');
@@ -268,7 +268,7 @@ var scepter = {
             classes = Array.from(parent.classList),
             ids = parent.id;
 
-        let classString = '<' + type + '>';
+        let classString = '&lt;' + type + '&gt;';
 
         if (classes.length > 0) classString += '.' + classes.join('.');
         if (ids) classString += '#' + ids.split(' ').join('#');
