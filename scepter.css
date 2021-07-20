@@ -155,12 +155,10 @@
   opacity: 0;
 }
 
-.overlay.visible, .overlay.visible + .inspector {
+.overlay.visible + .inspector {
   opacity: 1;
   pointer-events: all;
-}
-
-.overlay.visible + .inspector {
+  
   transform: none;
   transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2), 0s left, 0s top;
 }
