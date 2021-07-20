@@ -112,6 +112,27 @@ var scepter = {
       }
       
     })
+    
+    // when clicked elsewhere than the scepter menu
+    elementsWrapper.addEventListener('mousedown', (e) => {
+            
+      if (e.target != shadow.host) {
+      
+        // deselect element
+        let selectedElements = elementsWrapper.querySelectorAll('.seElected');
+
+        selectedElements.forEach(elem => {
+          elem.classList.remove('seElected');
+        });
+
+        overlay.classList.remove('visible');
+
+        // remove element from queue
+        selectQueue = [];
+        
+      }
+      
+    })
 
     // reposition menu on window resize
     win.addEventListener('resize', repositionMenu, true);
