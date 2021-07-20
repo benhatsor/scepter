@@ -104,12 +104,15 @@ var scepter = {
       });
 
       overlay.classList.remove('visible');
-      
-      console.log(e);
 
       // remove element from queue
       selectQueue = [];
-
+      
+      // init new touch event
+      var newE = document.createEvent('TouchEvent');
+      newE.touches = [{ pageX: e.touches[0].pageX, pageY: e.touches[0].pageY }];
+      newE.initTouchEvent();
+      
     })
 
     // reposition menu on window resize
