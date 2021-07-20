@@ -394,6 +394,13 @@ var scepter = {
         
       })
       
+      // if no logs, show default message
+      if (renderedHTML == '') {
+        
+        renderedHTML = '<div class="intro"><div class="subhead">‽</div><div class="message">No logs yet</div></div>';
+        
+      }
+      
       popoverContent.innerHTML = renderedHTML;
       
       // scroll to bottom of popover
