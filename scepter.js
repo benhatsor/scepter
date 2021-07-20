@@ -181,8 +181,7 @@ var scepter = {
     function renderPopover(element) {
 
       // scroll to element
-      element.scrollIntoView({ behavior: 'smooth' });
-      console.log('Scroll');
+      element.scrollIntoViewIfNeeded({ behavior: 'smooth' });
 
 
       // show element title
