@@ -298,15 +298,14 @@ var scepterHTML = `
 
 var scepterOutlyingCSS = `
 body, html {
+  user-select: none;
+  -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 body .seElected {
   border-radius: 1px !important;
   box-shadow: 0 0 0 10px rgb(104 187 228 / 12%);
   background-color: rgba(104,187,228,0.12);
-  
-  user-select: none !important;
-  -webkit-user-select: none !important;
   
   transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2) !important;
 }
