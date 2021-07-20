@@ -72,7 +72,7 @@ var scepter = {
         selectQueue[0].classList.add('seElected');
 
         // override every click everywhere but selected element
-        //overlay.classList.add('visible');
+        overlay.classList.add('visible');
 
         // move menu to element
         repositionMenu();
@@ -105,7 +105,7 @@ var scepter = {
           elem.classList.remove('seElected');
         });
 
-        //overlay.classList.remove('visible');
+        overlay.classList.remove('visible');
 
         // remove element from queue
         selectQueue = [];
