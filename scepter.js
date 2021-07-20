@@ -109,7 +109,7 @@ var scepter = {
       selectQueue = [];
       
       // init new touch event
-      var newE = document.createEvent('TouchEvent');
+      var newE = win.document.createEvent('TouchEvent');
       newE.touches = [{ pageX: e.touches[0].pageX, pageY: e.touches[0].pageY }];
       
       console.log(newE);
