@@ -182,6 +182,7 @@ var scepter = {
 
       // scroll to element
       element.scrollIntoView({ behavior: 'smooth' });
+      console.log('Scroll');
 
 
       // show element title
@@ -193,7 +194,7 @@ var scepter = {
       
       
       // scroll to top of popover
-      popover.scrollTo(0, 0);
+      popoverContent.scrollTo(0, 0);
 
 
 
