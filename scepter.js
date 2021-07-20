@@ -415,9 +415,6 @@ var scepter = {
     // when popover is open and clicked elsewhere than popover
     expandedOverlay.addEventListener('click', () => {
       
-      // move menu to selected element
-      repositionMenu();
-      
       // transition back correctly
       inspector.classList.add('transitioning');
       
@@ -426,7 +423,12 @@ var scepter = {
 
       // reset transition when animation ended
       win.setTimeout(() => {
+        
         inspector.classList.remove('transitioning');
+        
+        // move menu to selected element
+        repositionMenu();
+        
       }, 300 + 180);
 
     });
@@ -434,9 +436,6 @@ var scepter = {
     // when popover is open and clicked on close button 
     popoverClose.addEventListener('click', () => {
       
-      // move menu to selected element
-      repositionMenu();
-      
       // transition back correctly
       inspector.classList.add('transitioning');
 
@@ -445,7 +444,12 @@ var scepter = {
 
       // reset transition when animation ended
       win.setTimeout(() => {
+        
         inspector.classList.remove('transitioning');
+        
+        // move menu to selected element
+        repositionMenu();
+        
       }, 300 + 180);
 
     });
