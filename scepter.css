@@ -296,7 +296,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.popover .action:active {
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .popover .action:first-of-type {
