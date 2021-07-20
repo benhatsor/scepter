@@ -331,6 +331,8 @@ window.addEventListener('error', (message) => {
   document.querySelector('.loading').classList = 'snap';
   document.querySelector('.loading .subtitle').innerText = message;
   
+  console.log(message);
+  
 })
 
 // render iframe
