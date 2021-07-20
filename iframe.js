@@ -18,14 +18,14 @@ async function renderFrame(url) {
   document.querySelector('.loading-image').classList.remove('loaded');
   
   // set a loading timeout
-  window.setTimeout(() => {
+  /*window.setTimeout(() => {
     
-    /* What did it take? */
+    /* What did it take?
     document.querySelector('.loading').classList.add('snap');
-    /* Everything. */
+    /* Everything.
     document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
     
-  }, 30000);
+  }, 30000);*/
   
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
@@ -85,7 +85,7 @@ async function renderFrame(url) {
     // get href with base URL
     var newHref = new URL(a.href, url); 
     
-    a.href = 'javascript: window.parent.renderFrame("'+ newHref +'")';
+    a.ontouchstart = () => { window.parent.renderFrame(newHref) };
     
   })
   
