@@ -111,7 +111,8 @@ var scepter = {
       // init new touch event
       var newE = document.createEvent('TouchEvent');
       newE.touches = [{ pageX: e.touches[0].pageX, pageY: e.touches[0].pageY }];
-      newE.initTouchEvent();
+      
+      console.log(newE);
       
     })
 
