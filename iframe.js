@@ -42,7 +42,6 @@ async function renderFrame(url) {
   // for HTML manipulation
   
   var tempFrame = document.createElement('iframe');
-  tempFrame.src = '/iframe';
   tempFrame.frameBorder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
