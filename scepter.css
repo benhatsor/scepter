@@ -384,3 +384,21 @@
   pointer-events: all;
   transition-delay: 0.3s;
 }
+
+@media (max-width: 481px)  {
+  
+  .inspector.expanded {
+    width: 568px;
+    border-radius: 8px;
+    left: 50vw !important;
+    transform: translateX(-50%) translateY(-100%) !important;
+  }
+  
+  .popover {
+    left: 50vw;
+    width: 568px;
+    border-radius: 8px;
+    transform: translateX(-50%);
+  }
+  
+}
