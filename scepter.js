@@ -235,7 +235,7 @@ var scepter = {
               classes = Array.from(child.classList),
               ids = child.id;
 
-          let classString = type;
+          let classString = '<' + type + '>';
 
           if (classes.length > 0) classString += '.' + classes.join('.');
           if (ids) classString += '#' + ids.split(' ').join('#');
@@ -257,7 +257,7 @@ var scepter = {
       let parent = element.parentElement;
 
       // if element has a parent
-      if (parent && parent != elementsWrapper) {
+      if (parent && parent != elementsWrapper.parentElement) {
 
         // render HTML
 
@@ -268,7 +268,7 @@ var scepter = {
             classes = Array.from(parent.classList),
             ids = parent.id;
 
-        let classString = type;
+        let classString = '<' + type + '>';
 
         if (classes.length > 0) classString += '.' + classes.join('.');
         if (ids) classString += '#' + ids.split(' ').join('#');
@@ -305,14 +305,14 @@ var scepter = {
 
           // remove element from queue
           selectQueue = [];
-
+          
+          let actionElement = action.classList.contains('parent') ? parent : children[index];
+          
+          // select action element
+          selectElement(actionElement);
+          
           // when animation ended
           win.setTimeout(() => {
-
-            let actionElement = action.classList.contains('parent') ? parent : children[index];
-
-            // select action element
-            selectElement(actionElement);
             
             // render popover content
             renderPopover(actionElement);
@@ -326,9 +326,9 @@ var scepter = {
             // reset transition when animation ended
             win.setTimeout(() => {
               popover.classList.remove('transitioning');
-            }, 250);
+            }, 150);
 
-          }, 300);
+          }, 150);
 
         })
 
