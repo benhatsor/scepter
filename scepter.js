@@ -44,6 +44,7 @@ var scepter = {
       element.addEventListener("mouseup", clearPressTimer);
       element.addEventListener("mouseout", clearPressTimer);
       element.addEventListener("touchend", clearPressTimer);
+      element.addEventListener("touchmove", clearPressTimer);
       element.addEventListener("touchleave", clearPressTimer);
 
     })
