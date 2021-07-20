@@ -260,7 +260,7 @@ var scepter = {
       let parent = element.parentElement;
 
       // if element has a parent
-      if (parent && parent != elementsWrapper.parentElement) {
+      if (parent && parent != elementsWrapper) {
 
         // render HTML
 
