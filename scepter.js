@@ -420,14 +420,18 @@ var scepter = {
       
       // close popover
       inspector.classList.remove('expanded');
-
+      
+      // move menu to selected element
+      win.setTimeout(() => {
+        
+        repositionMenu();
+        
+      }, 180);
+      
       // reset transition when animation ended
       win.setTimeout(() => {
         
         inspector.classList.remove('transitioning');
-        
-        // move menu to selected element
-        repositionMenu();
         
       }, 300 + 180);
 
@@ -442,13 +446,17 @@ var scepter = {
       // close popover
       inspector.classList.remove('expanded');
 
+      // move menu to selected element
+      win.setTimeout(() => {
+        
+        repositionMenu();
+        
+      }, 180);
+      
       // reset transition when animation ended
       win.setTimeout(() => {
         
         inspector.classList.remove('transitioning');
-        
-        // move menu to selected element
-        repositionMenu();
         
       }, 300 + 180);
 
