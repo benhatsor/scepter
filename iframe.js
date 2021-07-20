@@ -88,13 +88,18 @@ async function renderFrame(url) {
   // redirect all links
   tempDoc.querySelectorAll('a[href]').forEach((a) => {
     
-    // get href with base URL
-    var newHref = new URL(a.href, url); 
+    // if URL does not redirect to current page
+    if (a.href != url && a.href != '#') {
     
-    a.onclick = (e) => {
-      e.preventDefault();
-      window.parent.renderFrame(newHref);
-    };
+      // get href with base URL
+      var newHref = new URL(a.href, url); 
+
+      a.onclick = (e) => {
+        e.preventDefault();
+        window.parent.renderFrame(newHref);
+      };
+      
+    }
     
   })
   
