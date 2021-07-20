@@ -94,7 +94,7 @@ var scepter = {
     }
 
     // when clicked elsewhere than selected element
-    overlay.addEventListener('touchstart', () => {
+    overlay.addEventListener('touchstart', (e) => {
 
       // deselect element
       let selectedElements = elementsWrapper.querySelectorAll('.seElected');
@@ -104,6 +104,8 @@ var scepter = {
       });
 
       overlay.classList.remove('visible');
+      
+      console.log(e);
 
       // remove element from queue
       selectQueue = [];
