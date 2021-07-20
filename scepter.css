@@ -385,7 +385,7 @@
   transition-delay: 0.3s;
 }
 
-@media (max-width: 481px)  {
+@media (min-width: 481px)  {
   
   .inspector.expanded {
     width: 568px;
