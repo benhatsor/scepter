@@ -18,14 +18,20 @@ async function renderFrame(url) {
   document.querySelector('.loading-image').classList.remove('loaded');
   
   // set a loading timeout
-  /*window.setTimeout(() => {
+  window.setTimeout(() => {
     
-    /* What did it take?
-    document.querySelector('.loading').classList.add('snap');
-    /* Everything.
-    document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
+    // if still loading when timeout ended
+    if (!document.querySelector('.loading').classList.contains('hidden')) {
     
-  }, 30000);*/
+      /* what did it take?.. */
+      document.querySelector('.loading').classList.add('snap');
+      
+      /* ..everything */
+      document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
+      
+    }
+    
+  }, 30000);
   
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
@@ -300,9 +306,6 @@ var scepterHTML = `
     `;
 
 var scepterOutlyingCSS = `
-html {
-  padding-top: 48px;
-}
 body, html {
   user-select: none;
   -webkit-user-select: none;
@@ -330,16 +333,6 @@ function pushUrl() {
 
 // rerender iframe when pressed "back" button in browser
 window.addEventListener('popstate', pushUrl);
-
-// listen for errors
-window.addEventListener('error', (message) => {
-  
-  document.querySelector('.loading').classList = 'snap';
-  document.querySelector('.loading .subtitle').innerText = message;
-  
-  console.log(message);
-  
-})
 
 // render iframe
 pushUrl();
