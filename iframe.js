@@ -10,10 +10,18 @@ async function renderFrame(url) {
     
   }
   
-  // change protocol
-  var urlObj = new URL(url);
-  urlObj.protocol = 'https:';
-  url = urlObj.href;
+  // add protocol
+  if (url.search(/^http[s]?\:\/\//) == -1) {
+    
+    url = 'https://' + url;
+    
+  } else {
+    
+    var urlObj = new URL(url);
+    urlObj.protocol = 'https:';
+    url = urlObj.href;
+    
+  }
   
   // push new url to history
   window.history.pushState({}, '', (window.location.origin + '/?url=' + url));
