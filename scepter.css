@@ -190,11 +190,10 @@
 .popover.hidden {
   opacity: 0 !important;
   transition: 0.15s !important;
-  transition: none !important;
 }
 
 .popover.transitioning {
-  transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2) !important;
+  transition: 0.15s !important;
 }
 
 .popover .header {
