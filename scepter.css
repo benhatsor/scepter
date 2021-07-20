@@ -299,7 +299,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.popover .action:active {
+.popover .action:hover {
   background: rgba(255, 255, 255, 0.07);
 }
 
