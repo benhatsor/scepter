@@ -169,7 +169,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  z-index: 1003;
+  z-index: 11000;
   
   opacity: 0;
   pointer-events: none;
