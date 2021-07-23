@@ -89,7 +89,7 @@ async function renderFrame(url) {
   if (ogImage) {
     
     // get og image with base URL
-    var ogImageUrl = new URL(ogImage.content, url);
+    var ogImageUrl = new URL(ogImage.content, url).href;
 
     // show og image in loading screen
     loadingImage.src = ogImageUrl;
@@ -105,7 +105,7 @@ async function renderFrame(url) {
     if (a.href != url && a.href != '#') {
     
       // get href with base URL
-      var newHref = new URL(a.href, url); 
+      var newHref = new URL(a.href, url).href; 
 
       a.onclick = (e) => {
         e.preventDefault();
@@ -132,7 +132,7 @@ async function renderFrame(url) {
     if (script.src) {
     
       // get src with base URL
-      var absSrc = new URL(script.src, url);
+      var absSrc = new URL(script.src, url).href;
       
       // create a HTTP Request with CORS headers
       code = await axios.get(absSrc, true);
@@ -340,7 +340,7 @@ body .seElected {
 
 function pushUrl() {
   var url = new URL(window.location.href),
-    requestedURL = url.searchParams.get('url');
+      requestedURL = url.searchParams.get('url');
 
   if (requestedURL) {
     renderFrame(requestedURL);
