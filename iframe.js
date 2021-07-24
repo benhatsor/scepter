@@ -328,6 +328,7 @@ var scepterOutlyingCSS = `
 body, html {
   user-select: none;
   -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
 }
 body .seElected {
