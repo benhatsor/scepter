@@ -51,7 +51,7 @@ async function renderFrame(url) {
                      .catch((e) => {
                        document.querySelector('.loading').classList.add('snap');
                        document.querySelector('.loading .subtitle').innerText = e;
-                     };
+                     });
   
   
   
