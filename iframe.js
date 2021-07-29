@@ -47,11 +47,12 @@ async function renderFrame(url) {
   }, 30000);
   
   // create a HTTP Request with CORS headers
-  const resp = await axios.get(url, true)
-                     .catch((e) => {
-                       document.querySelector('.loading').classList.add('snap');
-                       document.querySelector('.loading .subtitle').innerText = e;
-                     });
+  try {
+    const resp = await axios.get(url, true);
+  } catch(e) {
+    document.querySelector('.loading').classList.add('snap');
+    document.querySelector('.loading .subtitle').innerText = e;
+  }
   
   
   
