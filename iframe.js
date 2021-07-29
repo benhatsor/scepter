@@ -52,6 +52,7 @@ async function renderFrame(url) {
   } catch(e) {
     document.querySelector('.loading').classList.add('snap');
     document.querySelector('.loading .subtitle').innerText = e;
+    return;
   }
   
   
@@ -225,7 +226,11 @@ class ScepterElement extends HTMLElement {
     linkElem.setAttribute('href', '`+ window.location.origin +`/scepter.css');
     
     // hide loader when styles are loaded
-    linkElem.onload = () => { parentWindow.document.querySelector('.loading').classList.add('hidden') };
+    linkElem.onload = () => {
+      if (!parentWindow.document.querySelector('.loading').classList.contains('snap')) {
+        parentWindow.document.querySelector('.loading').classList.add('hidden');
+      }
+    };
 
     // attach the created element to the shadow dom
     shadow.appendChild(linkElem);
