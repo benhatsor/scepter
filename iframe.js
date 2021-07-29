@@ -188,7 +188,7 @@ var axios = {
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           resolve(this.responseText);
-        } else if (this.status != 200) {
+        } else if (!this.responseText) {
           reject('Oh snap! Request rejected.');
         }
       };
