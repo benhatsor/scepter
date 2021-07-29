@@ -47,7 +47,11 @@ async function renderFrame(url) {
   }, 30000);
   
   // create a HTTP Request with CORS headers
-  const resp = await axios.get(url, true);
+  const resp = await axios.get(url, true)
+                     .catch((e) => {
+                       document.querySelector('.loading').classList.add('snap');
+                       document.querySelector('.loading .subtitle').innerText = e;
+                     };
   
   
   
@@ -179,19 +183,19 @@ var axios = {
   'get': (url, cors) => {
     return new Promise((resolve, reject) => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function () {
+      xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           resolve(this.responseText);
+        } else if (this.status != 200) {
+          reject('Oh snap! Request rejected.');
         }
       };
 
       cors = cors ? 'https://scepter-cors2.herokuapp.com/' : ''; // alt: https://sceptercors.herokuapp.com/
 
       xmlhttp.open('GET', (cors + url), true);
-
-      try {
-        xmlhttp.send();
-      } catch(e) { reject(e) }
+      xmlhttp.send();
+      
     });
   }
 }
