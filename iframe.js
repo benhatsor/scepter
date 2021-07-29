@@ -47,13 +47,7 @@ async function renderFrame(url) {
   }, 30000);
   
   // create a HTTP Request with CORS headers
-  try {
-    const resp = await axios.get(url, true);
-  } catch(e) {
-    document.querySelector('.loading').classList.add('snap');
-    document.querySelector('.loading .subtitle').innerText = e;
-    return;
-  }
+  const resp = await axios.get(url, true);
   
   
   
@@ -188,8 +182,6 @@ var axios = {
       xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           resolve(this.responseText);
-        } else if (!this.responseText) {
-          reject('Oh snap! Request rejected.');
         }
       };
 
