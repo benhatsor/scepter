@@ -1,4 +1,4 @@
-<h1 align="center"><img src="/pic/scepter-logo.svg" width="236.94" height="58.44" alt="Scepter"></h1>
+<h1 align="center"><img src="https://scepter.berryscript.com/pic/scepter-logo.svg" width="236.94" height="58.44" alt="Scepter"></h1>
 <p align="center">
   <h3 align="center">  
     Mobile web inspector

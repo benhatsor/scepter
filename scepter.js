@@ -26,7 +26,7 @@ var scepter = {
       function setPressTimer(e) {
 
         // on press of element
-        pressTimer = win.setTimeout(() => { selectElement(element) }, 350);
+        pressTimer = win.setTimeout(() => { e.preventDefault(); selectElement(element) }, 350);
         return false;
 
       };
@@ -44,9 +44,8 @@ var scepter = {
       element.addEventListener("mouseup", clearPressTimer);
       element.addEventListener("mouseout", clearPressTimer);
       element.addEventListener("touchend", clearPressTimer);
-      element.addEventListener("touchleave", clearPressTimer);
-      element.addEventListener("touchcancel", clearPressTimer);
       element.addEventListener("touchmove", clearPressTimer);
+      element.addEventListener("touchleave", clearPressTimer);
 
     })
 
@@ -93,21 +92,46 @@ var scepter = {
 
     }
 
-    // when clicked elsewhere than selected element
-    overlay.addEventListener('click', () => {
+    // when clicked elsewhere than the scepter menu
+    elementsWrapper.addEventListener('touchstart', (e) => {
+            
+      if (e.target != shadow.host) {
+      
+        // deselect element
+        let selectedElements = elementsWrapper.querySelectorAll('.seElected');
 
-      // deselect element
-      let selectedElements = elementsWrapper.querySelectorAll('.seElected');
+        selectedElements.forEach(elem => {
+          elem.classList.remove('seElected');
+        });
 
-      selectedElements.forEach(elem => {
-        elem.classList.remove('seElected');
-      });
+        overlay.classList.remove('visible');
 
-      overlay.classList.remove('visible');
+        // remove element from queue
+        selectQueue = [];
+        
+      }
+      
+    })
+    
+    // when clicked elsewhere than the scepter menu
+    elementsWrapper.addEventListener('mousedown', (e) => {
+            
+      if (e.target != shadow.host) {
+      
+        // deselect element
+        let selectedElements = elementsWrapper.querySelectorAll('.seElected');
 
-      // remove element from queue
-      selectQueue = [];
+        selectedElements.forEach(elem => {
+          elem.classList.remove('seElected');
+        });
 
+        overlay.classList.remove('visible');
+
+        // remove element from queue
+        selectQueue = [];
+        
+      }
+      
     })
 
     // reposition menu on window resize
@@ -177,7 +201,7 @@ var scepter = {
     function renderPopover(element) {
 
       // scroll to element
-      element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+      element.scrollIntoViewIfNeeded({ behavior: 'smooth' });
 
 
       // show element title
@@ -189,7 +213,7 @@ var scepter = {
       
       
       // scroll to top of popover
-      popover.scrollTo(0, 0);
+      popoverContent.scrollTo(0, 0);
 
 
 
@@ -235,7 +259,7 @@ var scepter = {
               classes = Array.from(child.classList),
               ids = child.id;
 
-          let classString = type;
+          let classString = '&lt;' + type + '&gt;';
 
           if (classes.length > 0) classString += '.' + classes.join('.');
           if (ids) classString += '#' + ids.split(' ').join('#');
@@ -268,7 +292,7 @@ var scepter = {
             classes = Array.from(parent.classList),
             ids = parent.id;
 
-        let classString = type;
+        let classString = '&lt;' + type + '&gt;';
 
         if (classes.length > 0) classString += '.' + classes.join('.');
         if (ids) classString += '#' + ids.split(' ').join('#');
@@ -305,14 +329,14 @@ var scepter = {
 
           // remove element from queue
           selectQueue = [];
-
+          
+          let actionElement = action.classList.contains('parent') ? parent : children[index];
+          
+          // select action element
+          selectElement(actionElement);
+          
           // when animation ended
           win.setTimeout(() => {
-
-            let actionElement = action.classList.contains('parent') ? parent : children[index];
-
-            // select action element
-            selectElement(actionElement);
             
             // render popover content
             renderPopover(actionElement);
@@ -326,9 +350,9 @@ var scepter = {
             // reset transition when animation ended
             win.setTimeout(() => {
               popover.classList.remove('transitioning');
-            }, 250);
+            }, 150);
 
-          }, 300);
+          }, 150);
 
         })
 
@@ -359,8 +383,6 @@ var scepter = {
     };
 
     win.onerror = function(message, source, line) {
-      
-      console.log('Found error!');
       
       win.console.logs.push({ content: (message + '\nURL: ' + source + '. L: ' + line), type: 'error' });
       
@@ -396,6 +418,13 @@ var scepter = {
         
       })
       
+      // if no logs, show default message
+      if (renderedHTML == '') {
+        
+        renderedHTML = '<div class="intro"><div class="subhead">‽</div><div class="message">No logs yet</div></div>';
+        
+      }
+      
       popoverContent.innerHTML = renderedHTML;
       
       // scroll to bottom of popover
@@ -416,32 +445,40 @@ var scepter = {
 
     // when popover is open and clicked elsewhere than popover
     expandedOverlay.addEventListener('click', () => {
-
+      
       // transition back correctly
       inspector.classList.add('transitioning');
-
+      
       // close popover
       inspector.classList.remove('expanded');
-
+      
       // reset transition when animation ended
       win.setTimeout(() => {
+        
         inspector.classList.remove('transitioning');
+        
+        repositionMenu();
+        
       }, 300 + 180);
 
     });
 
     // when popover is open and clicked on close button 
     popoverClose.addEventListener('click', () => {
-
+      
       // transition back correctly
       inspector.classList.add('transitioning');
 
       // close popover
       inspector.classList.remove('expanded');
-
+      
       // reset transition when animation ended
       win.setTimeout(() => {
+        
         inspector.classList.remove('transitioning');
+        
+        repositionMenu();
+        
       }, 300 + 180);
 
     });

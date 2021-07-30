@@ -10,6 +10,19 @@ async function renderFrame(url) {
     
   }
   
+  // add protocol
+  if (url.search(/^http[s]?\:\/\//) == -1) {
+    
+    url = 'https://' + url;
+    
+  } else {
+    
+    var urlObj = new URL(url);
+    urlObj.protocol = 'https:';
+    url = urlObj.href;
+    
+  }
+  
   // push new url to history
   window.history.pushState({}, '', (window.location.origin + '/?url=' + url));
   
@@ -20,10 +33,16 @@ async function renderFrame(url) {
   // set a loading timeout
   window.setTimeout(() => {
     
-    /* What did it take? */
-    document.querySelector('.loading').classList.add('snap');
-    /* Everything. */
-    document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
+    // if still loading when timeout ended
+    if (!document.querySelector('.loading').classList.contains('hidden')) {
+    
+      /* what did it take?.. */
+      document.querySelector('.loading').classList.add('snap');
+      
+      /* ..everything */
+      document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
+      
+    }
     
   }, 30000);
   
@@ -70,7 +89,7 @@ async function renderFrame(url) {
   if (ogImage) {
     
     // get og image with base URL
-    var ogImageUrl = new URL(ogImage.content, url);
+    var ogImageUrl = new URL(ogImage.content, url).href;
 
     // show og image in loading screen
     loadingImage.src = ogImageUrl;
@@ -82,10 +101,24 @@ async function renderFrame(url) {
   // redirect all links
   tempDoc.querySelectorAll('a[href]').forEach((a) => {
     
-    // get href with base URL
-    var newHref = new URL(a.href, url); 
+    // if URL does not redirect to current page
+    if (a.href != url && a.href != '#') {
     
-    a.href = 'javascript: window.parent.renderFrame("'+ newHref +'")';
+      // get href with base URL
+      var newHref = new URL(a.href, url).href; 
+
+      a.onclick = (e) => {
+        e.preventDefault();
+        renderFrame(newHref);
+      };
+      
+    } else {
+      
+      a.onclick = (e) => {
+        e.preventDefault();
+      };
+      
+    }
     
   })
   
@@ -99,7 +132,7 @@ async function renderFrame(url) {
     if (script.src) {
     
       // get src with base URL
-      var absSrc = new URL(script.src, url);
+      var absSrc = new URL(script.src, url).href;
       
       // create a HTTP Request with CORS headers
       code = await axios.get(absSrc, true);
@@ -146,19 +179,17 @@ var axios = {
   'get': (url, cors) => {
     return new Promise((resolve, reject) => {
       var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function () {
+      xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           resolve(this.responseText);
         }
       };
 
-      cors = cors ? 'https://sceptercors.herokuapp.com/' : '';
+      cors = cors ? 'https://scepter-cors2.herokuapp.com/' : ''; // alt: https://sceptercors.herokuapp.com/
 
       xmlhttp.open('GET', (cors + url), true);
-
-      try {
-        xmlhttp.send();
-      } catch(e) { reject(e) }
+      xmlhttp.send();
+      
     });
   }
 }
@@ -187,7 +218,11 @@ class ScepterElement extends HTMLElement {
     linkElem.setAttribute('href', '`+ window.location.origin +`/scepter.css');
     
     // hide loader when styles are loaded
-    linkElem.onload = () => { parentWindow.document.querySelector('.loading').classList.add('hidden') };
+    linkElem.onload = () => {
+      if (!parentWindow.document.querySelector('.loading').classList.contains('snap')) {
+        parentWindow.document.querySelector('.loading').classList.add('hidden');
+      }
+    };
 
     // attach the created element to the shadow dom
     shadow.appendChild(linkElem);
@@ -208,18 +243,9 @@ class ScepterElement extends HTMLElement {
     
       if (links[x].getAttribute('rel') == 'stylesheet') {
         
-        // set link href with base URL
-        var url = parentWindow.location.href.split('?url=')[1];
-        links[x].wasAtt = new URL(links[x].getAttribute('href'), url);
-        
         st.push(links[x]);
-        
+        links[x].wasAtt = links[x].getAttribute('href');
         links[x].setAttribute('href', '');
-        
-      } else {
-      
-        // fetch fonts with CORS
-        links[x].setAttribute('crossorigin', '');
         
       }
       
@@ -228,11 +254,11 @@ class ScepterElement extends HTMLElement {
     setTimeout(() => {
     
       for (var x = 0; x < st.length; x++) {
-      
+        
         st[x].setAttribute('href', st[x].wasAtt);
         
         // if could not fetch the resource normally, try a CORS fetch
-        st[x].onerror = () => {
+        st[x].onerror = function() {
         
           st[x].setAttribute('crossorigin', '');
           st[x].setAttribute('href', '');
@@ -302,23 +328,22 @@ var scepterHTML = `
 
 var scepterOutlyingCSS = `
 body, html {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
 }
 body .seElected {
   border-radius: 1px !important;
-  box-shadow: 0 0 0 10px rgb(104 187 228 / 12%);
-  background-color: rgba(104,187,228,0.12);
-  
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  
+  box-shadow: inset 0 0 0 500em rgb(104 187 228 / 12%), 0 0 0 10px rgb(104 187 228 / 12%) !important;  
   transition: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.2) !important;
+  transition-property: box-shadow, border-radius !important;
 }
 `;
 
 function pushUrl() {
   var url = new URL(window.location.href),
-    requestedURL = url.searchParams.get('url');
+      requestedURL = url.searchParams.get('url');
 
   if (requestedURL) {
     renderFrame(requestedURL);
@@ -332,3 +357,4 @@ window.addEventListener('popstate', pushUrl);
 
 // render iframe
 pushUrl();
+
