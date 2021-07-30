@@ -211,7 +211,7 @@ function addScript(documentNode, code, type) {
   try {
     documentNode.head.appendChild(script);
   } catch(e) {
-    document.querySelector('iframe').contentWindow.throw(e);
+    document.querySelector('iframe').contentWindow.console.log(e);
   }
 }
 
