@@ -45,20 +45,31 @@ async function renderFrame(url) {
   // for HTML manipulation
   
   var tempFrame = document.createElement('iframe');
-  tempFrame.frameBorder = 0;
-  tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
+  tempFrame.visibility = false;
+  
+  document.body.appendChild(tempFrame);
   
   var tempDoc = tempFrame.contentDocument;
   tempDoc.documentElement.innerHTML = resp;
   
   // add base url to iframe to prevent breaking relative URLs
   var base = tempDoc.createElement('base');
-  
   base.href = url;
   tempDoc.head.appendChild(base);
   
-  document.body.appendChild(tempFrame);
-    
+  // create new iframe
+  var newFrame = document.createElement('iframe');
+  newFrame.frameBorder = 0;
+  newFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
+  
+  document.body.appendChild(newFrame);
+  
+  tempDoc = newFrame.contentDocument;
+  tempDoc.documentElement.innerHTML = tempDoc.documentElement.innerHTML;
+  
+  // remove old iframe
+  tempFrame.remove();
+  
   
   
   // add scepter shadow boundary CSS to iframe
