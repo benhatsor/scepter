@@ -114,9 +114,9 @@ async function renderFrame(url) {
   
   
   // run all scripts
-  tempDoc.querySelectorAll('script').forEach(async (script) => {
+  tempDoc.querySelectorAll('script').forEach(async(script) => {
     
-    var code = '';
+    let code = '';
     
     // if script is external
     if (script.src) {
@@ -125,33 +125,26 @@ async function renderFrame(url) {
       var absSrc = new URL(script.src, url).href;
       
       // create a HTTP Request with CORS headers
-      code = await axios.get(absSrc, true);
+      axios.get(absSrc, true).then((code) => {
+        
+        // filter script
+        code = filterScript(code);
+        
+        addScript(tempFrame.contentWindow.document, code, script.type);
+        
+      });
       
     } else {
       
-      code = script.innerHTML;
+      // filter script
+      code = filterScript(script.innerHTML);
+      
+      addScript(tempFrame.contentWindow.document, code, script.type);
       
     }
     
-    
-    // filter scripts
-    
-    // allow framing
-    if (code.includes('top!==self')) code = code.replace('top!==self','self!==self');
-    if (code.includes('window.top')) code = code.replace('window.top','window');
-    if (code.includes('window.parent')) code = code.replace('window.parent','window');
-    
-    // prevent changing domain
-    if (code.includes('window.document.domain')) code = code.replace('window.document.domain','window.location.origin');
-    
-    // redirect on changing location of window
-    /* if (code.includes('window.location.href=')) code = code.replace('window.location.href=','window.parent.renderFrame(');
-    if (code.includes('window.location.href =')) code = code.replace('window.location.href =','window.parent.renderFrame('); */
-    
-    
-    // discussion about replacing eval():
-    // https://github.com/barhatsor/scepter/issues/2
-    addScript(tempFrame.contentWindow.document, code, script.type);
+    // remove the original script
+    script.remove();
     
   })
   
@@ -190,6 +183,25 @@ function addScript(documentNode, code, type) {
   script.appendChild(documentNode.createTextNode(code));
   console.log('Appending', code);
   documentNode.body.appendChild(script);
+}
+
+// filter scripts
+function filterScript(code) {
+    
+  // allow framing
+  if (code.includes('top!==self')) code = code.replace('top!==self','self!==self');
+  if (code.includes('window.top')) code = code.replace('window.top','window');
+  if (code.includes('window.parent')) code = code.replace('window.parent','window');
+
+  // prevent changing domain
+  if (code.includes('window.document.domain')) code = code.replace('window.document.domain','window.location.origin');
+  
+  // redirect on changing location of window
+  /* if (code.includes('window.location.href=')) code = code.replace('window.location.href=','window.parent.renderFrame(');
+  if (code.includes('window.location.href =')) code = code.replace('window.location.href =','window.parent.renderFrame('); */
+  
+  return code;
+  
 }
 
 // display "Aw, snap!" error message
