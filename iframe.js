@@ -161,13 +161,13 @@ async function renderFrame(url) {
     
     // discussion about replacing eval():
     // https://github.com/barhatsor/scepter/issues/2
-    tempFrame.contentWindow.eval(code);
+    addScript(tempFrame.contentWindow.documentElement, code);
     
   })
   
   
   // add scepter to iframe
-  tempFrame.contentWindow.eval(scepterClass);
+  addScript(tempFrame.contentWindow.documentElement, scepterClass);
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
@@ -192,6 +192,13 @@ var axios = {
       
     });
   }
+}
+
+function addScript(documentNode, code) {
+  var script = document.createElement('script');
+  script.type = 'application/javascript';
+  script.appendChild(document.createTextNode(code));
+  documentNode.head.appendChild(script);
 }
 
 var scepterClass = `
@@ -357,4 +364,3 @@ window.addEventListener('popstate', pushUrl);
 
 // render iframe
 pushUrl();
-
