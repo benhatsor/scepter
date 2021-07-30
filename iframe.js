@@ -48,18 +48,17 @@ async function renderFrame(url) {
   tempFrame.frameBorder = 0;
   tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
+  var tempDoc = tempFrame.contentDocument;
   tempDoc.documentElement.innerHTML = resp;
   
   // add base url to iframe to prevent breaking relative URLs
   var base = tempDoc.createElement('base');
   
   base.href = url;
-  tempFrame.contentDocument.head.appendChild(base);
+  tempDoc.head.appendChild(base);
   
   document.body.appendChild(tempFrame);
-  
-  var tempDoc = tempFrame.contentDocument;
-  
+    
   
   
   // add scepter shadow boundary CSS to iframe
