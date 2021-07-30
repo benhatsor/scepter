@@ -62,12 +62,6 @@ async function renderFrame(url) {
   newFrame.frameBorder = 0;
   newFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
-  newFrame.onload = (e) => {
-    
-    console.log(e);
-    
-  };
-  
   document.body.appendChild(newFrame);
   
   var tempDoc = newFrame.contentDocument;
@@ -316,6 +310,14 @@ class ScepterElement extends HTMLElement {
       
       setTimeout(() => {
         fireEvent(window, "load");
+        
+        setTimeout(() => {
+          parentWindow.querySelector('iframe').onload = () => {
+
+            pushUrl();
+
+          };
+        }, 0);
       }, 0);
       
     }, 0);
