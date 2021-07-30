@@ -114,9 +114,9 @@ async function renderFrame(url) {
   
   
   // run all scripts
-  tempDoc.querySelectorAll('script').forEach(async(script) => {
+  tempDoc.querySelectorAll('script').forEach(async (script) => {
     
-    let code = '';
+    var code = '';
     
     // if script is external
     if (script.src) {
@@ -124,30 +124,34 @@ async function renderFrame(url) {
       // get src with base URL
       var absSrc = new URL(script.src, url).href;
       
-      addScript(tempFrame.contentWindow.document, {code: '', src: absSrc}, script.type);
-      
-      /*
       // create a HTTP Request with CORS headers
-      axios.get(absSrc, true).then((code) => {
-        
-        // filter script
-        code = filterScript(code);
-        
-        addScript(tempFrame.contentWindow.document, code, script.type);
-        
-      });*/
+      code = await axios.get(absSrc, true);
       
     } else {
       
-      // filter script
-      code = filterScript(script.innerHTML);
-      
-      addScript(tempFrame.contentWindow.document, {code: code, src: ''}, script.type);
+      code = script.innerHTML;
       
     }
     
-    // remove the original script
-    script.remove();
+    
+    // filter scripts
+    
+    // allow framing
+    if (code.includes('top!==self')) code = code.replace('top!==self','self!==self');
+    if (code.includes('window.top')) code = code.replace('window.top','window');
+    if (code.includes('window.parent')) code = code.replace('window.parent','window');
+    
+    // prevent changing domain
+    if (code.includes('window.document.domain')) code = code.replace('window.document.domain','window.location.origin');
+    
+    // redirect on changing location of window
+    /* if (code.includes('window.location.href=')) code = code.replace('window.location.href=','window.parent.renderFrame(');
+    if (code.includes('window.location.href =')) code = code.replace('window.location.href =','window.parent.renderFrame('); */
+    
+    
+    // discussion about replacing eval():
+    // https://github.com/barhatsor/scepter/issues/2
+    addScript(tempFrame.contentWindow.document, code, script.type);
     
   })
   
@@ -180,37 +184,11 @@ var axios = {
   }
 }
 
-function addScript(documentNode, properties, type) {
+function addScript(documentNode, code, type) {
   var script = documentNode.createElement('script');
   script.type = type;
-  
-  if (properties.code != '') {
-    script.appendChild(documentNode.createTextNode(properties.code));
-  } else if (properties.src != '') {
-    script.src = properties.src;
-  }
-  
-  console.log('Appending', script);
-  documentNode.body.appendChild(script);
-}
-
-// filter scripts
-function filterScript(code) {
-    
-  // allow framing
-  if (code.includes('top!==self')) code = code.replace('top!==self','self!==self');
-  if (code.includes('window.top')) code = code.replace('window.top','window');
-  if (code.includes('window.parent')) code = code.replace('window.parent','window');
-
-  // prevent changing domain
-  if (code.includes('window.document.domain')) code = code.replace('window.document.domain','window.location.origin');
-  
-  // redirect on changing location of window
-  /* if (code.includes('window.location.href=')) code = code.replace('window.location.href=','window.parent.renderFrame(');
-  if (code.includes('window.location.href =')) code = code.replace('window.location.href =','window.parent.renderFrame('); */
-  
-  return code;
-  
+  script.appendChild(documentNode.createTextNode(code));
+  documentNode.head.appendChild(script);
 }
 
 // display "Aw, snap!" error message
