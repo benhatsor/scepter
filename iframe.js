@@ -312,7 +312,7 @@ class ScepterElement extends HTMLElement {
         fireEvent(window, "load");
         
         setTimeout(() => {
-          parentWindow.querySelector('iframe').onload = () => {
+          parentWindow.document.querySelector('iframe').onload = () => {
 
             parentWindow.pushUrl();
 
