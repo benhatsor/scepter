@@ -62,6 +62,12 @@ async function renderFrame(url) {
   newFrame.frameBorder = 0;
   newFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
+  newFrame.onerrror = (e) => {
+    
+    console.log(e);
+    
+  };
+  
   document.body.appendChild(newFrame);
   
   var tempDoc = newFrame.contentDocument;
@@ -106,9 +112,7 @@ async function renderFrame(url) {
       var newHref = new URL(a.href, url).href; 
       
       a.href = 'javascript:window.parent.renderFrame("'+ newHref +'")';
-      
-      console.log(newHref);
-      
+            
     } else {
             
       a.onclick = (e) => {
