@@ -171,7 +171,7 @@ async function renderFrame(url) {
     try {
       newFrame.contentWindow.eval(code);
     } catch(e) {
-      newFrame.contentWindow.error(e);
+      newFrame.contentWindow.console.error(e);
     }
     
     // delete original
