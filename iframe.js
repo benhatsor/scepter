@@ -113,6 +113,8 @@ async function renderFrame(url) {
       
     } else {
       
+      a.href = '';
+      
       a.onclick = (e) => {
         e.preventDefault();
       };
