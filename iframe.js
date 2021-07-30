@@ -190,7 +190,7 @@ function addScript(documentNode, properties, type) {
     script.src = properties.src;
   }
   
-  console.log('Appending', code);
+  console.log('Appending', script);
   documentNode.body.appendChild(script);
 }
 
