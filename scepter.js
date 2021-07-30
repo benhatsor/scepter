@@ -384,7 +384,7 @@ var scepter = {
 
     win.onerror = function(message, source, line) {
       
-      win.console.logs.push({ content: (message + '\nURL: ' + source + '. L: ' + line), type: 'error' });
+      win.console.logs.push({ content: (message + '\nL: ' + line), type: 'error' });
       
       // if console is open
       if (popoverContent.querySelector('.log')) {
