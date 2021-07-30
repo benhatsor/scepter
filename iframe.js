@@ -49,13 +49,13 @@ async function renderFrame(url) {
   
   document.body.appendChild(tempFrame);
   
-  var tempDoc = tempFrame.contentDocument;
-  tempDoc.documentElement.innerHTML = resp;
+  var theTempDoc = tempFrame.contentDocument;
+  theTempDoc.documentElement.innerHTML = resp;
   
   // add base url to iframe to prevent breaking relative URLs
-  var base = tempDoc.createElement('base');
+  var base = theTempDoc.createElement('base');
   base.href = url;
-  tempDoc.head.appendChild(base);
+  theTempDoc.head.appendChild(base);
   
   // create new iframe
   var newFrame = document.createElement('iframe');
@@ -64,8 +64,9 @@ async function renderFrame(url) {
   
   document.body.appendChild(newFrame);
   
-  tempDoc = newFrame.contentDocument;
-  tempDoc.documentElement.innerHTML = tempFrame.contentDocument.documentElement.innerHTML;
+  var tempDoc = newFrame.contentDocument;
+  console.log(theTempDoc.documentElement.innerHTML);
+  tempDoc.documentElement.innerHTML = theTempDoc.documentElement.innerHTML;
   
   // remove old iframe
   //tempFrame.remove();
