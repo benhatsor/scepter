@@ -97,10 +97,10 @@ async function renderFrame(url) {
   
   
   // redirect all links
-  tempDoc.querySelectorAll('a[href]').forEach((a) => {
+  tempDoc.querySelectorAll('a').forEach((a) => {
     
     // if URL does not redirect to current page
-    if (a.href != url && a.href != '#') {
+    if (a.href != '#') {
     
       // get href with base URL
       var newHref = new URL(a.href, url).href; 
