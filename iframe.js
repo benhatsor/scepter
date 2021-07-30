@@ -151,7 +151,7 @@ async function renderFrame(url) {
     
     // discussion about replacing eval():
     // https://github.com/barhatsor/scepter/issues/2
-    tempFrame.contentWindow.eval(code);
+    addScript(tempFrame.contentWindow.document, code);
     
   })
   
