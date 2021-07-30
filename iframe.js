@@ -314,7 +314,7 @@ class ScepterElement extends HTMLElement {
         setTimeout(() => {
           parentWindow.querySelector('iframe').onload = () => {
 
-            pushUrl();
+            parentWindow.pushUrl();
 
           };
         }, 0);
