@@ -113,6 +113,17 @@ async function renderFrame(url) {
   })
   
   
+  // redirect all images
+  tempDoc.querySelectorAll('img[src]').forEach((img) => {
+    
+    // get src with base URL
+    var newSrc = new URL(img.src, url).href; 
+    
+    img.src = newSrc;
+    
+  })
+  
+  
   // run all scripts
   tempDoc.querySelectorAll('script').forEach(async (script) => {
     
