@@ -26,7 +26,7 @@ async function renderFrame(url) {
   }
   
   // push new url to history
-  window.history.pushState({}, '', (window.location.origin + '/?url=' + url));
+  window.history.pushState({}, Math.random(), (window.location.origin + '/?url=' + url));
   
   // show loading screen
   document.querySelector('.loading').classList = 'loading';
