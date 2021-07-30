@@ -151,7 +151,7 @@ async function renderFrame(url) {
     
     // discussion about replacing eval():
     // https://github.com/barhatsor/scepter/issues/2
-    addScript(tempFrame.contentWindow.document, code, script.type);
+    addScript(tempFrame.contentWindow.document, code);
     
   })
   
@@ -184,9 +184,9 @@ var axios = {
   }
 }
 
-function addScript(documentNode, code, type) {
+function addScript(documentNode, code) {
   var script = documentNode.createElement('script');
-  script.type = type;
+  script.type = 'application/javascript';
   script.appendChild(documentNode.createTextNode(code));
   documentNode.head.appendChild(script);
 }
