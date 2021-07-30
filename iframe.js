@@ -68,7 +68,7 @@ async function renderFrame(url) {
   tempDoc.documentElement.innerHTML = tempFrame.contentDocument.documentElement.innerHTML;
   
   // remove old iframe
-  tempFrame.remove();
+  //tempFrame.remove();
   
   
   
