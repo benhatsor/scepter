@@ -153,6 +153,8 @@ async function renderFrame(url) {
     // https://github.com/barhatsor/scepter/issues/2
     addScript(tempFrame.contentWindow.document, code);
     
+    script.remove();
+    
   })
   
   
