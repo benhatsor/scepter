@@ -296,13 +296,14 @@ class ScepterElement extends HTMLElement {
         
         // if could not fetch the resource normally, try a CORS fetch
         st[x].onerror = function() {
-        
+          
+          /*
           st[x].setAttribute('crossorigin', '');
           st[x].setAttribute('href', '');
           
           setTimeout(() => {
             st[x].setAttribute('href', st[x].wasAtt);
-          }, 0);
+          }, 0);*/
           
         };
         
