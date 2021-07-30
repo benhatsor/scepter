@@ -169,7 +169,7 @@ async function renderFrame(url) {
     
     
     // add new script
-    addScript(tempFrame.contentWindow.document, code);
+    addScript(newFrame.contentWindow.document, code);
     
     // delete original
     script.remove();
@@ -178,7 +178,7 @@ async function renderFrame(url) {
   
   
   // add scepter to iframe
-  addScript(tempFrame.contentWindow.document, scepterClass);
+  addScript(newFrame.contentWindow.document, scepterClass);
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
