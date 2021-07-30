@@ -1,4 +1,6 @@
 
+let loadingTimeout;
+
 // render iframe
 async function renderFrame(url) {
   
@@ -31,20 +33,7 @@ async function renderFrame(url) {
   document.querySelector('.loading-image').classList.remove('loaded');
   
   // set a loading timeout
-  window.setTimeout(() => {
-    
-    // if still loading when timeout ended
-    if (!document.querySelector('.loading').classList.contains('hidden')) {
-    
-      /* what did it take?.. */
-      document.querySelector('.loading').classList.add('snap');
-      
-      /* ..everything */
-      document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
-      
-    }
-    
-  }, 30000);
+  loadingTimeout = window.setTimeout(awSnap, 30000);
   
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
@@ -201,6 +190,22 @@ function addScript(documentNode, code) {
   documentNode.head.appendChild(script);
 }
 
+// display "Aw, snap!" error message
+function awSnap() {
+  
+  /* what did it take?.. */
+  document.querySelector('.loading').classList.add('snap');
+
+  /* ..everything */
+  document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
+  
+}
+
+// clear loading timeout
+function clearLoadingTimeout() {
+  window.clearTimeout(loadingTimeout);
+}
+
 var scepterClass = `
 // create a class for the scepter element
 class ScepterElement extends HTMLElement {
@@ -228,6 +233,10 @@ class ScepterElement extends HTMLElement {
     linkElem.onload = () => {
       if (!parentWindow.document.querySelector('.loading').classList.contains('snap')) {
         parentWindow.document.querySelector('.loading').classList.add('hidden');
+        
+        // clear loading timeout
+        parentWindow.clearLoadingTimeout();
+        
       }
     };
 
