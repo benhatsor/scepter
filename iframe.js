@@ -124,7 +124,7 @@ async function renderFrame(url) {
       // get src with base URL
       var absSrc = new URL(script.src, url).href;
       
-      addScript(tempFrame.contentWindow.document, {src: absSrc}, script.type);
+      addScript(tempFrame.contentWindow.document, {code: '', src: absSrc}, script.type);
       
       /*
       // create a HTTP Request with CORS headers
@@ -142,7 +142,7 @@ async function renderFrame(url) {
       // filter script
       code = filterScript(script.innerHTML);
       
-      addScript(tempFrame.contentWindow.document, {code: code}, script.type);
+      addScript(tempFrame.contentWindow.document, {code: code, src: ''}, script.type);
       
     }
     
@@ -184,9 +184,9 @@ function addScript(documentNode, properties, type) {
   var script = documentNode.createElement('script');
   script.type = type;
   
-  if (properties.code) {
+  if (properties.code != '') {
     script.appendChild(documentNode.createTextNode(properties.code));
-  } else {
+  } else if (properties.src != '') {
     script.src = properties.src;
   }
   
