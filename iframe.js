@@ -208,11 +208,7 @@ function addScript(documentNode, code, type) {
   var script = documentNode.createElement('script');
   script.type = script.type ?? 'application/javascript';
   script.appendChild(documentNode.createTextNode(code));
-  try {
-    documentNode.head.appendChild(script);
-  } catch(e) {
-    document.querySelector('iframe').contentWindow.console.log(e);
-  }
+  documentNode.head.appendChild(script);
 }
 
 // display "Aw, snap!" error message
