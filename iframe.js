@@ -62,7 +62,7 @@ async function renderFrame(url) {
   newFrame.frameBorder = 0;
   newFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
   
-  newFrame.onerrror = (e) => {
+  newFrame.onload = (e) => {
     
     console.log(e);
     
