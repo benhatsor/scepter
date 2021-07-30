@@ -94,9 +94,11 @@ var scepter = {
 
     // when clicked elsewhere than the scepter menu
     elementsWrapper.addEventListener('touchstart', (e) => {
-            
-      if (e.target != shadow.host) {
       
+      if (e.target != shadow.host) {
+        
+        e.preventDefault();
+        
         // deselect element
         let selectedElements = elementsWrapper.querySelectorAll('.seElected');
 
@@ -115,8 +117,10 @@ var scepter = {
     
     // when clicked elsewhere than the scepter menu
     elementsWrapper.addEventListener('mousedown', (e) => {
-            
+      
       if (e.target != shadow.host) {
+        
+        e.preventDefault();
       
         // deselect element
         let selectedElements = elementsWrapper.querySelectorAll('.seElected');
