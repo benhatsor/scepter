@@ -33,7 +33,7 @@ async function renderFrame(url) {
   document.querySelector('.loading-image').classList.remove('loaded');
   
   // set a loading timeout
-  loadingTimeout = window.setTimeout(awSnap, 30000);
+  loadingTimeout = window.setTimeout(awSnap, 10000);
   
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
