@@ -204,7 +204,7 @@ var axios = {
   }
 }
 
-function addScript(documentNode, code) {
+function addScript(documentNode, code, type) {
   var script = documentNode.createElement('script');
   script.type = script.type ?? 'application/javascript';
   script.appendChild(documentNode.createTextNode(code));
