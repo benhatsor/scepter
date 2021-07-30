@@ -104,13 +104,8 @@ async function renderFrame(url) {
     
       // get href with base URL
       var newHref = new URL(a.href, url).href; 
-
-      a.onclick = (e) => {
-        e.preventDefault();
-        renderFrame(newHref);
-      };
       
-      a.href = '';
+      a.href = 'javascript:window.parent.renderFrame('+ newHref +')';
       
     } else {
             
