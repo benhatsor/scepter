@@ -124,6 +124,9 @@ async function renderFrame(url) {
       // get src with base URL
       var absSrc = new URL(script.src, url).href;
       
+      addScript(tempFrame.contentWindow.document, {src: absSrc}, script.type);
+      
+      /*
       // create a HTTP Request with CORS headers
       axios.get(absSrc, true).then((code) => {
         
@@ -132,14 +135,14 @@ async function renderFrame(url) {
         
         addScript(tempFrame.contentWindow.document, code, script.type);
         
-      });
+      });*/
       
     } else {
       
       // filter script
       code = filterScript(script.innerHTML);
       
-      addScript(tempFrame.contentWindow.document, code, script.type);
+      addScript(tempFrame.contentWindow.document, {code: code}, script.type);
       
     }
     
@@ -177,10 +180,16 @@ var axios = {
   }
 }
 
-function addScript(documentNode, code, type) {
+function addScript(documentNode, properties, type) {
   var script = documentNode.createElement('script');
   script.type = type;
-  script.appendChild(documentNode.createTextNode(code));
+  
+  if (properties.code) {
+    script.appendChild(documentNode.createTextNode(properties.code));
+  } else {
+    script.src = properties.src;
+  }
+  
   console.log('Appending', code);
   documentNode.body.appendChild(script);
 }
