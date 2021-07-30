@@ -149,9 +149,11 @@ async function renderFrame(url) {
     if (code.includes('window.location.href =')) code = code.replace('window.location.href =','window.parent.renderFrame('); */
     
     
-    // discussion about replacing eval():
-    // https://github.com/barhatsor/scepter/issues/2
+    // add new script
     addScript(tempFrame.contentWindow.document, code);
+    
+    // delete original
+    script.remove();
     
   })
   
