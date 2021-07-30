@@ -188,6 +188,7 @@ function addScript(documentNode, code, type) {
   var script = documentNode.createElement('script');
   script.type = type;
   script.appendChild(documentNode.createTextNode(code));
+  console.log('Appending', code);
   documentNode.body.appendChild(script);
 }
 
