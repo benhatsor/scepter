@@ -107,6 +107,8 @@ async function renderFrame(url) {
       
       a.href = 'javascript:window.parent.renderFrame('+ newHref +')';
       
+      console.log(newHref);
+      
     } else {
             
       a.onclick = (e) => {
