@@ -65,7 +65,6 @@ async function renderFrame(url) {
   document.body.appendChild(newFrame);
   
   var tempDoc = newFrame.contentDocument;
-  console.log(theTempDoc.documentElement.innerHTML);
   tempDoc.documentElement.innerHTML = theTempDoc.documentElement.innerHTML;
   
   // remove old iframe
@@ -111,13 +110,15 @@ async function renderFrame(url) {
         renderFrame(newHref);
       };
       
-    } else {
-      
       a.href = '';
       
+    } else {
+            
       a.onclick = (e) => {
         e.preventDefault();
       };
+      
+      a.href = '';
       
     }
     
