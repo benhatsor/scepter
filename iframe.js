@@ -168,7 +168,11 @@ async function renderFrame(url) {
     
     
     // add new script
-    addScript(newFrame.contentWindow.document, code, script.type);
+    try {
+      newFrame.contentWindow.eval(code);
+    } catch(e) {
+      newFrame.contentWindow.error(e);
+    }
     
     // delete original
     script.remove();
