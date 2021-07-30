@@ -33,6 +33,7 @@ async function renderFrame(url) {
   document.querySelector('.loading-image').classList.remove('loaded');
   
   // set a loading timeout
+  clearLoadingTimeout();
   loadingTimeout = window.setTimeout(awSnap, 10000);
   
   // create a HTTP Request with CORS headers
