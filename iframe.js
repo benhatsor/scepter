@@ -139,7 +139,7 @@ async function renderFrame(url) {
     // if script is external
     if (script.src) {
     
-      addScript(newFrame.contentWindow.document, script.src, script.type);
+      addScript(newFrame.contentWindow.document, script.src, false);
       
       // get src with base URL
       //var absSrc = new URL(script.src, url).href;
@@ -184,7 +184,7 @@ async function renderFrame(url) {
   
   
   // add scepter to iframe
-  addScript(newFrame.contentWindow.document, scepterClass);
+  addScript(newFrame.contentWindow.document, '', false, scepterClass);
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
@@ -211,10 +211,15 @@ var axios = {
   }
 }
 
-function addScript(documentNode, src, type) {
+function addScript(documentNode, src, type, code) {
   var script = documentNode.createElement('script');
   script.src = src;
   script.type = script.type ?? 'application/javascript';
+  
+  if (code) {
+    script.appendChild(documentNode.createTextNode(code));
+  }
+  
   documentNode.head.appendChild(script);
 }
 
