@@ -208,6 +208,10 @@ function addScript(documentNode, src, type, code) {
     script.async = false;
   }
   
+  script.onerror = (e) => {
+    documentNode.defaultView.console.error(e);
+  }
+  
   documentNode.head.appendChild(script);
 }
 
