@@ -139,15 +139,7 @@ async function renderFrame(url) {
     // if script is external
     if (script.src) {
     
-      var absSrc = script.src;
-      
-      script.src = '';
-      
-      window.setTimeout(() => {
-        
-        script.src = absSrc;
-        
-      }, 30);
+      addScript(newFrame.contentWindow.document, script.src, script.type);
       
       // get src with base URL
       //var absSrc = new URL(script.src, url).href;
@@ -219,12 +211,11 @@ var axios = {
   }
 }
 
-function addScript(documentNode, code, type) {
+function addScript(documentNode, src, type) {
   var script = documentNode.createElement('script');
+  script.src = src;
   script.type = script.type ?? 'application/javascript';
-  script.async = false;
-  script.appendChild(documentNode.createTextNode(code));
-  documentNode.body.appendChild(script);
+  documentNode.head.appendChild(script);
 }
 
 // display "Aw, snap!" error message
