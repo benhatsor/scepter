@@ -139,16 +139,10 @@ async function renderFrame(url) {
     // if script is external
     if (script.src) {
     
-      addScript(newFrame.contentWindow.document, script.src, false);
-      
-      // get src with base URL
-      //var absSrc = new URL(script.src, url).href;
+      addScript(newFrame.contentWindow.document, script.src, script.type);
       
       // delete original
-      //script.remove();
-      
-      // create a HTTP Request with CORS headers
-      //code = await axios.get(absSrc, true);
+      script.remove();
       
     } else {
       
@@ -170,15 +164,6 @@ async function renderFrame(url) {
     // redirect on changing location of window
     /* if (code.includes('window.location.href=')) code = code.replace('window.location.href=','window.parent.renderFrame(');
     if (code.includes('window.location.href =')) code = code.replace('window.location.href =','window.parent.renderFrame('); */
-    
-    
-    // add new script
-    /*try {
-      newFrame.contentWindow.eval(code);
-    } catch(e) {
-      newFrame.contentWindow.console.error(e);
-    }*/
-    //addScript(newFrame.contentWindow.document, code);
     
   })
   
@@ -213,7 +198,7 @@ var axios = {
 
 function addScript(documentNode, src, type, code) {
   var script = documentNode.createElement('script');
-  script.type = script.type ?? 'application/javascript';
+  script.type = (script.type != '') ? script.type : 'application/javascript';
   
   if (code) {
     script.appendChild(documentNode.createTextNode(code));
