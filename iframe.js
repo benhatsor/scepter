@@ -213,7 +213,7 @@ function addScript(documentNode, code, type) {
   var script = documentNode.createElement('script');
   script.type = script.type ?? 'application/javascript';
   script.appendChild(documentNode.createTextNode(code));
-  documentNode.head.appendChild(script);
+  documentNode.body.appendChild(script);
 }
 
 // display "Aw, snap!" error message
