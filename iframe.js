@@ -220,6 +220,7 @@ function addScript(documentNode, src, type, code) {
   } else {
     script.src = src;
     script.defer = true;
+    script.async = false;
   }
   
   documentNode.head.appendChild(script);
