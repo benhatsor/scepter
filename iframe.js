@@ -173,7 +173,7 @@ async function renderFrame(url) {
     } catch(e) {
       newFrame.contentWindow.console.error(e);
     }*/
-    addScript(newFrame.contentWindow.document, code, script.type);
+    addScript(newFrame.contentWindow.document, code);
     
     // delete original
     script.remove();
