@@ -132,7 +132,7 @@ async function renderFrame(url) {
   
   
   // run all scripts
-  tempDoc.querySelectorAll('script').forEach(async (script) => {
+  tempDoc.querySelectorAll('script').forEach((script) => {
     
     var code = '';
     
