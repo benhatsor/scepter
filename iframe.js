@@ -140,13 +140,13 @@ async function renderFrame(url) {
     if (script.src) {
     
       // get src with base URL
-      var absSrc = new URL(script.src, url).href;
+      //var absSrc = new URL(script.src, url).href;
       
       // delete original
-      script.remove();
+      //script.remove();
       
       // create a HTTP Request with CORS headers
-      code = await axios.get(absSrc, true);
+      //code = await axios.get(absSrc, true);
       
     } else {
       
@@ -176,7 +176,7 @@ async function renderFrame(url) {
     } catch(e) {
       newFrame.contentWindow.console.error(e);
     }*/
-    addScript(newFrame.contentWindow.document, code);
+    //addScript(newFrame.contentWindow.document, code);
     
   })
   
