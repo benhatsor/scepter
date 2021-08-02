@@ -213,11 +213,13 @@ var axios = {
 
 function addScript(documentNode, src, type, code) {
   var script = documentNode.createElement('script');
-  script.src = src;
   script.type = script.type ?? 'application/javascript';
   
   if (code) {
     script.appendChild(documentNode.createTextNode(code));
+  } else {
+    script.src = src;
+    script.defer = true;
   }
   
   documentNode.head.appendChild(script);
