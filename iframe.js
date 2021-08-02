@@ -139,15 +139,15 @@ async function renderFrame(url) {
     // if script is external
     if (script.src) {
     
-      var scriptSrc = script.src;
+      var absSrc = script.src;
       
       script.src = '';
       
       window.setTimeout(() => {
         
-        script.src = scriptSrc;
+        script.src = absSrc;
         
-      }, 0);
+      }, 30);
       
       // get src with base URL
       //var absSrc = new URL(script.src, url).href;
