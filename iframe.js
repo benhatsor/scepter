@@ -173,7 +173,7 @@ async function renderFrame(url) {
     } catch(e) {
       newFrame.contentWindow.console.error(e);
     }*/
-    addScript(newFrame.contentWindow.document, code);
+    addScript(newFrame.contentWindow.document, code, script.type);
     
     // delete original
     script.remove();
@@ -212,6 +212,7 @@ var axios = {
 function addScript(documentNode, code, type) {
   var script = documentNode.createElement('script');
   script.type = script.type ?? 'application/javascript';
+  script.async = false;
   script.appendChild(documentNode.createTextNode(code));
   documentNode.body.appendChild(script);
 }
