@@ -42,7 +42,6 @@ Here's how to use it:
 Pages won't load in these cases:
 
 - 403 (Forbidden) on some sites
-- Relative URL CSS `background-image` ([#3](https://github.com/barhatsor/scepter/issues/3))
 
 ## Contributing
 
