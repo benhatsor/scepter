@@ -331,6 +331,7 @@
   border-top-left-radius: 0;
   box-shadow: 0 1px .5px rgba(0,0,0,.13);
   word-break: break-all;
+  white-space: pre-wrap;
 }
 
 .popover .log.error {
