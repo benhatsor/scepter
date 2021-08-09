@@ -94,9 +94,9 @@ var scepter = {
 
     // when clicked elsewhere than the scepter menu
     elementsWrapper.addEventListener('touchstart', (e) => {
-            
-      if (e.target != shadow.host) {
       
+      if (e.target != shadow.host) {
+                
         // deselect element
         let selectedElements = elementsWrapper.querySelectorAll('.seElected');
 
@@ -115,9 +115,9 @@ var scepter = {
     
     // when clicked elsewhere than the scepter menu
     elementsWrapper.addEventListener('mousedown', (e) => {
-            
-      if (e.target != shadow.host) {
       
+      if (e.target != shadow.host) {
+              
         // deselect element
         let selectedElements = elementsWrapper.querySelectorAll('.seElected');
 
@@ -384,7 +384,7 @@ var scepter = {
 
     win.onerror = function(message, source, line) {
       
-      win.console.logs.push({ content: (message + '\nURL: ' + source + '. L: ' + line), type: 'error' });
+      win.console.logs.push({ content: (message + '\nL: ' + line), type: 'error' });
       
       // if console is open
       if (popoverContent.querySelector('.log')) {

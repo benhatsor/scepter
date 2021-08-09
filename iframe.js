@@ -1,4 +1,6 @@
 
+let loadingTimeout;
+
 // render iframe
 async function renderFrame(url) {
   
@@ -24,27 +26,15 @@ async function renderFrame(url) {
   }
   
   // push new url to history
-  window.history.pushState({}, '', (window.location.origin + '/?url=' + url));
+  window.history.pushState({}, Math.random(), (window.location.origin + '/?url=' + url));
   
   // show loading screen
   document.querySelector('.loading').classList = 'loading';
   document.querySelector('.loading-image').classList.remove('loaded');
   
   // set a loading timeout
-  window.setTimeout(() => {
-    
-    // if still loading when timeout ended
-    if (!document.querySelector('.loading').classList.contains('hidden')) {
-    
-      /* what did it take?.. */
-      document.querySelector('.loading').classList.add('snap');
-      
-      /* ..everything */
-      document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
-      
-    }
-    
-  }, 30000);
+  clearLoadingTimeout();
+  loadingTimeout = window.setTimeout(awSnap, 10000);
   
   // create a HTTP Request with CORS headers
   const resp = await axios.get(url, true);
@@ -55,23 +45,31 @@ async function renderFrame(url) {
   // for HTML manipulation
   
   var tempFrame = document.createElement('iframe');
-  tempFrame.frameBorder = 0;
-  tempFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
+  tempFrame.visibility = false;
   
   document.body.appendChild(tempFrame);
   
-  var tempDoc = tempFrame.contentDocument;
-  tempDoc.documentElement.innerHTML = resp;
-  
+  var theTempDoc = tempFrame.contentDocument;
+  theTempDoc.documentElement.innerHTML = resp;
   
   // add base url to iframe to prevent breaking relative URLs
-  // note: this does not apply for CSS urls [eg. url('images/name.ext')]
-  // ref: https://stackoverflow.com/questions/3812375/specifying-base-url-for-css
-  
-  var base = tempDoc.createElement('base');
-  
+  var base = theTempDoc.createElement('base');
   base.href = url;
-  tempDoc.head.appendChild(base);
+  theTempDoc.head.appendChild(base);
+  
+  // create new iframe
+  var newFrame = document.createElement('iframe');
+  newFrame.frameBorder = 0;
+  newFrame.allow = 'camera; gyroscope; microphone; autoplay; clipboard-write; encrypted-media; picture-in-picture; accelerometer';
+  
+  document.body.appendChild(newFrame);
+  
+  var tempDoc = newFrame.contentDocument;
+  tempDoc.documentElement.innerHTML = theTempDoc.documentElement.innerHTML;
+  
+  // remove old iframe
+  tempFrame.remove();
+  
   
   
   // add scepter shadow boundary CSS to iframe
@@ -106,7 +104,6 @@ async function renderFrame(url) {
     
       // get href with base URL
       var newHref = new URL(a.href, url).href; 
-
       a.onclick = (e) => {
         e.preventDefault();
         renderFrame(newHref);
@@ -123,19 +120,29 @@ async function renderFrame(url) {
   })
   
   
+  // redirect all images
+  tempDoc.querySelectorAll('img[src]').forEach((img) => {
+    
+    // get src with base URL
+    var newSrc = new URL(img.src, url).href; 
+    
+    img.src = newSrc;
+    
+  })
+  
+  
   // run all scripts
-  tempDoc.querySelectorAll('script').forEach(async (script) => {
+  tempDoc.querySelectorAll('script').forEach((script) => {
     
     var code = '';
     
     // if script is external
     if (script.src) {
     
-      // get src with base URL
-      var absSrc = new URL(script.src, url).href;
+      addScript(newFrame.contentWindow.document, script.src, script.type);
       
-      // create a HTTP Request with CORS headers
-      code = await axios.get(absSrc, true);
+      // delete original
+      script.remove();
       
     } else {
       
@@ -158,16 +165,11 @@ async function renderFrame(url) {
     /* if (code.includes('window.location.href=')) code = code.replace('window.location.href=','window.parent.renderFrame(');
     if (code.includes('window.location.href =')) code = code.replace('window.location.href =','window.parent.renderFrame('); */
     
-    
-    // discussion about replacing eval():
-    // https://github.com/barhatsor/scepter/issues/2
-    tempFrame.contentWindow.eval(code);
-    
   })
   
   
   // add scepter to iframe
-  tempFrame.contentWindow.eval(scepterClass);
+  addScript(newFrame.contentWindow.document, '', false, scepterClass);
   
   // add the scepter element to dom
   var scepterElem = tempDoc.createElement('scepter-element');
@@ -192,6 +194,41 @@ var axios = {
       
     });
   }
+}
+
+function addScript(documentNode, src, type, code) {
+  var script = documentNode.createElement('script');
+  script.type = (script.type != '') ? script.type : 'application/javascript';
+  
+  if (code) {
+    script.appendChild(documentNode.createTextNode(code));
+  } else {
+    script.src = src;
+    script.defer = true;
+    script.async = false;
+  }
+  
+  script.onerror = (e) => {
+    documentNode.defaultView.console.error(e);
+  }
+  
+  documentNode.head.appendChild(script);
+}
+
+// display "Aw, snap!" error message
+function awSnap() {
+  
+  /* what did it take?.. */
+  document.querySelector('.loading').classList.add('snap');
+
+  /* ..everything */
+  document.querySelector('.loading .subtitle').innerText = 'Aw, snap! Timed out.';
+  
+}
+
+// clear loading timeout
+function clearLoadingTimeout() {
+  window.clearTimeout(loadingTimeout);
 }
 
 var scepterClass = `
@@ -221,6 +258,10 @@ class ScepterElement extends HTMLElement {
     linkElem.onload = () => {
       if (!parentWindow.document.querySelector('.loading').classList.contains('snap')) {
         parentWindow.document.querySelector('.loading').classList.add('hidden');
+        
+        // clear loading timeout
+        parentWindow.clearLoadingTimeout();
+        
       }
     };
 
@@ -259,13 +300,14 @@ class ScepterElement extends HTMLElement {
         
         // if could not fetch the resource normally, try a CORS fetch
         st[x].onerror = function() {
-        
+          
+          /*
           st[x].setAttribute('crossorigin', '');
           st[x].setAttribute('href', '');
           
           setTimeout(() => {
             st[x].setAttribute('href', st[x].wasAtt);
-          }, 0);
+          }, 0);*/
           
         };
         
@@ -273,6 +315,14 @@ class ScepterElement extends HTMLElement {
       
       setTimeout(() => {
         fireEvent(window, "load");
+        
+        setTimeout(() => {
+          parentWindow.document.querySelector('iframe').onload = () => {
+
+            parentWindow.pushUrl();
+
+          };
+        }, 0);
       }, 0);
       
     }, 0);
@@ -357,4 +407,3 @@ window.addEventListener('popstate', pushUrl);
 
 // render iframe
 pushUrl();
-
