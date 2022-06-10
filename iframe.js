@@ -198,7 +198,7 @@ var axios = {
 
 function addScript(documentNode, src, type, code) {
   var script = documentNode.createElement('script');
-  script.type = type ?? 'application/javascript';
+  script.type = (type !== false && type !== '') ? type : 'application/javascript';
   
   if (code) {
     script.appendChild(documentNode.createTextNode(code));
