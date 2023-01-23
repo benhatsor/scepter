@@ -7,7 +7,7 @@
 
 <p align="center">
   <a target='_blank' href='https://scepter.berryscript.com'><img src='https://img.shields.io/badge/Try-it%20now-brightgreen' alt='Try it now'/></a>
-  <a target='_blank' href='https://github.com/barhatsor/scepter/releases'/><img src='https://img.shields.io/github/v/release/barhatsor/scepter' alt='Latest version'/></a>
+  <a target='_blank' href='https://github.com/benhatsor/scepter/releases'/><img src='https://img.shields.io/github/v/release/benhatsor/scepter' alt='Latest version'/></a>
   <a target='_blank' href='https://app.netlify.com/sites/scepter/deploys'><img src='https://api.netlify.com/api/v1/badges/cf90a1a9-767e-440f-974a-6ac36e37da12/deploy-status' alt='Netlify status'/></a>
 </p>
 
@@ -58,7 +58,7 @@ Please create a GitHub issue if there is something wrong or needs to be improved
 
 ## Changelog
 
-[Releases](https://github.com/barhatsor/scepter/releases)
+[Releases](https://github.com/benhatsor/scepter/releases)
 
 ## License
 
