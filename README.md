@@ -14,7 +14,7 @@
 
 - Go to [scepter.berryscript.com](https://scepter.berryscript.com)/?url=\[URL to inspect\]
 - Long press an element to bring up the inspector. Tap the first option.
-- Navigate the element's classes and children.
+- Navigate the DOM tree.
 
 ## Changelog
 
