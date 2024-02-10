@@ -11,50 +11,11 @@
   <a target='_blank' href='https://app.netlify.com/sites/scepter/deploys'><img src='https://api.netlify.com/api/v1/badges/cf90a1a9-767e-440f-974a-6ac36e37da12/deploy-status' alt='Netlify status'/></a>
 </p>
 
-### See the contents of any site
-
-**Scepter** helps you easily understand how a site is built, fix problems, or make tweaks.
-
-### Just type a URL
-
-Combining the power of both **iframes** and **CORS requests**, you can just type a URL to inspect it.
-
-Eg. [scepter.berryscript.com/?url=**https://time.com**](https://scepter.berryscript.com/?url=https://time.com)
-
-### Mobile first
-
-There's no reason to have to open the computer just to inspect. Tap and swipe to roam the site.
-
-<p align="center">
-  <img src="https://media.giphy.com/media/woc5Fv841xPvYR11vq/giphy-downsized-large.gif" alt="Scepter Tutorial">
-</p>
-
-## Tutorial
-
-Here's how to use it:
+## Usage
 
 - Go to [scepter.berryscript.com](https://scepter.berryscript.com)/?url=\[URL to inspect\]
-- Long press an element to bring up the Scepter menu.
-- Tap the Scepter menu to see the element's classes and children.
-
-## Caveats
-
-Pages won't load in these cases:
-
-- 403 (Forbidden) on some sites
-
-## Contributing
-
-Thanks! Add yourself to `CONTRIBUTORS.md` when you're done 😊
-
-Some ideas to riff on:
-
-- [x] Inline console
-- [ ] Show element styles
-- [ ] Add local CSS to element using inline editor
-
-Make a pull request to the `dev` branch.  
-Please create a GitHub issue if there is something wrong or needs to be improved.
+- Long press an element to bring up the inspector. Tap the first option.
+- Navigate the element's classes and children.
 
 ## Changelog
 
