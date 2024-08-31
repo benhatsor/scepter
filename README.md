@@ -12,6 +12,8 @@
 
 ## Usage
 
+[Demo](https://scepter.berryscript.com/?url=https://time.com)
+
 - Go to [scepter.berryscript.com](https://scepter.berryscript.com)/?url=\[URL to inspect\]
 - Long press an element to bring up the inspector. Tap the first option.
 - Navigate the DOM tree.
