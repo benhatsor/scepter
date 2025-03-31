@@ -178,12 +178,18 @@ async function renderFrame(url) {
 }
 
 var axios = {
-  'get': (url) => {
-    return fetch('/api/cors', {
+  'get': async (url) => {
+    
+    let resp = await fetch('/api/cors', {
       headers: {
         'request-url': url
       }
     });
+    
+    resp = await resp.text();
+    
+    return resp;
+    
   }
 }
 
