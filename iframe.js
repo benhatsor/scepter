@@ -37,7 +37,7 @@ async function renderFrame(url) {
   loadingTimeout = window.setTimeout(awSnap, 10000);
   
   // create a HTTP Request with CORS headers
-  const resp = await axios.get(url, true);
+  const resp = await axios.get(url);
   
   
   
@@ -178,20 +178,11 @@ async function renderFrame(url) {
 }
 
 var axios = {
-  'get': (url, cors) => {
-    return new Promise((resolve, reject) => {
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          resolve(this.responseText);
-        }
-      };
-
-      cors = cors ? 'https://scepter-cors2.herokuapp.com/' : ''; // alt: https://sceptercors.herokuapp.com/
-
-      xmlhttp.open('GET', (cors + url), true);
-      xmlhttp.send();
-      
+  'get': (url) => {
+    return fetch('/api/cors', {
+      headers: {
+        'request-url': url
+      }
     });
   }
 }
